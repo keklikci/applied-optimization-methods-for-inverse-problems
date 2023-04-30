@@ -61,10 +61,11 @@ def store_matrix(storage: list = [], filenames: list = [], save_dir: str = "") -
     """
     for tag, filename in enumerate(filenames):
         data = Image.open(filename)
-        save_file(data, save_dir, tag + 1)
-        data.save(f"{save_dir}/000{tag + 1}.png")
         data = np.array(data)
         storage.append(data)
+        image = Image.fromarray(data)
+        save_file(image, save_dir, tag + 1)
+        image.close()
     return storage
 
 def save_file(data, save_dir: str = "", tag: int = 0) -> None:

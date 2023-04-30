@@ -10,6 +10,8 @@ import time
 import os
 from data_loader import *
 from flat_field import apply_correction
+from util.normalizer import normalize
+from util.plotter import plot_figure
 
 def main():
     start_time = time.time()
@@ -24,8 +26,8 @@ def main():
     for tag, scan in enumerate(scans):
         out = apply_correction(scan, dark_frame, flat_fields)
         # map to the correct range
-        out = Image.fromarray(np.uint8(out * 255))
-        save_file(out, corrected_scan_dir, tag + 1)
+        out = normalize(out)
+        plot_figure(out, save=True, save_dir=corrected_scan_dir, tag=tag)
     print("Flat-field correction, done.")
     print("Total execution time: {:.2f} seconds.".format(time.time() - start_time))
 
