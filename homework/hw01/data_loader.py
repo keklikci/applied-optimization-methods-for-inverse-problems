@@ -20,7 +20,7 @@ filecount = 5
 
 def read_filenames() -> tuple:
     """
-    Read filenames on path for CT scans, dark frame, and flat-field images on a given orbit.
+    Reads filenames on path for CT scans, dark frame, and flat-field images on a given orbit.
     :param:
         None
     :return:
@@ -61,11 +61,23 @@ def store_matrix(storage: list = [], filenames: list = [], save_dir: str = "") -
     """
     for tag, filename in enumerate(filenames):
         data = Image.open(filename)
+        save_file(data, save_dir, tag + 1)
         data.save(f"{save_dir}/000{tag + 1}.png")
         data = np.array(data)
         storage.append(data)
     return storage
 
+def save_file(data, save_dir: str = "", tag: int = 0) -> None:
+    """
+    Saves Pillow image to the parametrized directory.
+    :param:
+        data: an open PIL image
+        save_dir: directory to save PIL image
+        tag: output png suffix
+    :return:
+        None
+    """
+    data.save(f"{save_dir}/000{tag}.png")
 
 def create_directory():
     """
@@ -85,7 +97,7 @@ def create_directory():
 
 def load_files() -> tuple:
     """
-    Load filenames on path for CT scans, dark frame, and flat-field images on a given orbit.
+    Loads filenames on path for CT scans, dark frame, and flat-field images on a given orbit.
     :param:
         None
     :return:
