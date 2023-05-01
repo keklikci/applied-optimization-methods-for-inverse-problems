@@ -15,7 +15,7 @@ load_dotenv()
 
 def rotate(image: np.ndarray, offset: int, tag: int, save_path: str) -> None:
     """
-    Left-shifts object to match the correct center of rotation.
+    Shifts object over the last axis.
     :param:
         image: np.ndarray of flat-field corrected image
         offset: shift value, sourced by configuration
