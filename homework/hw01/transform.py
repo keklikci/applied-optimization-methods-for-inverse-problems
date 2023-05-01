@@ -8,7 +8,6 @@
 import numpy as np
 import os
 import matplotlib.pyplot as plt
-from util.scaler import uint_mapper
 
 def estimate_initial_density(image: np.ndarray, window: int = 10) -> float:
     """
@@ -44,7 +43,7 @@ def absorption_to_transmission(x, IO) -> np.ndarray:
     :return:
         transmission: np.ndarray of transmitted image
     """
-    transmission_image = np.exp(-absorbance) * I0
+    transmission_image = np.exp(-x) * I0
     return transmission_image
 
 if __name__ == "__main__":
@@ -60,7 +59,6 @@ if __name__ == "__main__":
         image = plt.imread(filename)
         I0 = estimate_initial_density(image)
         absorption_image = transmission_to_absorption(image, I0)
-        transmission_image = transmission_to_absorption(absorption_image, I0)
         # save forward, i.e., transmission to absorption
         plt.axis("off")
         plt.imshow(absorption_image, cmap="binary")
@@ -70,8 +68,7 @@ if __name__ == "__main__":
         plt.close()
         # save inverse, i.e., absorption to transmission
         plt.axis("off")
-        # scale back to raw file format
-        transmission_image = uint_mapper(transmission_image)
+        transmission_image = absorption_to_transmission(absorption_image, I0)
         plt.imshow(transmission_image, cmap="binary")
         plt.colorbar()
         save_path = os.path.join(output_transmission_dir, f"000{tag + 1}_.png")
