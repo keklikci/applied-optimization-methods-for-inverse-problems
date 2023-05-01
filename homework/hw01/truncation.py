@@ -17,7 +17,6 @@ def truncate(image: np.ndarray, I0: int, input_mode: str = "absorption") -> np.n
         input_mode: str, type of input image
     :return:
         image: np.ndarray of truncated image
-
     """
     if input_mode == "absorption":
         image[image < 0] = 0
