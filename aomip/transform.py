@@ -31,7 +31,7 @@ def transmission_to_absorption(x, IO) -> np.ndarray:
     :return:
         absorption_image: np.ndarray of absorbed image
     """
-    absorption_image = -I0 * np.log(x)
+    absorption_image = -np.log(x / I0)
     return absorption_image
 
 def absorption_to_transmission(x, IO) -> np.ndarray:

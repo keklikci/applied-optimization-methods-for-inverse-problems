@@ -31,7 +31,7 @@ def transmission_to_absorption(x, IO) -> np.ndarray:
     :return:
         absorption_image: np.ndarray of absorbed image
     """
-    absorption_image = -I0 * np.log(x)
+    absorption_image = -np.log(x / I0)
     return absorption_image
 
 def absorption_to_transmission(x, IO) -> np.ndarray:
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         absorption_image = transmission_to_absorption(image, I0)
         # save forward, i.e., transmission to absorption
         plt.axis("off")
-        plt.imshow(absorption_image, cmap="binary")
+        plt.imshow(absorption_image, cmap="gray")
         plt.colorbar()
         save_path = os.path.join(output_absorption_dir, f"000{tag + 1}.png")
         plt.savefig(save_path, transparent=True)
@@ -69,7 +69,7 @@ if __name__ == "__main__":
         # save inverse, i.e., absorption to transmission
         plt.axis("off")
         transmission_image = absorption_to_transmission(absorption_image, I0)
-        plt.imshow(transmission_image, cmap="binary")
+        plt.imshow(transmission_image, cmap="gray")
         plt.colorbar()
         save_path = os.path.join(output_transmission_dir, f"000{tag + 1}.png")
         plt.savefig(save_path, transparent=True)
