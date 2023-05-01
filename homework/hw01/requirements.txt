@@ -2,3 +2,5 @@ matplotlib==3.7.0
 numpy==1.23.5
 Pillow==9.5.0
 python-dotenv==1.0.0
+scipy==1.10.0
+skimage==0.0
