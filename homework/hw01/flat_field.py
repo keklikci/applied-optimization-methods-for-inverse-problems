@@ -12,7 +12,7 @@ def apply_correction(scan: np.ndarray = np.array([]), dark_frame: np.ndarray = n
     """
     :param:
         scan: np.ndarray of flat-field detector output, i.e., CT scan
-        dark_frames: np.ndarray, dark frame
+        dark_frame: np.ndarray, dark frame
         flat_fields: list of np.ndarrays for flat field images
     :return:
         b: np.ndarray of flat-field corrected output image
