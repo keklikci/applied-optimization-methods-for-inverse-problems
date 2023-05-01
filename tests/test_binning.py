@@ -1,3 +1,10 @@
+# !/usr/bin/env python
+# -*- coding: utf-8 -*-
+# ********************************** #
+# Author: kaanguney.keklikci@tum.de  #
+# Date: 01.05.2023                   #
+# ********************************** #
+
 import numpy as np
 from aomip.binning import bin
 
