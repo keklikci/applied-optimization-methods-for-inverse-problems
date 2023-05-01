@@ -20,14 +20,10 @@ def plot_figure(image: np.ndarray = np.array([]), save: bool = True, save_dir: s
     :return:
         None
     """
-    plt.xticks([])
-    plt.yticks([])
     plt.axis("off")
-    image *= 255
-    image = image.astype(np.uint8)
-    image = Image.fromarray(image)
+    # convert back to the loaded format
+    image = Image.fromarray(image).convert("I;16")
     if save:
        output_file = save_dir + "/000{}.png".format(tag + 1)
        image.save(output_file)
-       # plt.savefig(output_file)
     plt.close()

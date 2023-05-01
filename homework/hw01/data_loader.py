@@ -16,7 +16,7 @@ data_dir = f"./datasets/Walnut{walnut_id}"
 save_dir = "./homework/hw01/output"
 orbit_ids = np.linspace(1, 3, 3, dtype=np.int64)
 projections_dir = os.path.join(data_dir, "Projections")
-filecount = 5
+filecount = 3
 
 def read_filenames() -> tuple:
     """

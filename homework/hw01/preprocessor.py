@@ -12,6 +12,7 @@ from data_loader import *
 from flat_field import apply_correction
 from util.normalizer import normalize
 from util.plotter import plot_figure
+from util.scaler import uint_mapper
 
 def main():
     start_time = time.time()
@@ -25,9 +26,12 @@ def main():
     os.makedirs(corrected_scan_dir, exist_ok=True)
     for tag, scan in enumerate(scans):
         out = apply_correction(scan, dark_frame, flat_fields)
-        # map to the correct range
+        # ensure normalization
         out = normalize(out)
+        # map to the correct range
+        out = uint_mapper(out)
         plot_figure(out, save=True, save_dir=corrected_scan_dir, tag=tag)
+        # sequential application of normalization and mapping yields higher definitions
     print("Flat-field correction, done.")
     print("Total execution time: {:.2f} seconds.".format(time.time() - start_time))
 
