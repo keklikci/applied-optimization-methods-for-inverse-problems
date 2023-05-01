@@ -9,14 +9,19 @@
 import os
 import numpy as np
 from PIL import Image
+from dotenv import load_dotenv
 
-walnut_id = 42
-orbit_id = 3
+# source configuration file
+load_dotenv()
+walnut_id = os.environ["WALNUT_ID"]
+orbit_id = os.environ["ORBIT_ID"]
+save_dir = os.environ["SAVE_DIR"]
+filecount = int(os.environ["FILE_COUNT"])
+
+# dynamically assigned configuration
 data_dir = f"./datasets/Walnut{walnut_id}"
-save_dir = "./homework/hw01/output"
 orbit_ids = np.linspace(1, 3, 3, dtype=np.int64)
 projections_dir = os.path.join(data_dir, "Projections")
-filecount = 3
 
 def read_filenames() -> tuple:
     """
