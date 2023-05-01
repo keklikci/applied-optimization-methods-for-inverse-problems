@@ -46,7 +46,7 @@ def rotate(image: np.ndarray, offset: int, tag: int, save_path: str) -> None:
     plt.imshow(image, cmap="gray")
     plt.axvline(x = correct_center_x, ymax = 0.5, color = "g")
     plt.axhline(y = correct_center_y, xmax = 0.5, color = "g")
-    plt.title("Center of Rotation (After Correction)")
+    plt.title("Center of Rotation (Shifted Over Last Axis)")
     corrected_rotated_dir = os.path.join(save_path, "corrected")
     os.makedirs(corrected_rotated_dir, exist_ok=True)
     plt.savefig(os.path.join(corrected_rotated_dir, f"000{tag}.png"))

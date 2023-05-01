@@ -63,7 +63,7 @@ if __name__ == "__main__":
         plt.axis("off")
         plt.imshow(absorption_image, cmap="binary")
         plt.colorbar()
-        save_path = os.path.join(output_absorption_dir, f"000{tag + 1}_.png")
+        save_path = os.path.join(output_absorption_dir, f"000{tag + 1}.png")
         plt.savefig(save_path, transparent=True)
         plt.close()
         # save inverse, i.e., absorption to transmission
@@ -71,6 +71,6 @@ if __name__ == "__main__":
         transmission_image = absorption_to_transmission(absorption_image, I0)
         plt.imshow(transmission_image, cmap="binary")
         plt.colorbar()
-        save_path = os.path.join(output_transmission_dir, f"000{tag + 1}_.png")
+        save_path = os.path.join(output_transmission_dir, f"000{tag + 1}.png")
         plt.savefig(save_path, transparent=True)
         plt.close()
