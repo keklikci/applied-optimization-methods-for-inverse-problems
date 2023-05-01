@@ -53,7 +53,7 @@ def rotate(image: np.ndarray, offset: int, tag: int, save_path: str) -> None:
     plt.close()
 
 if __name__ == "__main__":
-    # source lat-field corrected files
+    # source flat-field corrected files
     input_dir = os.path.join(os.getcwd(), "homework", "hw01", "output", "scan", "flat_field_corrected")
     # create output directory
     output_dir = input_dir.replace("flat_field_corrected", "rotated")
