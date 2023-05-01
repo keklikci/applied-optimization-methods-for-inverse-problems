@@ -22,7 +22,7 @@ def main():
     # fetch dark frame
     dark_frame = dark_frames[0]
     # create directory
-    corrected_scan_dir = "./homework/hw01/output/scan/corrected"
+    corrected_scan_dir = "./homework/hw01/output/scan/flat_field_corrected"
     os.makedirs(corrected_scan_dir, exist_ok=True)
     for tag, scan in enumerate(scans):
         out = apply_correction(scan, dark_frame, flat_fields)
