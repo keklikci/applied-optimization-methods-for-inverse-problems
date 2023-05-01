@@ -11,15 +11,26 @@ import matplotlib.pyplot as plt
 from skimage.transform import radon
 from phantom import *
 
-def transform(phantom: np.ndarray) -> np.ndarray:
+def get_projection_angles(phantom: np.ndarray) -> np.ndarray:
+    """
+    Initializes an np.ndarray of projection angles.
+    :param:
+        phantom: np.ndarray of phantom image
+    :return:
+        theta: np.ndarray of projection angles
+    """
+    theta = np.linspace(0., 180., max(phantom.shape), endpoint=False)
+    return theta
+
+def transform(phantom: np.ndarray, theta: np.ndarray) -> np.ndarray:
     """
     Applies a radon transformation to the phantom.
     :param:
         phantom: np.ndarray of phantom image
+        thetha: np.ndarray of projection angles
     :return:
         sinogram: np.ndarray, the corresponding radon transform
     """
-    theta = np.linspace(0., 180., max(phantom.shape), endpoint=False)
     sinogram = radon(phantom, theta=theta)
     return sinogram
 
