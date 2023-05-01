@@ -44,7 +44,7 @@ def absorption_to_transmission(x, IO) -> np.ndarray:
     :return:
         transmission: np.ndarray of transmitted image
     """
-    transmission_image = np.exp(-x / (I0 * np.log(2)))
+    transmission_image = np.exp(-absorbance) * I0
     return transmission_image
 
 if __name__ == "__main__":
