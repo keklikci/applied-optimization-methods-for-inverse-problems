@@ -14,8 +14,8 @@
 * Script loads the [raw](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/raw) input files, stores them into matrices and performs flat-field correction given the formula. 
 * Below is a sample output for flat-field correction, with raw image on the left and flat-field corrected output on the right. Complete set of results can be found by accessing this [hyperlink](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/flat_field_corrected).
 <p float="left">
-  <img src="https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/raw/0001.png" width="100" />
-  <img src="https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/flat_field_corrected/0001.png" width="100" /> 
+  <img src="https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/raw/0001.png" width="20" />
+  <img src="https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/flat_field_corrected/0001.png" width="20" /> 
 </p>
 * Note that since there are two flat field images, they are averaged to get a reasonable estimate. In contrast, only one dark image exists.
 
