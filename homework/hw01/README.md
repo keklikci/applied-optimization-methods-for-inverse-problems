@@ -17,7 +17,6 @@
 Raw Image        |  Flat-field corrected
 :-------------------------:|:-------------------------:
 ![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/raw/0001.png)  |  ![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/flat_field_corrected/0001.png)
-</p>
 * Note that since there are two flat field images, they are averaged to get a reasonable estimate. In contrast, only one dark image exists.
 
 ## Homework 3, Task 2: Transmission to Absorption conversion
