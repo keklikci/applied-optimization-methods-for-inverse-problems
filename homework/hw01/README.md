@@ -7,8 +7,7 @@
 * Please download this [dataset](https://zenodo.org/record/2688112#.ZFBTsOxByu4) and place it under a folder named `datasets` in repository root.
 
 ## Homework 3: Preprocessing for computed tomography
---
-### Task 1: Flat-field Correction
+#### (i) Flat-field Correction
 * Execute the following script to generate the output for flat-field correction.
     * `python -B homework/hw01/preprocessor.py`
 * Script loads the [raw](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/raw) input files, stores them into matrices and performs flat-field correction given the formula. 
