@@ -2,6 +2,7 @@
 * Please execute all scripts from repository root directory.
 * Concrete implementations are replicated in `aomip` directory as described in the description.
 * In general, scripts generate the desired output once executed. For future work, sample image generation for deliverables may be handled in `tests`.
+* Some utility scripts exist under `util` folder inside this homework directory. Scripts inside were implemented or scaling and plotting to obtain higher definitions.
 
 ## Requirements
 * Inside the homework file, you will find a `requirements.txt` file for dependencies.
@@ -12,11 +13,7 @@
 * Execute the following script to generate the output for flat-field correction.
     * `python -B homework/hw01/preprocessor.py`
 * Script loads the [raw](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/raw) input files, stores them into matrices and performs flat-field correction given the formula. 
-* Below is a sample output for flat-field correction, with raw image on the left and flat-field corrected output on the right. Complete set of results can be found by accessing this [hyperlink](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/flat_field_corrected).
-
-Raw Image        |  Flat-field corrected
-:-------------------------:|:-------------------------:
-![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw01/output/scan/raw/0001.png)  |  ![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw01/output/scan/flat_field_corrected/0001.png)
+* Complete set of results can be found by accessing this [hyperlink](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/flat_field_corrected).
 * Note that since there are two flat field images, they are averaged to get a reasonable estimate. In contrast, only one dark image exists.
 
 ## Homework 3, Task 2: Transmission to Absorption conversion
@@ -24,5 +21,41 @@ Raw Image        |  Flat-field corrected
     * `python -B homework/hw01/transform.py`
 * Script will load the files, estimate an initial density by sampling some pixels from the input image, and implement [Beer-Lambert](https://www.edinst.com/blog/the-beer-lambert-law/) law.
 * As specified in the homework statement, for simulation purposes, an inverse is also implemented.
+* Complete set of results can be found by accessing this [hyperlink](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/transformed).
 
+## Homework 3, Task 3: Cleaning the signal
+* Truncation is implemented in `truncation.py`.
+* Depending on the direction of transformation, cases are handled separately.
+* Error handling is also implemented. No other transformation modes besides `absorption` and `transmission` are implemented. If attempted, a `NotImplementedError` is raised.
+* Function passes local tests, but this implementation does not provide an output based on an image.
+* A concrete implementation is present in `aomip` folder.
 
+## Homework 3, Task 4: Binning
+* Binning is implemented based on 2D signals, specifically for images in this implementation.
+* Error handling is implemented. For a correct approach, binning factor must be a power of 2. Otherwise, a `NotImplementedError` is raised and execution terminates.
+* Execute the following script to see all functionality in action embedded in the script.
+    * `python -B tests/test_binning.py`
+
+## Homework 3, Task 5: Center of rotation correction
+* Center of rotation correction is implemented for a 2D signal, i.e., image.
+* A rotational offset is sourced from the `.env` file to shift the image over the last axis.
+* Execute the following script to save the output associated with the task.
+    * `python -B homework/hw01/rotation.py`
+* Script takes flat-field corrected images as input, and saves the rotated / shifted images to the corresponding [directory](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/rotated), where the rotational effect can be observed.
+
+## Homework 3, Task 6: Padding
+* Execute the following script to save the output associated with the task.
+    * `python -B homework/hw01/padding.py`
+* Complete set of results can be found by accessing this [hyperlink](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/scan/padded).
+* Padding is important because it reduces the chance to lose informative pixels from the borders. For instance, during reconstruction, we use filters. If the images are not padded, some information from the borders could get lost.
+
+## Homework 4: Analytical Reconstruction
+* Some concrete implementations associated with this part such as `phantom.py` and `sinogram.py` are replicated in `aomip` folder for future use.
+* Three different filters are implemented with reference and inspiration from [sckit-image](https://scikit-image.org/docs/stable/api/skimage.filters.html).
+* Reconstruction involves a sequence of steps, with all steps performed in `backproject.py`.
+* Execute the following script to save the backprojected output of a Shepp-Logan phantom.
+    * `python -B homework/hw01/backproject.py`
+* Click on each of these hyperlinks to access the corresponding results.
+    * [Shepp-Logan phantom](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/phantom/raw/phantom.png)
+    * [Sinogram](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/phantom/sinogram/sinogram.png)
+    * [Backprojection](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw01/output/phantom/backprojection/backprojection.png)
