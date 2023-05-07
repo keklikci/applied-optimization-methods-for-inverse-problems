@@ -15,6 +15,10 @@ except:
     sys.path.append(os.getcwd())
 from PIL import Image
 
+# sinogram config
+arc = 360
+angles = 420
+
 def test_slicing(projections: list, output_path: str) -> None:
     volume = []
     for projection in projections:
@@ -22,8 +26,8 @@ def test_slicing(projections: list, output_path: str) -> None:
         image = np.array(image)
         volume = aomip.slicing.stack_slice(volume, image, image.shape[0] // 2)
     volume = np.array(volume, dtype = np.uint16)
-    sinogram = aomip.radon(volume, [180], np.linspace(0, 360, 420), 1000, 150)
-    plt.imshow(volume, cmap = "gray")
+    sinogram = aomip.radon(volume, [180], np.linspace(0, arc, angles), 1000, 150)
+    plt.imshow(sinogram, cmap = "gray")
     plt.savefig(os.path.join(output_path, "sinogram.png"), transparent = True)
 
 def main():
