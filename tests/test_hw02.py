@@ -28,6 +28,7 @@ def test_slicing(projections: list, output_path: str) -> None:
     volume = np.array(volume, dtype = np.uint16)
     sinogram = aomip.radon(volume, [180], np.linspace(0, arc, angles), 1000, 150)
     plt.imshow(sinogram, cmap = "gray")
+    os.makedirs(output_path, exist_ok = True)
     plt.savefig(os.path.join(output_path, "sinogram.png"), transparent = True)
 
 def main():
