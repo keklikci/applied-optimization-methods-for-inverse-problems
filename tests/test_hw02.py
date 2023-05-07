@@ -33,7 +33,7 @@ def test_slicing(projections: list, output_path: str) -> None:
 
 def main():
     dataset_path = "/srv/ceph/share-all/aomip/6983008_seashell/"
-    output_path = "../homework/hw02/output/"
+    output_path = "homework/hw02/output/"
     slicing_path = os.path.join(output_path, "slicing")
     projections = os.listdir(dataset_path)
     test_slicing(projections = [os.path.join(dataset_path, projection) for projection in projections], output_path = slicing_path)
