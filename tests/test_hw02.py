@@ -8,7 +8,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-import aomip
+try:
+    import aomip
+except:
+    import sys
+    sys.path.append(os.getcwd())
 from PIL import Image
 
 def test_slicing(projections: list, output_path: str) -> None:
