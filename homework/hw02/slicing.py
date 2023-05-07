@@ -18,5 +18,5 @@ def stack_slice(volume: list, image: np.ndarray, slice_idx: int) -> np.ndarray:
         sliced_image: np.ndarray, sliced image given the slicing position
     """
     sliced_row = image[:slice_idx, :]
-    volumne.append(sliced_row)
+    volume.append(sliced_row)
     return volume
