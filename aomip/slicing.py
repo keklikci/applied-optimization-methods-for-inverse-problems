@@ -18,7 +18,7 @@ def slicing(projections: list, slice_idx: int) -> np.ndarray:
     """
     sliced = []
     for projection in projections:
-        s = image[slice_idx, :]
+        s = projection[slice_idx, :]
         sliced.append(s)
     sliced = np.transpose(sliced)
     return sliced
