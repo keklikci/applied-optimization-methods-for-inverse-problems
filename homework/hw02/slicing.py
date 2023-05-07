@@ -7,16 +7,18 @@
 
 import numpy as np
 
-def stack_slice(volume: list, image: np.ndarray, slice_idx: int) -> np.ndarray:
+def slicing(projections: list, slice_idx: int) -> np.ndarray:
     """
     Implements and outputs a sliced sinogram, parametrized by the row slicing row index.
     :param:
-        volume: list of np.ndarrays, stack of projections
-        image: np.ndarray, array representation of the image
+        projections: list of np.ndarrays, projection filenames
         slice_idx: int, slicing row index
     :return:
-        sliced_image: np.ndarray, sliced image given the slicing position
+        sliced: np.ndarray, slice of volume given the slicing position
     """
-    sliced_row = image[slice_idx]
-    volume.append(sliced_row)
-    return volume
+    sliced = []
+    for projection in projections:
+        s = image[slice_idx, :]
+        sliced.append(s)
+    sliced = np.transpose(sliced)
+    return sliced
