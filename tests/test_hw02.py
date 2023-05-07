@@ -20,11 +20,9 @@ def test_slicing(projections: list, output_path: str) -> None:
     for projection in projections:
         image = Image.open(projection)
         image = np.array(image)
-        volume = aomip.slicing.stack_slice(volume, image, image.shape[0] // 2)
-    volume = np.array(volume, dtype = np.uint16)
-    sinogram = aomip.radon(volume, [180], np.linspace(0, 180, max(volume.shape), endpoint = False), 1000, 150)
-    dx, dy = 0.5 * 180.0 / max(volume.shape), 0.5 / sinogram.shape[0]
-    plt.imshow(sinogram, cmap = plt.cm.Greys_r, extent=(-dx, 180 + dx, -dy, sinogram.shape[0] + dy), aspect = "auto")
+        volume = aomip.slicing.stack_slice(volume, image, image.shape[0] // 2 - 1)
+    volume = np.array(volume).T
+    plt.imshow(sinogram, cmap = "gray")
     os.makedirs(output_path, exist_ok = True)
     plt.savefig(os.path.join(output_path, "sinogram.png"), transparent = True)
 
