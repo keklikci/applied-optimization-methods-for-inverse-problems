@@ -28,7 +28,7 @@ def test_slicing(filenames: list, output_path: str) -> None:
     os.makedirs(output_path, exist_ok = True)
     plt.savefig(os.path.join(output_path, "sinogram.png"), transparent = True)
 
-def test_gradient_descent_opt(output_path: str, learning_rate: float = 0.0001, n_iterations: int = 300_000) -> None:
+def test_gradient_descent_opt(output_path: str, learning_rate: float = 0.001, n_iterations: int = 100_000) -> None:
     volume_shape = [128, 128]
     sinogram_shape = [128]
     d2c = volume_shape[0] * 100.0
@@ -50,6 +50,7 @@ def test_gradient_descent_opt(output_path: str, learning_rate: float = 0.0001, n
     ax1.set_title("Shepp-Logan Phantom (Original)")
     ax1.imshow(phantom, cmap = "gray")
     ax2.set_title(f"Shepp-Logan Phantom (Reconstructed), lr = {learning_rate}, n_iterations = {n_iterations}")
+    ax2.imshow(x, cmap = "gray")
     os.makedirs(output_path, exist_ok = True)
     plt.savefig(os.path.join(output_path, "least_squares.png"), transparent = True)
 
