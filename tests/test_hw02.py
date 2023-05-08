@@ -80,7 +80,7 @@ def test_gradient_descent_opt(output_path: str, learning_rate: float = 0.0005, n
     os.makedirs(output_path, exist_ok = True)
     plt.savefig(os.path.join(output_path, "least_squares.png"), transparent = True)
 
-def test_tikhonov_opt(output_path: str, learning_rate: float = 0.0005, n_iterations: int = 300_000) -> None:
+def test_tikhonov_opt(output_path: str, learning_rate: float = 0.0005, n_iterations: int = 100_000) -> None:
     volume_shape = [128, 128]
     sinogram_shape = [128]
     d2c = volume_shape[0] * 100.0
@@ -101,8 +101,7 @@ def test_tikhonov_opt(output_path: str, learning_rate: float = 0.0005, n_iterati
         x -= learning_rate * gradient
     plt.imshow(x, cmap = "gray")
     os.makedirs(output_path, exist_ok = True)
-    # reserved for submission, hence .tif extension
-    plt.savefig(os.path.join(output_path, "tikhonov_regularization.tif"), transparent = True)
+    plt.savefig(os.path.join(output_path, "tikhonov_regularization.png"), transparent = True)
 
 def test_huber_functional_opt(output_path: str, learning_rate: float = 0.0005, n_iterations: int = 100_000, delta: float = 0.0001) -> None:
     volume_shape = [128, 128]
@@ -144,7 +143,7 @@ def test_fair_potential_opt(output_path: str, learning_rate: float = 0.0005, n_i
     for i in range(n_iterations):
         if i % 100_000 == 0:
             if i == 0:
-                print("Optimizing via Huber functional...")
+                print("Optimizing via Fair potential...")
             else:
                 print(f"Processed {i} iterations.") 
         # add term to the gradient
@@ -153,32 +152,6 @@ def test_fair_potential_opt(output_path: str, learning_rate: float = 0.0005, n_i
     plt.imshow(x, cmap = "gray")
     os.makedirs(output_path, exist_ok = True)
     plt.savefig(os.path.join(output_path, "fair_potential.png"), transparent = True)
-
-def test_gradient_descent_opt(output_path: str, learning_rate: float = 0.0005, n_iterations: int = 300_000) -> None:
-    volume_shape = [128, 128]
-    sinogram_shape = [128]
-    d2c = volume_shape[0] * 100.0
-    c2d = volume_shape[0] * 5.0
-    thetas = np.arange(360)
-    phantom = aomip.shepp_logan(volume_shape)
-    sinogram = aomip.radon(phantom, sinogram_shape, thetas, d2c, c2d)
-    x = np.zeros(volume_shape)
-    operator = aomip.XrayOperator(volume_shape, sinogram_shape, thetas, volume_shape[0] * 100.0, volume_shape[0] * 5.0)
-    for i in range(n_iterations):
-        if i % 100_000 == 0:
-            if i == 0:
-                print("Optimizing via gradient descent..")
-            else:
-                print(f"Processed {i} iterations.") 
-        gradient = operator.applyAdjoint(operator.apply(x) - sinogram)
-        x -= learning_rate * gradient
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4.5))
-    ax1.set_title("Original")
-    ax1.imshow(phantom, cmap = "gray")
-    ax2.set_title(f"Reconstructed")
-    ax2.imshow(x, cmap = "gray")
-    os.makedirs(output_path, exist_ok = True)
-    plt.savefig(os.path.join(output_path, "least_squares.png"), transparent = True)
 
 def main():
     dataset_path = "/srv/ceph/share-all/aomip/6983008_seashell/"
