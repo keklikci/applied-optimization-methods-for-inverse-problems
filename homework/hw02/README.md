@@ -18,3 +18,19 @@
 ## Homework 3: Solving CT Problems (i)
 * The `XrayOperator.py` class was used to generate the system matrix (sparse) `A` and the formulation in the assignment for obtaining the derivative was implemented.
 * The original and reconstructed image are plotted side-by-side and [results](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw02/output/least_squares) are available via the subfolder corresponding to the task in the output directory.
+
+## ℓ-2 Norm square (ii)
+* For every reconstruction method from least squares onwards, a term to the gradient was added. The added term is a byproduct of calculation of the gradient.
+* [Results](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw02/output/tikhonov_regularization) are written to the hyperlinked directory. Tikhonov term added to the gradient is `x`.
+
+## Huber Functional (iii)
+* [Results](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw02/output/huber_functional) are written to the hyperlinked directory. Gradient term is calculated w.r.t the formualtion in the homework statement.
+* Reconstruction is comparable to the Tikhonov regularization but worse than least squares. Selection of delta is a purely experimental process, this is the primary reason for performance discrepancy.
+
+## iv) Fair potential
+* [Results](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw02/output/fair_potential) are written to the hyperlinked directory. Gradient term is calculated w.r.t the formualtion in the homework statement.
+* Unfortunately, I could not achieve a nice reconstruction with this method. Finding the right delta is extremely important for fair potential. If selected very small, regularization decreases heavily due to the inversion of the term at the denominator.
+
+## Homework 5: Iterative algorithm vs FBP
+* Iterative methods run longer, as they need very good calibration of parameters such as the learning rate and delta selection.
+* FBP is more stable than iterative methods because gradient could make the optimization process shaky. FBP also takes advantage of transforming the signals to their frequency domain. Therefore, it is more efficient and fast. Also, filters, to my experience in my implementations so far, affect FBP far more than it affects iterative methods.
