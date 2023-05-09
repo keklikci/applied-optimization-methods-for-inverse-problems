@@ -9,10 +9,11 @@
 * Script writes all results to the `homework/hw2/output` directory of the corresponding task.
 
 ## Homework 1: Preprocessing again
-* For this task, every image, i.e., `.tif` file was iteratively sliced by the middle row index and stacked side-by-side to obtain a shallow sinogram. Implementation is available via `homework/hw02/slicing.py`. 
+* For this task, every image, i.e., `.tif` file was iteratively sliced by the middle row index and stacked side-by-side to obtain a shallow sinogram. Implementation is available via `homework/hw02/slicing.py`. For output, please execute `python -B tests/test_hw02.py`.
 
 ## Homework 2: Iterative Reconstruction
-* Gradient descent is implemented and parametrized by number of iterations, learning_rate, the data to be to be optimized, and the gradient. Because the calculation of the gradient is cost function depended, it was parametrized for readability and re-usability.
+* Gradient descent is implemented and parametrized by number of iterations, learning_rate, the data to be to be optimized, and the gradient.
+* The calculation of the gradient is cost function depended, it was parametrized for readability and re-usability.
 
 ## Homework 3: Solving CT Problems (i)
 * The `XrayOperator.py` class was used to generate the system matrix (sparse) `A` and the formulation in the assignment for obtaining the derivative was implemented.
