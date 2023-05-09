@@ -23,11 +23,11 @@
 * For every reconstruction method from least squares onwards, a term to the gradient was added. The added term is a byproduct of calculation of the gradient.
 * [Results](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw02/output/tikhonov_regularization) are written to the hyperlinked directory. Tikhonov term added to the gradient is `x`.
 
-## Huber Functional
+### Huber Functional
 * [Results](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw02/output/huber_functional) are written to the hyperlinked directory. Gradient term is calculated w.r.t the formualtion in the homework statement.
 * Reconstruction is comparable to the Tikhonov regularization but worse than least squares. Selection of delta is a purely experimental process, this is the primary reason for performance discrepancy.
 
-## Fair potential
+### Fair potential
 * [Results](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw02/output/fair_potential) are written to the hyperlinked directory. Gradient term is calculated w.r.t the formualtion in the homework statement.
 * Unfortunately, I could not achieve a nice reconstruction with this method. Finding the right delta is extremely important for fair potential. If selected very small, regularization decreases heavily due to the inversion of the term at the denominator.
 
