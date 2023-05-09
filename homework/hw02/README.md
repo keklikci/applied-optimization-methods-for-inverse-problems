@@ -14,6 +14,6 @@
 ## Homework 2: Iterative Reconstruction
 * Gradient descent is implemented and parametrized by number of iterations, learning_rate, the data to be to be optimized, and the gradient. Because the calculation of the gradient is cost function depended, it was parametrized for readability and re-usability.
 
-# Homework 3: Solving CT Problems (i)
+## Homework 3: Solving CT Problems (i)
 * The `XrayOperator.py` class was used to generate the system matrix (sparse) `A` and the formulation in the assignment for obtaining the derivative was implemented.
 * The original and reconstructed image are plotted side-by-side and [results](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw02/output/least_squares) are available via the subfolder corresponding to the task in the output directory.
