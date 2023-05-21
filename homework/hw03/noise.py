@@ -17,11 +17,9 @@ class Noise:
         Type of noise to sample and add to the image
     """
 
-    def __init__(self, method):
+    def __init__(self, method = "Gaussian"):
         self.validity = {"Poisson", "Gaussian", "Salt-Pepper"}
-        if self.__isinstance(method) and self.__isvalid(method):
-            method = str.capitalize(method)
-            self.method = method
+        self.update(str.capitalize(method))
 
     def __isinstance(self, method):
         if not isinstance(method, str):
@@ -30,13 +28,15 @@ class Noise:
 
     def __isvalid(self, method):
         if not method in self.validity:
-            raise ValueError(f"Method must be an element of {self.validity}!")
+            raise ValueError(f"Method must be an element of {self.validity}")
+        return True
 
     def __str__(self):
         return self.method
 
     def update(self, method):
-        self.method = method
+        if self.__isinstance(method) and self.__isvalid(method):
+            self.method = method
 
     def transform(self, image):
         noise, noise_shape = None, image.shape
