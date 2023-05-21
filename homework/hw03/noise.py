@@ -18,6 +18,9 @@ class Noise:
     """
 
     def __init__(self, method = "Gaussian"):
+        self.seed = 42
+        # for deterministic sampling
+        np.random.seed(self.seed)
         self.validity = {"Poisson", "Gaussian", "Salt-Pepper"}
         self.update(str.capitalize(method))
 
@@ -41,15 +44,14 @@ class Noise:
     def transform(self, image):
         noise, noise_shape = None, image.shape
         if self.method == "Gaussian":
-            noise = np.random.normal(loc = 0., scale = 0.1, size = noise_shape)
+            noise = np.random.normal(loc = 0., scale = 1., size = noise_shape)
             return image + noise
         elif self.method == "Poisson":
-            image = np.random.poisson(image)
-            image = np.clip(a = image, a_min = 0, a_max = 255).astype(np.uint8)
+            image = np.random.poisson(image).astype(np.uint8)
             return image
         else:
             noise = np.random.randint(low = 0, high = 2, size = image.shape)
             img = image.copy()
             img[noise == 0] = 0
-            img[noise == 1] = 1
+            img[noise == 1] = 255
             return img

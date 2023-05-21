@@ -12,8 +12,11 @@ import sys
 sys.path.append("homework/hw03")
 from noise import *
 
-INPUT_PATH = "homework/hw03/input/htc2022_02c_recon.tif"
-OUTPUT_PATH = "homework/hw3/output"
+INPUT_PATH = "homework/hw03/images/input/htc2022_04b_recon.tif"
+OUTPUT_PATH = "homework/hw03/images/output"
+
+# ensure correct range
+func = lambda image: image.astype(np.uint8)
 
 class TestNoise(unittest.TestCase):
 
@@ -22,6 +25,9 @@ class TestNoise(unittest.TestCase):
 
     def test_string(self):
         self.assertEqual(str(self.noise), "Gaussian")
+
+    def test_seed(self):
+        self.assertEqual(self.noise.seed, 42)
 
     def test_update_poisson(self):
         self.noise.update(method = "Poisson")
@@ -37,7 +43,24 @@ class TestNoise(unittest.TestCase):
         self.assertEqual(str(context.exception), f"Method must be an element of {self.noise.validity}")
 
     def test_gaussian_transform(self):
-        # TODO: add transformation unit tests
+        image = tifffile.imread(INPUT_PATH)
+        noisy_image = func(self.noise.transform(image))
+        tifffile.imsave(OUTPUT_PATH + "/" + f"{str(self.noise).lower()}_noise.tif", noisy_image)
+        self.assertEqual(str(self.noise).lower(), "gaussian")
+
+    def test_poisson_transform(self):
+        image = tifffile.imread(INPUT_PATH)
+        self.noise.update(method = "Poisson")
+        noisy_image = self.noise.transform(image)
+        tifffile.imsave(OUTPUT_PATH + "/" + f"{str(self.noise).lower()}_noise.tif", noisy_image)
+        self.assertEqual(str(self.noise).lower(), "poisson")
+
+    def test_salt_pepper_transform(self):
+        image = tifffile.imread(INPUT_PATH)
+        self.noise.update(method = "Salt-Pepper")
+        noisy_image = func(self.noise.transform(image))
+        tifffile.imsave(OUTPUT_PATH + "/" + f"{str(self.noise).lower().replace('-', '_')}_noise.tif", noisy_image)
+        self.assertEqual(str(self.noise).lower(), "salt-pepper")
 
 if __name__ == "__main__":
     unittest.main()
