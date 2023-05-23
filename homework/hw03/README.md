@@ -19,7 +19,7 @@
   - ### iv) Conjugate Gradient
     -  From the root directory, run the following command to write the reconstructed image to the [images](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw03/images) directory. Note that all output images are already provided under the directory, as a result of this command they will be overwritten. Concrete implementation of the conjugate gradient is available [here](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw03/conjugate_gradient.py).
         
-    `python -B tests/test_conjugate_gradient.py`
+      `python -B tests/test_conjugate_gradient.py`
     
     - After executing the test, the optimization algorithm will run and export the output. 
     
@@ -35,7 +35,7 @@
 
     - From the root directory, run the following command to sample some noise, combine it with the [input image](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw03/images/input/htc2022_04b_recon.tif). Note that the image is an example of groundtruth images which were provided after last week's session.
     
-    `python -B tests/test_noise.py`
+      `python -B tests/test_noise.py`
     
     - After executing the test, images wtih filenames prefixed by the noise type will be written to the output directory.
     
@@ -47,7 +47,7 @@
 
     - From the root directory, run the following command to blur and deblur the [input image](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw03/images/input/htc2022_04b_recon.tif) with Gaussian kernel. 
     
-    `python -B tests/test_blur.py`
+      `python -B tests/test_blur.py`
     
     - After executing the test, both blurred and deblurred images will be written to the [images](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw03/images) directory.
     
