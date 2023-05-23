@@ -25,7 +25,8 @@
     - After executing the test, images wtih filenames prefixed by the noise type will be written to the output directory.
     - One important remark here is that Poisson noise is not additive unlike Gaussian noise, where we can add the generated noise to shift the standard deviation of the image. To generate noise from a Poisson distribution for an image, we pass the image to the `np.random.poisson`.
     - Also note that, to make the results reproducible, a seed is provided within the concerete implementation of Noise class, which is also available [here](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw03/noise.py).
-    
+
+
 - ### Deblurring
     - From the root directory, run the following command to blur and deblur the [input image](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw03/images/input/htc2022_04b_recon.tif) with Gaussian kernel. 
             python -B tests/test_blur.py
