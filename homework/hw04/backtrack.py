@@ -8,6 +8,7 @@
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+import tifffile
 from line_search import LineSearch
 
 
@@ -39,9 +40,7 @@ def main():
     backtrack = Backtracking()
     output = backtrack.optimize()
     os.makedirs("images", exist_ok=True)
-    plt.axis("off")
-    plt.imshow(output, cmap="gray")
-    plt.savefig("images/backtrack.tif", transparent=True)
+    tifffile.imsave("images/backtrack.tif", output.astype(np.uint8))
 
 
 if __name__ == "__main__":
