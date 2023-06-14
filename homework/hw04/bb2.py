@@ -24,7 +24,7 @@ class BB2(LineSearch):
         for i in range(num_iterations):
             # avoid division by zero for the first iteration
             if not i:
-                step = 1e-5
+                step = 1e-3
             else:
                 gradient_diff = grad - prev_gradient
                 x_diff = x - prev_x
