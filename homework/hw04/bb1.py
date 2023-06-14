@@ -17,7 +17,7 @@ class BB1(LineSearch):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-    def optimize(self, operator, sino, num_iterations=100) -> None:
+    def optimize(self, num_iterations=100) -> None:
         x = self.x0
         gradient = self.calculate_gradient(x)
         prev_gradient = gradient
@@ -39,7 +39,7 @@ class BB1(LineSearch):
             prev_x = x
             x = next_x
             prev_gradient = gradient
-            gradient = operator.applyAdjoint(operator.apply(x) - sino)
+            gradient = self.calculate_gradient(x)
         # descent with the optimal step
         for i in range(num_iterations):
             x -= step * gradient
