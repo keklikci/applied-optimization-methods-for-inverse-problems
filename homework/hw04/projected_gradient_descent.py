@@ -44,7 +44,7 @@ def main():
     os.makedirs("images", exist_ok=True)
     plt.imshow(output, cmap="gray")
     plt.axis("off")
-    plt.savefig("images/proj_grad_descent.tif")
+    plt.savefig("images/proj_grad_descent.tif", transparent=True)
 
 
 if __name__ == "__main__":
