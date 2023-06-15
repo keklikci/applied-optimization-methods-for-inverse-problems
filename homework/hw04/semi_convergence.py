@@ -68,6 +68,7 @@ def main():
         os.makedirs("images", exist_ok=True)
         plt.imshow(x, cmap="gray")
         plt.savefig(f"images/semi_convergence_reconstruction_{i + 1}.tif", transparent=True)
+        plt.figure()
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {1e-4}")
         plt.xlabel(f"# of iterations")
