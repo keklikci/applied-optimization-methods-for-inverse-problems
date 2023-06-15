@@ -21,6 +21,7 @@ phantom = aomip.shepp_logan(vol_shape)
 sino = aomip.radon(phantom, sino_shape, thetas, d2c, c2d)
 operator = aomip.XrayOperator(vol_shape, sino_shape, thetas, d2c, c2d)
 
+
 def apply_filter(sino, sino_shape):
     H = np.linspace(-1, 1, sino_shape[0])
     ram_lak = np.abs(H)
@@ -30,7 +31,10 @@ def apply_filter(sino, sino_shape):
     sino = np.real(np.fft.ifft(np.fft.ifftshift(projection, axes=1), axis=0))
     return sino
 
-def experiment(x, operator, sino, sino_shape, alpha=1e-4, num_iterations=100, log_error=True) -> None:
+
+def experiment(
+    x, operator, sino, sino_shape, alpha=1e-4, num_iterations=100, log_error=True
+) -> None:
     callback = []
     sino = np.random.poisson(sino).astype(np.uint8)
     sino = apply_filter(sino, sino_shape)
@@ -43,15 +47,15 @@ def experiment(x, operator, sino, sino_shape, alpha=1e-4, num_iterations=100, lo
         x -= alpha * gradient
     return x, callback
 
+
 def main():
-    x = np.zeros(vol_shape) 
+    x = np.zeros(vol_shape)
     output, callback = experiment(x, operator, sino, sino_shape)
     os.makedirs("images", exist_ok=True)
     tifffile.imsave("images/experiment_recon.tif", output.astype(np.uint8))
     plt.plot(np.arange(len(callback)), callback)
     plt.savefig("images/experiment_error.png")
 
+
 if __name__ == "__main__":
     main()
-
-

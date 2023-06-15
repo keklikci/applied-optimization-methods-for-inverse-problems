@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import tifffile
 from optimize import Optimization
 
+
 class Backtracking(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -49,6 +50,7 @@ def main():
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
         plt.savefig(f"images/backtrack_callback_{i + 1}")
+
 
 if __name__ == "__main__":
     main()
