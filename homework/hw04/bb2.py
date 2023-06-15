@@ -9,7 +9,7 @@ import numpy as np
 import tifffile
 import os
 import sys
-from optimization import Optimization
+from optimize import Optimization
 
 
 class BB2(Optimization):
