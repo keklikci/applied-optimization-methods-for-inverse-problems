@@ -50,7 +50,7 @@ def main():
         x, callback = descent.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
         plt.imshow(x, cmap="gray")
-        plt.savefig(f"images/proj_grad_descent_{i + 1}.tif")
+        plt.savefig(f"images/proj_grad_descent_{i + 1}.tif", transparent=True)
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
