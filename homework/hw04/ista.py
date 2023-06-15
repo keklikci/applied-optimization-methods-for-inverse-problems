@@ -51,8 +51,8 @@ class ISTA(Optimization):
 
 def main():
     ista = ISTA()
-    alphas = np.linspace(1e-3, 1e-5, num=5)
-    betas = np.linspace(1e-6, 1e-8, num=5)
+    alphas = np.linspace(1e-5, 1e-3, num=5)
+    betas = np.linspace(1e-8, 1e-6, num=5)
     callback = []
     for i, params in enumerate(zip(alphas, betas)):
         x, callback = ista.optimize(callback=callback)

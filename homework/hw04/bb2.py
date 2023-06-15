@@ -47,9 +47,9 @@ class BB2(Optimization):
 
 def main():
     bb2 = BB2()
-    output = bb2.optimize()
+    x = bb2.optimize()
     os.makedirs("images", exist_ok=True)
-    tifffile.imsave("images/bb2.tif", output.astype(np.uint8))
+    tifffile.imsave("images/bb2.tif", x.astype(np.uint8))
 
 
 if __name__ == "__main__":
