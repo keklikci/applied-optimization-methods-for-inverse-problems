@@ -40,15 +40,16 @@ class Backtracking(Optimization):
 def main():
     backtrack = Backtracking()
     alphas = [1e-3, 1e-4, 1e-5, 1e-6, 1e-7]
+    strings = [str(string) for string in range(3, 8)]
     callback = []
-    for alpha in alphas:
+    for i, alpha in enumerate(alphas):
         x, callback = backtrack.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
-        tifffile.imsave(f"images/backtrack_{alpha}.tif", x.astype(np.uint8))
+        tifffile.imsave(f"images/backtrack_{strings[i]}.tif", x.astype(np.uint8))
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
         plt.plot(np.arange(len(callback)), callback)
-        plt.savefig(f"images/callback_{alpha}", transparent=True)
+        plt.savefig(f"images/callback_{strings[i]}", transparent=True)
 
 if __name__ == "__main__":
     main()
