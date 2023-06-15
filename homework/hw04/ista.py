@@ -8,6 +8,7 @@
 import aomip
 import numpy as np
 import tifffile
+import os
 from optimize import Optimization
 
 class ISTA(Optimization):
