@@ -49,7 +49,7 @@ def main():
     os.makedirs("images", exist_ok=True)
     tifffile.imsave("images/experiment_recon.tif", output.astype(np.uint8))
     plt.plot(np.arange(len(callback)), callback)
-    plt.figsave("images/experiment_error.png")
+    plt.savefig("images/experiment_error.png")
 
 if __name__ == "__main__":
     main()
