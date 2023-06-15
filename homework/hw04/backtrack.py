@@ -9,10 +9,9 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 import tifffile
-from line_search import LineSearch
+from optimize import Optimization
 
-
-class Backtracking(LineSearch):
+class Backtracking(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
