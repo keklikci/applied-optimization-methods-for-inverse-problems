@@ -30,8 +30,9 @@ class ProjectedGradientDescent(Optimization):
         xproj = np.maximum(x - self.step * gradient, 0)
         return xproj
 
-    def optimize(self, num_iterations=100, callback=None) -> None:
+    def optimize(self, alpha=1e-5, num_iterations=100, callback=None) -> None:
         x = self.x0
+        self.step = alpha
         for i in range(num_iterations):
             gradient = self.calculate_gradient(x)
             x = self.project(x, gradient)
