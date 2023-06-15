@@ -8,7 +8,7 @@
 import aomip
 import numpy as np
 import tifffile
-from optimization import Optimization
+from optimize import Optimization
 
 class ISTA(Optimization):
     def __init__(self, *args, **kwargs) -> None:
