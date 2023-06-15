@@ -33,17 +33,17 @@ class ISTA(Optimization):
         self._beta = beta
 
     def project(self, x, gradient) -> np.ndarray:
-        xproj = np.maximum(x - self.alpha * gradient, 0)
+        xproj = np.maximum(x - self.step * gradient, 0)
         return xproj
 
     def soft_threshold(self, x) -> np.ndarray:
-        return np.sign(x) * np.maximum(np.abs(x) - self.alpha, 0)
+        return np.sign(x) * np.maximum(np.abs(x) - self.beta, 0)
 
     def optimize(self, num_iterations=100) -> None:
         x = self.x0
         for i in range(num_iterations):
             gradient = self.calculate_gradient(x)
-            x -= self.beta * gradient
+            x -= self.step * gradient
             x = self.soft_threshold(x)
         return x
 
