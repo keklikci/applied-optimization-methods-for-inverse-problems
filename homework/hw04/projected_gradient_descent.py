@@ -8,6 +8,7 @@
 import aomip
 import numpy as np
 import tifffile
+import matplotlib.pyplot as plt
 import os
 from optimize import Optimization
 
@@ -41,7 +42,9 @@ def main():
     descent = ProjectedGradientDescent()
     output = descent.optimize()
     os.makedirs("images", exist_ok=True)
-    tifffile.imsave("images/proj_grad_descent.tif", output.astype(np.uint8))
+    plt.imshow(output, cmap="gray")
+    plt.axis("off")
+    plt.savefig("images/proj_grad_descent.tif")
 
 
 if __name__ == "__main__":
