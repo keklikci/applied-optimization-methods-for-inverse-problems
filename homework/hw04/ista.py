@@ -11,12 +11,13 @@ import tifffile
 import os
 from optimize import Optimization
 
+
 class ISTA(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self.step = 1e-5
-        self.beta = 0.75
-    
+        self.step = 1e-3
+        self.beta = 1e-6
+
     @property
     def step(self) -> float:
         return self._step
@@ -32,10 +33,6 @@ class ISTA(Optimization):
     @beta.setter
     def beta(self, beta) -> float:
         self._beta = beta
-
-    def project(self, x, gradient) -> np.ndarray:
-        xproj = np.maximum(x - self.step * gradient, 0)
-        return xproj
 
     def soft_threshold(self, x) -> np.ndarray:
         return np.sign(x) * np.maximum(np.abs(x) - self.beta, 0)
