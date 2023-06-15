@@ -49,7 +49,6 @@ def main():
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
-        plt.show()
         plt.savefig(f"images/callback_{strings[i]}", transparent=True)
 
 if __name__ == "__main__":
