@@ -71,3 +71,12 @@
 
 - Results are just as expected. Until some iterations, we are actually able to reach to a regularized result, at roughly `50` iterations. After that, reconstruction error starts spiking up, where we deviate from the solution. Please specifically see this [error plot](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw04/images/semi_convergence_error2.png) as this perfectly demonstrates semi convergence.
     
+## Homework 3 & 4: Submission & Catch Up
+
+- I try to submit as much as possible to the leaderboard, especially on all angles. However, often times (not always) I cannot beat my vanilla gradient descent. This is valid for this assignment, too. 
+
+- The possible reasoning is that the more complex iterative methods get, the more artifacts the reconstructions will have, unless the hyperparameters like `alpha` or `beta` are extremely precise. 
+
+- This requires exhaustively testing the algorithms, which I am doing to my best effort. However, it is not very often that I am able to find extremely precise parameters.
+
+- Finally, I did not manage to implement finite differences yet, but refined a lot of code and increased code quality significantly. I implemented desired callbacks and hopefully managed to explicitly document my work.
