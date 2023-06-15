@@ -43,7 +43,7 @@ def experiment(
     loc=0.0,
     scale=1.0,
 ) -> None:
-    noise = np.random.normal(loc=loc, scale=scale, size=vol_shape)
+    noise = np.random.normal(loc=loc, scale=scale, size=[512, 360])
     sino += noise
     sino = apply_filter(sino, sino_shape)
     for i in range(num_iterations):
