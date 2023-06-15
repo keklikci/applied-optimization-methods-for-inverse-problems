@@ -46,9 +46,10 @@ def main():
         x, callback = backtrack.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
         tifffile.imsave(f"images/backtrack_{strings[i]}.tif", x.astype(np.uint8))
+        plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
-        plt.plot(np.arange(len(callback)), callback)
+        plt.show()
         plt.savefig(f"images/callback_{strings[i]}", transparent=True)
 
 if __name__ == "__main__":
