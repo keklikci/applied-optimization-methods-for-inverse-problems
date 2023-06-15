@@ -66,11 +66,12 @@ def main():
             x, operator, sino, sino_shape, callback=callback, loc=data[0], scale=data[1]
         )
         os.makedirs("images", exist_ok=True)
-        tifffile.imsave(f"images/experiment_recon_{i + 1}.tif", x.astype(np.uint8))
+        plt.imshow(x, cmap="gray")
+        plt.savefig(f"images/semi_convergence_reconstruction_{i + 1}.tif", transparent=True)
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {1e-4}")
         plt.xlabel(f"# of iterations")
-        plt.savefig(f"images/experiment_error_{i + 1}.png")
+        plt.savefig(f"images/semi_convergence_error{i + 1}.png")
 
 
 if __name__ == "__main__":
