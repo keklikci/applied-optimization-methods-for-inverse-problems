@@ -30,21 +30,29 @@ class ProjectedGradientDescent(Optimization):
         xproj = np.maximum(x - self.step * gradient, 0)
         return xproj
 
-    def optimize(self, num_iterations=100) -> None:
+    def optimize(self, num_iterations=100, callback=None) -> None:
         x = self.x0
         for i in range(num_iterations):
             gradient = self.calculate_gradient(x)
             x = self.project(x, gradient)
-        return x
+            if callback is not None and i % 2 == 0:
+                error = self.calculate_error(x)
+                callback.append(error)
+        return x, callback
 
 
 def main():
     descent = ProjectedGradientDescent()
-    output = descent.optimize()
-    os.makedirs("images", exist_ok=True)
-    plt.imshow(output, cmap="gray")
-    plt.axis("off")
-    plt.savefig("images/proj_grad_descent.tif", transparent=True)
+    callback = []
+    alphas = np.linspace(1-3, 1e-8, num=5)
+    for i, alpha in enumerate(alphas):
+        x, callback = descent.optimize(alpha=alpha, callback=callback)
+        os.makedirs("images", exist_ok=True)
+        tifffile.imsave(f"images/proj_grad_descent_{i + 1}.tif", x.astype(np.uint8))
+        plt.plot(np.arange(len(callback)), callback)
+        plt.ylabel(f"Reconstruction error, alpha = {alpha}")
+        plt.xlabel(f"# of iterations")
+        plt.savefig(f"images/proj_grad_descent_callback_{i + 1}")
 
 
 if __name__ == "__main__":
