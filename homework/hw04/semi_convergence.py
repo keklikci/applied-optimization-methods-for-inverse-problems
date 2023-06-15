@@ -68,11 +68,12 @@ def main():
         os.makedirs("images", exist_ok=True)
         plt.imshow(x, cmap="gray")
         plt.savefig(f"images/semi_convergence_reconstruction_{i + 1}.tif", transparent=True)
-        plt.figure()
+        plt.clf()
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {1e-4}")
         plt.xlabel(f"# of iterations")
         plt.savefig(f"images/semi_convergence_error{i + 1}.png")
+        plt.clf()
 
 
 if __name__ == "__main__":
