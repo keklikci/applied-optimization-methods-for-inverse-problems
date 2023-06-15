@@ -45,7 +45,7 @@ class ProjectedGradientDescent(Optimization):
 def main():
     descent = ProjectedGradientDescent()
     callback = []
-    alphas = np.linspace(1-3, 1e-8, num=5)
+    alphas = np.linspace(1-6, 1e-10, num=5)
     for i, alpha in enumerate(alphas):
         x, callback = descent.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
@@ -54,6 +54,7 @@ def main():
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
+        plt.show()
         plt.savefig(f"images/proj_grad_descent_callback_{i + 1}")
 
 
