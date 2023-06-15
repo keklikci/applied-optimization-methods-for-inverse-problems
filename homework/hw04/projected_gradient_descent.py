@@ -15,7 +15,7 @@ from optimize import Optimization
 class ProjectedGradientDescent(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self.step = 1e-3
+        self.step = 1e-5
 
     @property
     def step(self) -> float:
