@@ -49,10 +49,11 @@ def main():
     for i, alpha in enumerate(alphas):
         x, callback = descent.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
-        plt.plot(np.arange(len(callback)), callback)
-        plt.ylabel(f"Reconstruction error, alpha = {alpha}")
-        plt.xlabel(f"# of iterations")
-        plt.savefig(f"images/proj_grad_descent_callback_{i + 1}")
+        if len(callback) == 100:
+            plt.plot(np.arange(len(callback)), callback)
+            plt.ylabel(f"Reconstruction error, alpha = {alpha}")
+            plt.xlabel(f"# of iterations")
+            plt.savefig(f"images/proj_grad_descent_callback_{i + 1}")
         plt.imshow(x, cmap="gray")
         plt.savefig(f"images/proj_grad_descent_{i + 1}.tif", transparent=True)
 
