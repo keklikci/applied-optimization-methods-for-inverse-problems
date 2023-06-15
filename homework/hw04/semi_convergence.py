@@ -38,7 +38,7 @@ def experiment(x, operator, sino, sino_shape, alpha=1e-4, num_iterations=100, lo
         error = operator.apply(x) - sino
         norm = np.linalg.norm(error)
         if log_error:
-            callback.append(error)
+            callback.append(norm)
         gradient = operator.applyAdjoint(error)
         x -= alpha * gradient
     return x, callback
