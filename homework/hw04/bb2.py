@@ -9,10 +9,10 @@ import numpy as np
 import tifffile
 import os
 import sys
-from line_search import LineSearch
+from optimization import Optimization
 
 
-class BB2(LineSearch):
+class BB2(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 

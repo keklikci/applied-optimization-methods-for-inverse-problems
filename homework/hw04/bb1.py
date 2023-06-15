@@ -10,10 +10,10 @@ import tifffile
 import os
 import sys
 import aomip
-from line_search import LineSearch
+from optimize import Optimization
 
 
-class BB1(LineSearch):
+class BB1(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 

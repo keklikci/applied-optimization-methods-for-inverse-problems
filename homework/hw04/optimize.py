@@ -11,7 +11,7 @@ import tifffile
 from abc import ABC, abstractmethod
 
 
-class LineSearch(object):
+class Optimization(object):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.vol_shape = [512, 512]
