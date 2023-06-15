@@ -7,6 +7,7 @@
 
 import aomip
 import numpy as np
+import matplotlib.pyplot as plt
 import tifffile
 import os
 
