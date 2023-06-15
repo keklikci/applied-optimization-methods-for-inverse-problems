@@ -24,7 +24,7 @@ class Backtracking(LineSearch):
         for i in range(num_iterations):
             next_x = x - step * gradient
             error = self.calculate_norm(next_x)
-            if callback:
+            if callback and i % 2 == 0:
                 callback.append(error)
             objective = self.calculate_norm(x)
             terminal_bound = error <= objective - alpha * step * norm
