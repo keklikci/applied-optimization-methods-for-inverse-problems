@@ -37,7 +37,7 @@ class ProjectedGradientDescent(Optimization):
             gradient = self.calculate_gradient(x)
             x = self.project(x, gradient)
             if callback is not None and i % 2 == 0:
-                error = self.calculate_error(x)
+                error = self.calculate_norm(x)
                 callback.append(error)
         return x, callback
 
