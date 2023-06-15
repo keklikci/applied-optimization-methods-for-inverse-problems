@@ -25,6 +25,7 @@
 ## Homework 1: Even more gradient based methods
 
   - ### i) Backtracking
+
     - Unlike other homeworks, python commands are intentionally skipped in these sections. Every script is self explanatory and follows a name convention to match the task at hand. You can then execute these scripts in the order you wish. 
     
     - I implemented and optimized this algorithm by linespacing it over an interval, where then reconstructed images and errors can be plotted.
@@ -34,17 +35,27 @@
     - Convergence analysis on backtracking shows that `alpha = 0.0075` is the only value that outputs a decent reconstruction. When callback graphs are examined, frequent oscillation of error values indicated a bad reconstruction, which is however not the case for `alpha = 0.0075`.
     
   - ### ii) BB1 (Barzilai - Borwein Steps)
+
     - As mentioned in the `Overview` section, a healthy discussion cannot be fostered over this algorithm now, with respect to my own implementation. Currently, the approach is to select a random `alpha = 1e-3` and descend by that for the first iteration to avoid division by zero in the first iteration.
+
     - Nonetheless, I included the output images in the relevant folder as a remark to myself in order to fix it. 
+
     - Current approach is to fix the export, as the optimization algorithm itself looks fine.
+
     - As an answer to the convergence rate, longer Barzilai - Borwein step, of course, converges faster compared to the shorter one.
     
   - ### iii) Iterative Shrinkage-Thresholding Algorithm
+
     - Experimentation with `ISTA` required linespacing over a range of values for both `alphas = np.linspace(1e-5, 1e-3, num=5)` and `betas = np.linspace(1e-8, 1e-6, num=5)`.
+
     - The values are then zipped and sent to the optimization function for reconstruction and convergence analysis.
+
     - Looking at the callbacks, we can see that the only decent parameter combination that produces to output a decent reconstruction is `alpha = 1e-5` and `beta = 1e-8`. Whenever the callback values start pulling away from a nicely looking decaying curve, reconstruction is naturally deterioriated.
+
     - Overall, I found out this algorithm is more sensitive to the parameter `alpha`. A small floating increase or decrease in alpha can in fact completely mess up the reconstruction while `beta` is less concerning, but shouldn't be kept to a very small value either.
-    - There are some artifacts on the reconstruction output. I believe this is due to the fact that algortihm is extremely susceptible to the parameter choice, a lot more than the regular gradient descent. Convergence happens halfway, i.e., `50` through the total number of iterations, i.e., `100`. 
+
+    - There are some artifacts on the reconstruction output. I believe this is due to the fact that algortihm is extremely susceptible to the parameter choice, a lot more than the regular gradient descent. Convergence happens halfway, i.e., `50` through the total number of iterations, i.e., `100`.
+     
     - Backtracking on the other hand, converges `2` times faster w.r.t. the individual optimization parameters of algorithms.
 
     
