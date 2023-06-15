@@ -39,8 +39,8 @@ class Backtracking(Optimization):
 
 def main():
     backtrack = Backtracking()
-    alphas = [1e-3, 1e-4, 1e-5, 1e-6, 1e-7]
-    strings = [str(string) for string in range(3, 8)]
+    alphas = [1e-2, 1e-3, 1e-4]
+    strings = [str(string) for string in range(2, 5)]
     callback = []
     for i, alpha in enumerate(alphas):
         x, callback = backtrack.optimize(alpha=alpha, callback=callback)
