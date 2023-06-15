@@ -15,7 +15,7 @@ class Backtracking(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-    def optimize(self, alpha=1e-5, beta=0.75, num_iterations=100, callback=None) -> None:
+    def optimize(self, alpha=1e-5, beta=0.9, num_iterations=100, callback=None) -> None:
         x = self.x0
         step = 1.0
         gradient = self.calculate_gradient(x)
