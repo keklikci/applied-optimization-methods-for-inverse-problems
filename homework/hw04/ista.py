@@ -17,12 +17,12 @@ class ISTA(Optimization):
         self.beta = 1
     
     @property
-    def alpha(self) -> float:
+    def step(self) -> float:
         return self._step
 
-    @alpha.setter
-    def alpha(self, alpha) -> float:
-        self._alpha = alpha
+    @step.setter
+    def step(self, step) -> float:
+        self._step = step
 
     @property
     def beta(self) -> float:
