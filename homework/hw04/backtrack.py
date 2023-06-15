@@ -39,8 +39,8 @@ class Backtracking(Optimization):
 
 def main():
     backtrack = Backtracking()
-    alphas = [1e-2, 1e-3, 1e-4]
-    strings = [str(string) for string in range(2, 5)]
+    alphas = [1e-2, 2e-2, 3e-2, 4e-2]
+    strings = [str(string) for string in range(1, 5)]
     callback = []
     for i, alpha in enumerate(alphas):
         x, callback = backtrack.optimize(alpha=alpha, callback=callback)
@@ -49,7 +49,7 @@ def main():
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
-        plt.savefig(f"images/callback_{strings[i]}", transparent=True)
+        plt.savefig(f"images/callback_{strings[i]}")
 
 if __name__ == "__main__":
     main()
