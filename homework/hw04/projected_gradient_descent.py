@@ -45,7 +45,7 @@ class ProjectedGradientDescent(Optimization):
 def main():
     descent = ProjectedGradientDescent()
     callback = []
-    alphas = np.linspace(1-6, 1e-10, num=5)
+    alphas = np.linspace(1 - 6, 1e-10, num=5)
     for i, alpha in enumerate(alphas):
         x, callback = descent.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
