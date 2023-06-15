@@ -33,28 +33,44 @@ def apply_filter(sino, sino_shape):
 
 
 def experiment(
-    x, operator, sino, sino_shape, alpha=1e-4, num_iterations=100, log_error=True
+    x,
+    operator,
+    sino,
+    sino_shape,
+    alpha=1e-4,
+    num_iterations=100,
+    callback=None,
+    loc=0.0,
+    scale=1.0,
 ) -> None:
-    callback = []
-    sino = np.random.poisson(sino).astype(np.uint8)
+    noise = np.random.normal(loc=loc, scale=scale, size=sino_shape)
+    sino += noise
     sino = apply_filter(sino, sino_shape)
     for i in range(num_iterations):
         error = operator.apply(x) - sino
         norm = np.linalg.norm(error)
-        if log_error:
-            callback.append(norm)
         gradient = operator.applyAdjoint(error)
         x -= alpha * gradient
+        if callback is not None and i % 2 == 0:
+            callback.append(norm)
     return x, callback
 
 
 def main():
     x = np.zeros(vol_shape)
-    output, callback = experiment(x, operator, sino, sino_shape)
-    os.makedirs("images", exist_ok=True)
-    tifffile.imsave("images/experiment_recon.tif", output.astype(np.uint8))
-    plt.plot(np.arange(len(callback)), callback)
-    plt.savefig("images/experiment_error.png")
+    callback = []
+    locs = np.linspace(0, 2, num=5)
+    scales = np.linspace(0, 6, num=5)
+    for i, data in enumerate(zip(locs, scales)):
+        x, callback = experiment(
+            x, operator, sino, sino_shape, callback=callback, loc=data[0], scale=data[1]
+        )
+        os.makedirs("images", exist_ok=True)
+        tifffile.imsave(f"images/experiment_recon_{i + 1}.tif", x.astype(np.uint8))
+        plt.plot(np.arange(len(callback)), callback)
+        plt.ylabel(f"Reconstruction error, alpha = {1e-4}")
+        plt.xlabel(f"# of iterations")
+        plt.savefig(f"images/experiment_error_{i + 1}.png")
 
 
 if __name__ == "__main__":
