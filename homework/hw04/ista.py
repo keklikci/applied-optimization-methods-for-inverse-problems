@@ -61,7 +61,7 @@ def main():
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {params[0]}, beta = {params[1]}")
         plt.xlabel(f"# of iterations")
-        plt.savefig(f"images/callback_{i + 1}")
+        plt.savefig(f"images/ista_callback_{i + 1}")
 
 
 if __name__ == "__main__":
