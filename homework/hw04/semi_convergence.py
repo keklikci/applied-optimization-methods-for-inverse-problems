@@ -34,7 +34,8 @@ def experiment(x, operator, sino, sino_shape, alpha=1e-4, num_iterations=100, lo
     sino = np.random.poisson(sino).astype(np.uint8)
     sino = apply_filter(sino, sino_shape)
     for i in range(num_iterations):
-        error = np.linalg.norm(operator.apply(x) - sino)
+        error = operator.apply(x) - sino
+        norm = np.linalg.norm(error)
         if log_error:
             callback.append(error)
         gradient = operator.applyAdjoint(error)
