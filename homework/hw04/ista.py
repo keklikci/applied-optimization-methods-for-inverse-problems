@@ -9,6 +9,7 @@ import aomip
 import numpy as np
 import tifffile
 import os
+import matplotlib.pyplot as plt
 from optimize import Optimization
 
 
