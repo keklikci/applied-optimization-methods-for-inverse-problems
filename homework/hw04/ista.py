@@ -14,8 +14,8 @@ from optimize import Optimization
 class ISTA(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self.step = 0.1
-        self.beta = 1
+        self.step = 1e-4
+        self.beta = 0.75
     
     @property
     def step(self) -> float:
@@ -38,13 +38,13 @@ class ISTA(Optimization):
         return xproj
 
     def soft_threshold(self, x) -> np.ndarray:
-        return np.sign(x) * np.maximum(np.abs(x) - self.beta, 0)
+        return np.sign(x) * np.maximum(np.abs(x) - self.step, 0)
 
     def optimize(self, num_iterations=100) -> None:
         x = self.x0
         for i in range(num_iterations):
             gradient = self.calculate_gradient(x)
-            x -= self.step * gradient
+            x -= self.beta * gradient
             x = self.soft_threshold(x)
         return x
 
