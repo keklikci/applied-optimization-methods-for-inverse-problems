@@ -15,7 +15,7 @@ from proximal_operators.nonnegativity import Nonnegativity
 from proximal_operators.l2 import L2
 
 
-class FPGM(Optimization):
+class PGM(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.step = 1e-3
@@ -47,7 +47,7 @@ class FPGM(Optimization):
 
 
 def main():
-    fpgm = FPGM()
+    fpgm = PGM()
     alphas = np.linspace(1e-5, 1e-3, num=5)
     betas = np.linspace(1e-6, 1e-3, num=5)
     variants = ["nonnegative", "l2"]
