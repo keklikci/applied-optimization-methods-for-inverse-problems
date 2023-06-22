@@ -41,11 +41,13 @@ class ProjectedGradientDescent(Optimization):
 def main():
     descent = ProjectedGradientDescent()
     callback = []
-    alphas = np.linspace(1e-6, 1e-3, num=5)
+    alphas = np.linspace(1e-8, 1e-2, num=5)
     for i, alpha in enumerate(alphas):
         x, callback = descent.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
-        tifffile.imsave(f"images/projected_gradient_descent_proximal_{i + 1}.tif", x.astype(np.uint8))
+        tifffile.imsave(f"images/projected_gradient_descent_proximal_{i + 1}.tif", x)
+        # plt.imshow(x, cmap="gray")
+        # plt.savefig(f"images/projected_gradient_descent_proximal_{i + 1}.tif", transparent=True)
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
