@@ -36,14 +36,11 @@ class ISTA(Optimization):
     def beta(self, beta) -> float:
         self._beta = beta
 
-    def soft_threshold(self, x) -> np.ndarray:
-        return L1.proximal(x, self.beta)
-
     def optimize(self, num_iterations=100, callback=None) -> None:
         x = self.x0
         for i in range(num_iterations):
             gradient = self.calculate_gradient(x)
-            x = self.soft_threshold(x - self.step * gradient)
+            x = L1().proximal(x - self.step * gradient, self.beta)
             if callback is not None and i % 2 == 0:
                 error = self.calculate_norm(x)
                 callback.append(error)
@@ -56,15 +53,15 @@ def main():
     betas = np.linspace(1e-8, 1e-6, num=5)
     callback = []
     for i, params in enumerate(zip(alphas, betas)):
-        ista.step = alpha
-        ista.beta = beta
+        ista.step = params[0]
+        ista.beta = params[1]
         x, callback = ista.optimize(callback=callback)
         os.makedirs("images", exist_ok=True)
         tifffile.imsave(f"images/ista_proximal_{i + 1}.tif", x.astype(np.uint8))
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {params[0]}, beta = {params[1]}")
         plt.xlabel(f"# of iterations")
-        plt.savefig(f"images/ista_callback_{i + 1}")
+        plt.savefig(f"images/ista_proximal_callback_{i + 1}")
 
 
 if __name__ == "__main__":

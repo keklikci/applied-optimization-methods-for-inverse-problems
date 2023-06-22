@@ -22,7 +22,7 @@ class Optimization(object):
         self.operator = aomip.XrayOperator(
             self.vol_shape, self.sino_shape, self.thetas, self.d2c, self.c2d
         )
-        self.target = tifffile.imread("images/htc2022_04b_recon.tif")
+        self.target = tifffile.imread("images/htc2022_05c_recon.tif")
         self.sino = aomip.radon(
             self.target, self.sino_shape, self.thetas, self.d2c, self.c2d
         )

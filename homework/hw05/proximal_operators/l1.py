@@ -6,11 +6,11 @@
 # ********************************** #
 
 import numpy as np
-from proximal_operator import ProximalOperator
+from .proximal_operator import ProximalOperator
 
 class L1(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    
+
     def proximal(self, x, beta):
         return np.sign(x) * np.maximum(np.abs(x) - beta, 0)

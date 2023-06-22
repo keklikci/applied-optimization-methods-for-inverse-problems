@@ -5,7 +5,7 @@
 # Date: 16.06.2023                   #
 # ********************************** #
 
-from proximal_operator import ProximalOperator
+from .proximal_operator import ProximalOperator
 
 class Constant(ProximalOperator):
     def __init__(self, *args, **kwargs):

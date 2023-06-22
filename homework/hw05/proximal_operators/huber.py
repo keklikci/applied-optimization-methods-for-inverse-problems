@@ -6,12 +6,12 @@
 # ********************************** #
 
 import numpy as np
-from proximal_operator import ProximalOperator
+from .proximal_operator import ProximalOperator
 
 class Huber(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-    
+
     def proximal(self, x, alpha, sigma):
         x = (1. - sigma / max(np.linalg.norm(x), sigma + alpha)) * x
         return x
