@@ -59,11 +59,14 @@ def main():
             fpgm.step = alpha
             x, callback = fpgm.optimize(callback=callback, variant=variant, beta=beta)
             os.makedirs("images", exist_ok=True)
-            tifffile.imsave(f"images/pgm_proximal_variant_{variant}_{i + 1}.tif", x.astype(np.uint8))
+            # tifffile.imsave(f"images/pgm_proximal_variant_{variant}_{i + 1}.tif", x.astype(np.uint8))
+            plt.imshow(x, cmap="gray")
+            plt.savefig(f"images/pgm_proximal_{variant}_{i + 1}.tif", transparent=True)
+            plt.clf()
             plt.plot(callback)
             plt.ylabel(f"Reconstruction error, alpha = {alpha}, beta = {beta}")
             plt.xlabel(f"# of iterations")
-            plt.savefig(f"images/fpgm_proximal_{variant}_callback_{i + 1}")
+            plt.savefig(f"images/pgm_proximal_{variant}_callback_{i + 1}")
             plt.clf()
 
 
