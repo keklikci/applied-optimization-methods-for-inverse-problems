@@ -32,7 +32,7 @@ class ProjectedGradientDescent(Optimization):
         self.step = alpha
         for i in range(num_iterations):
             gradient = self.calculate_gradient(x)
-            x = Nonnegativity(x, gradient)
+            x = Nonnegativity().proximal(x, gradient)
             if callback is not None and i % 2 == 0:
                 error = self.calculate_norm(x)
                 callback.append(error)

@@ -12,8 +12,5 @@ class Nonnegativity(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def __call__(self, x, step, gradient):
-        return self.proximal(x, step, gradient)
-
     def proximal(self, x, step, gradient):
         return np.maximum(x - step * gradient, 0)
