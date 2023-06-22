@@ -40,9 +40,9 @@ class ProjectedGradientDescent(Optimization):
 
 def main():
     descent = ProjectedGradientDescent()
-    callback = []
     alphas = np.linspace(1e-10, 1e-6, num=5)
     for i, alpha in enumerate(alphas):
+        callback = []
         x, callback = descent.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
         # tifffile.imsave(f"images/projected_gradient_descent_proximal_{i + 1}.tif", x)

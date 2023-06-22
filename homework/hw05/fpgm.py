@@ -48,8 +48,8 @@ class FPGM(Optimization):
 def main():
     fpgm = FPGM()
     alphas = np.linspace(1e-5, 1e-3, num=5)
-    callback = []
     for i, alpha in enumerate(alphas):
+        callback = []
         fpgm.step = alpha
         x, callback = fpgm.optimize(callback=callback)
         os.makedirs("images", exist_ok=True)

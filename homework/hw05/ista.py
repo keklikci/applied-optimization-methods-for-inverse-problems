@@ -53,8 +53,8 @@ def main():
     ista = ISTA()
     alphas = np.linspace(1e-5, 1e-3, num=5)
     betas = np.linspace(1e-5, 1e-3, num=5)
-    callback = []
     for i, params in enumerate(zip(alphas, betas)):
+        callback = []
         ista.step = params[0]
         ista.beta = params[1]
         x, callback = ista.optimize(callback=callback)
