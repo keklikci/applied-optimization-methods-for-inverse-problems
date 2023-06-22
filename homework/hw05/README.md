@@ -36,7 +36,7 @@
 
     - Still, I was able to get the reconstruction out of the algorithm, but some of pixels are too pushed back to the lower bound 0 and some of the pixels are too bright and scattered. Algorithm itself is correct, but to reiterate, it's very difficult to find a nice parametrization or fast convergence for this method. Arguably, the option that makes the most sense is to increase the number of iterations and include some `epsilon` termination condition.
 
-    - Projected gradient descent shows demonstrates some similar behavior but with a lot less artifacts. The difference compared to `FPGM` results from the difference in export API,  i.e., visualization via `matplotlib` grayscale colormap.
+    - Projected gradient descent demonstrates some similar behavior but with a lot less artifacts. The difference compared to `FPGM` results from the difference in export API,  i.e., visualization via `matplotlib` grayscale colormap.
 
     - Overall, optimization algorithms are implemented in a way that corresponding proximal operators from the module are ported to the optimization methods.
   
