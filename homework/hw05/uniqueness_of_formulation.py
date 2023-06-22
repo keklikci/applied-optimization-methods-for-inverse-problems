@@ -36,7 +36,7 @@ class FPGM(Optimization):
             gradient = self.calculate_gradient(z)
             if variant == "l2":
                 z = L2().proximal(xprev, self.step, gradient, beta)
-                x = z + self.step * (z - zprev) * beta
+                x = z + self.step * (z - zprev)
             else:
                 z = Nonnegativity().proximal(xprev, self.step, gradient)
                 x = z + self.step * (z - zprev)

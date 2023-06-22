@@ -11,5 +11,5 @@ class L2(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def proximal(self, x, sigma, reg):
-        return x / (1 + sigma * reg)
+    def proximal(self, x, sigma, gradient, reg):
+        return (x - sigma * gradient) / (1 + sigma * reg)
