@@ -29,10 +29,9 @@ class ProjectedGradientDescent(Optimization):
 
     def optimize(self, alpha=1e-5, num_iterations=100, callback=None) -> None:
         x = self.x0
-        self.step = alpha
         for i in range(num_iterations):
             gradient = self.calculate_gradient(x)
-            x = Nonnegativity().proximal(x, gradient)
+            x = Nonnegativity().proximal(x, alpha, gradient)
             if callback is not None and i % 2 == 0:
                 error = self.calculate_norm(x)
                 callback.append(error)
@@ -44,7 +43,6 @@ def main():
     callback = []
     alphas = np.linspace(1e-6, 1e-3, num=5)
     for i, alpha in enumerate(alphas):
-        descent.step = alpha
         x, callback = descent.optimize(alpha=alpha, callback=callback)
         os.makedirs("images", exist_ok=True)
         tifffile.imsave(f"images/projected_gradient_descent_proximal_{i + 1}.tif", x.astype(np.uint8))
