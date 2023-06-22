@@ -37,10 +37,12 @@ class ISTA(Optimization):
         self._beta = beta
 
     def optimize(self, num_iterations=100, callback=None) -> None:
-        x = self.x0
+        x, z = self.x0, self.x0
         for i in range(num_iterations):
+            xprev, zprev = x, z
             gradient = self.calculate_gradient(x)
-            x = L1().proximal(x - self.step * gradient, self.beta)
+            z = L1().proximal(x - self.step * gradient, self.beta)
+            x = z + self.step * (z - zprev)
             if callback is not None and i % 2 == 0:
                 error = self.calculate_norm(x)
                 callback.append(error)
