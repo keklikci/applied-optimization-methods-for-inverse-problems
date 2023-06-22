@@ -47,7 +47,9 @@ def main():
         os.makedirs("images", exist_ok=True)
         # tifffile.imsave(f"images/projected_gradient_descent_proximal_{i + 1}.tif", x.astype(np.uint8))
         plt.imshow(x, cmap="gray")
-        plt.savefig(f"images/projected_gradient_descent_proximal_{i + 1}.tif", transparent=True)
+        plt.savefig(
+            f"images/projected_gradient_descent_proximal_{i + 1}.tif", transparent=True
+        )
         plt.clf()
         plt.plot(callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")

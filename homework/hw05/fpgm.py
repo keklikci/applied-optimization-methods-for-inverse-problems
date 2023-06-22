@@ -26,7 +26,7 @@ class FPGM(Optimization):
     @step.setter
     def step(self, step) -> float:
         self._step = step
-    
+
     def optimize(self, num_iterations=100, callback=None) -> None:
         x, z = self.x0, self.x0
         t = 1
@@ -34,8 +34,8 @@ class FPGM(Optimization):
             xprev, zprev = x, z
             gradient = self.calculate_gradient(z)
             tprev = t
-            t = (1 + np.sqrt(1 + 4 * t ** 2)) / 2
-            # calculate momentum parameter 
+            t = (1 + np.sqrt(1 + 4 * t**2)) / 2
+            # calculate momentum parameter
             self.step = (tprev - 1) / t
             z = Nonnegativity().proximal(xprev, self.step, gradient)
             x = z + self.step * (z - zprev)

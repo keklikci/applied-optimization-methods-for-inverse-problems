@@ -10,6 +10,7 @@ import numpy as np
 import tifffile
 from abc import ABC, abstractmethod
 
+
 class Optimization(object):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)

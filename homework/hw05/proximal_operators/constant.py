@@ -7,6 +7,7 @@
 
 from .proximal_operator import ProximalOperator
 
+
 class Constant(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

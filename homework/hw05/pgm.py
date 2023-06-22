@@ -27,8 +27,15 @@ class PGM(Optimization):
     @step.setter
     def step(self, step) -> float:
         self._step = step
-    
-    def optimize(self, alpha=1e-3, num_iterations=100, callback=None, variant="nonnegative", beta=None) -> None:
+
+    def optimize(
+        self,
+        alpha=1e-3,
+        num_iterations=100,
+        callback=None,
+        variant="nonnegative",
+        beta=None,
+    ) -> None:
         x, z = self.x0, self.x0
         self.step = alpha
         for i in range(num_iterations):
@@ -59,7 +66,7 @@ def main():
             pgm.step = alpha
             x, callback = pgm.optimize(callback=callback, variant=variant, beta=beta)
             os.makedirs("images", exist_ok=True)
-            # tifffile.imsave(f"images/pgm_proximal_variant_{variant}_{i + 1}.tif", x.astype(np.uint8))
+            # tifffile.imsave(f"images/pgm_proximal_variant_{variant}_{i + 1}.tif", x.astype(np.uint8))
             plt.imshow(x, cmap="gray")
             plt.savefig(f"images/pgm_proximal_{variant}_{i + 1}.tif", transparent=True)
             plt.clf()

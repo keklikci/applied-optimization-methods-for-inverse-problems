@@ -27,7 +27,7 @@ class Elastic(Optimization):
     @step.setter
     def step(self, step) -> float:
         self._step = step
-    
+
     def optimize(self, num_iterations=100, callback=None) -> None:
         x, z = self.x0, self.x0
         t = 1
@@ -37,8 +37,8 @@ class Elastic(Optimization):
             # add l1, l2 terms to the gradient
             gradient += (self.step * np.sign(zprev)) + (self.step * zprev)
             tprev = t
-            t = (1 + np.sqrt(1 + 4 * t ** 2)) / 2
-            # calculate momentum parameter 
+            t = (1 + np.sqrt(1 + 4 * t**2)) / 2
+            # calculate momentum parameter
             self.step = (tprev - 1) / t
             z = Nonnegativity().proximal(xprev, self.step, gradient)
             x = z + self.step * (z - zprev)

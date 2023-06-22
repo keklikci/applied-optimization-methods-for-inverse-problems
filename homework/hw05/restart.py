@@ -11,6 +11,7 @@ from fpgm import FPGM
 from elastic import Elastic
 from ista import ISTA
 
+
 def main():
     alphas = 1e-3
     betas = 1e-6
@@ -20,7 +21,9 @@ def main():
         if variant == "phantom":
             algo = algos[0]
             algo.target = aomip.shepp_logan([128, 128])
-            algo.sino = aomip.radon(algo.target, [128], np.arange(360), 128 * 100, 128 * 5)
+            algo.sino = aomip.radon(
+                algo.target, [128], np.arange(360), 128 * 100, 128 * 5
+            )
         callback = []
         algo.step = alpha
         x, callback = algo.optimize(callback=callback)

@@ -8,6 +8,7 @@
 import numpy as np
 from .proximal_operator import ProximalOperator
 
+
 class L1(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
