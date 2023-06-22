@@ -36,7 +36,7 @@ class ISTA(Optimization):
     def beta(self, beta) -> float:
         self._beta = beta
 
-    def optimize(self, num_iterations=100, callback=None) -> None:
+    def optimize(self, num_iterations=500, callback=None) -> None:
         x, z = self.x0, self.x0
         for i in range(num_iterations):
             xprev, zprev = x, z
