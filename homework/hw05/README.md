@@ -30,29 +30,38 @@
 
   - ### i) Proximal Gradient Method
 
-    - As I mentioned in part i), the proximal operator of L1 norm is soft-thresholding, which is implemented as the accepted proximal operator by class `ISTA`. 
+    - As I mentioned in part i), the proximal operator of L1 norm is soft-thresholding, which is implemented as the accepted proximal operator by class `ISTA`.
+
     - Although I successfully ported the proximal operator to this algorithm, some artifacts do exist due to suboptimal parametrization of the optimization loop. 
+
     - Still, I was able to get the reconstruction out of the algorithm, but some of pixels are too pushed back to the lower bound 0 and some of the pixels are too bright and scattered. Algorithm itself is correct, but to reiterate, it's very difficult to find a nice parametrization or fast convergence for this method. Arguably, the option that makes the most sense is to increase the number of iterations and include some `epsilon` termination condition.
+
     - Projected gradient descent shows demonstrates some similar behavior but with a lot less artifacts. The difference compared to `FPGM` results from the difference in export API,  i.e., visualization via `matplotlib` grayscale colormap.
+
     - Overall, optimization algorithms are implemented in a way that corresponding proximal operators from the module are ported to the optimization methods.
   
   - ### ii) Fast proximal gradient method
   
     - FPGM reconstructions are excellent and far superior to any algorithm I have managed to implement so far.
+
     - Due to custom momentum calculation (I implemented the second bulleted approach in the assignment document), algorithm converges blazingly fast and callbacks always demonstrate a monotonically increasing reconstruction error from this point forward.
+
     - Convergence rate can simply be verified by inspecting one of the callback outputs and see monotonically increasing error plot (although small increases in magnitude) for reconstruction, meaning that I am able to reconstruct the image in only a handful of iterations. 
     
   - ### iii) Uniqueness of formulation
   
     - Convergence for nonnegativity proximal operator (first variant) is a lot faster than L2 proximal operator (second variant).
+
     - One possible explanation is that L2 proximal operator is a softer constraint than nonnegativity projection, meaning that it allows for a broader range of pixel mapping to larger field `F` over a domain of numbers with any sign. This makes the algorithm more difficult to converge and requires more iterations.
     
   - ### iv) Elastic Net Formulation
   
     - Elastic net formulation requires to add L1 and L2 penalties to the gradient, which I implemented in `elastic.py`. Note that optimization method is FPGM-like and the only difference is the added penalties.
+
     - It's interesting to see that despite more regularization, more regularization does not always necessarily mean slower convergence. Looking at the callbacks, in fact, elastic net formulation converges by a difference of 5 more iterations on average.
     
 ## Homework 3: Restart conditions
     
 * After some experimentation with restart (hardcoded, duplicated test scripts), I could not find a set of values for any algorithm that converged after periodical restarts at every `k` iterations. 
+
 * For further analysis and more detailed experimentation, I am in the process of writing a script to access and modify my optimization methods from different modules.
