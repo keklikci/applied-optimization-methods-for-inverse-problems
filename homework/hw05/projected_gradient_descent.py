@@ -49,7 +49,7 @@ def main():
         plt.imshow(x, cmap="gray")
         plt.savefig(f"images/projected_gradient_descent_proximal_{i + 1}.tif", transparent=True)
         plt.clf()
-        plt.plot(np.arange(len(callback)), callback)
+        plt.plot(callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
         plt.savefig(f"images/projected_gradient_descent_proximal_callback_{i + 1}")

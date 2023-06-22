@@ -54,7 +54,7 @@ def main():
         x, callback = fpgm.optimize(callback=callback)
         os.makedirs("images", exist_ok=True)
         tifffile.imsave(f"images/fpgm_proximal_{i + 1}.tif", x.astype(np.uint8))
-        plt.plot(np.arange(len(callback)), callback)
+        plt.plot(callback)
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
         plt.savefig(f"images/fpgm_proximal_callback_{i + 1}")
