@@ -47,7 +47,7 @@ class PGM(Optimization):
 
 
 def main():
-    fpgm = PGM()
+    pgm = PGM()
     alphas = np.linspace(1e-5, 1e-3, num=5)
     betas = np.linspace(1e-6, 1e-3, num=5)
     variants = ["nonnegative", "l2"]
@@ -56,8 +56,8 @@ def main():
             alpha = params[0]
             beta = params[1]
             callback = []
-            fpgm.step = alpha
-            x, callback = fpgm.optimize(callback=callback, variant=variant, beta=beta)
+            pgm.step = alpha
+            x, callback = pgm.optimize(callback=callback, variant=variant, beta=beta)
             os.makedirs("images", exist_ok=True)
             # tifffile.imsave(f"images/pgm_proximal_variant_{variant}_{i + 1}.tif", x.astype(np.uint8))
             plt.imshow(x, cmap="gray")
