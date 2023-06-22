@@ -58,6 +58,7 @@ def main():
         plt.ylabel(f"Reconstruction error, alpha = {alpha}")
         plt.xlabel(f"# of iterations")
         plt.savefig(f"images/fpgm_proximal_callback_{i + 1}")
+        plt.clf()
 
 
 if __name__ == "__main__":
