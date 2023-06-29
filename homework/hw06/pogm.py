@@ -13,6 +13,7 @@ import os
 from optimize import Optimization
 from proximal_operators.nonnegativity import Nonnegativity
 
+
 class POGM(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -36,9 +37,9 @@ class POGM(Optimization):
             L = np.linalg.norm(gradient, ord=2) ** 2
             self.step = 1.0 / L
             if 2 <= k < num_iterations - 1:
-                theta = 0.5 * (1 + np.sqrt(4 * thetaprev ** 2 + 1))
+                theta = 0.5 * (1 + np.sqrt(4 * thetaprev**2 + 1))
             if k == num_iterations - 1:
-                theta = 0.5 * (1 + np.sqrt(8 * theta ** 2 + 1))
+                theta = 0.5 * (1 + np.sqrt(8 * theta**2 + 1))
             gamma = self.step * (2 * thetaprev + theta - 1) / theta
             w = xprev - self.step * gradient
             nesterov = (thetaprev - 1) / theta * (w * wprev)
@@ -50,6 +51,7 @@ class POGM(Optimization):
                 error = self.calculate_norm(x)
                 callback.append(error)
         return x, callback
+
 
 def main():
     factor = 1000
@@ -65,6 +67,7 @@ def main():
     plt.xlabel(f"# of iterations")
     plt.savefig(f"images/convergence.png")
     tifffile.imwrite(f"images/pogm.tif", x)
+
 
 if __name__ == "__main__":
     main()

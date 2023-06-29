@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # ************************************** #
-# Author: frank@in.tum.de                #  
+# Author: frank@in.tum.de                #
 # Modified by: kaanguney.keklikci@tum.de #
 # Date: 29.06.2023                       #
 # ************************************** #
@@ -9,6 +9,7 @@
 import numpy as np
 
 config = {}
+
 
 def configure(data, metadata) -> dict:
     # config["angles"] = np.degrees(np.array(metadata["angles"])[: metadata["rotview"]])
