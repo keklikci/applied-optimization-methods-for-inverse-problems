@@ -44,17 +44,17 @@ class POGM(Optimization):
             ogm = thetaprev / theta * (w - xprev)
             pogm = (thetaprev - 1) / (L * gammaprev * theta) * (zprev - xprev)
             z = w + nesterov + ogm + pogm
-            x = Nonnegativity().proximal(z, self.step, gradient)
+            x = Nonnegativity().proximal(z, gamma, gradient)
         return x
 
 
 def main():
-    factor = 10 ** 3
+    factor = 1000
     pogm = POGM()
     x = pogm.optimize()
-    os.makedirs("images", exist_ok=True)
-    # scale image
+    # rescale by the factor
     x *= factor
+    os.makedirs("images", exist_ok=True)
     tifffile.imwrite(f"images/pogm.tif", x)
 
 if __name__ == "__main__":
