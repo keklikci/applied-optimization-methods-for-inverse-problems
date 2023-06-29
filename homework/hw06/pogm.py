@@ -2,7 +2,7 @@
 
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
-# Date: 22.06.2023                   #
+# Date: 29.06.2023                   #
 # ********************************** #
 
 import aomip
@@ -27,8 +27,8 @@ class POGM(Optimization):
         self._step = step
 
     def optimize(self, num_iterations=100, callback=None) -> None:
-        w, x, z = self, x0, self.x0, self.x0
-        theta, gamma = 1
+        w, x, z = self.x0, self.x0, self.x0
+        theta, gamma = 1, 1
         for k in range(num_iterations):
             wprev, xprev, zprev = w, x, z
             thetaprev, gammaprev = theta, gamma
@@ -39,13 +39,13 @@ class POGM(Optimization):
                 theta = 0.5 * (1 + np.sqrt(4 * thetaprev ** 2 + 1))
             if k == num_iterations - 1:
                 theta = 0.5 * (1 + np.sqrt(8 * theta ** 2 + 1))
-            gamma = self.step * ((2 * thetaprev + theta - 1) / theta)
+            gamma = self.step * (2 * thetaprev + theta - 1) / theta
             w = xprev - self.step * gradient
             nesterov = (thetaprev - 1) / theta * (w * wprev)
             ogm = thetaprev / theta * (w - xprev)
             pogm = (thetaprev - 1) / (L * gammaprev * theta) * (zprev - xprev)
             z = w + nesterov + ogm + pogm
-            x = Nonnegativity().proximal(xprev, self.step, gradient)
+            x = Nonnegativity().proximal(z, self.step, gradient)
         return x
 
 
@@ -53,7 +53,8 @@ def main():
     pogm = POGM()
     x = pogm.optimize()
     os.makedirs("images", exist_ok=True)
-    tifffile.imsave(f"images/pogm.tif", x.astype(np.uint8))
+    # TODO: clip the image
+    tifffile.imwrite(f"images/pogm.tif", x)
 
 
 if __name__ == "__main__":
