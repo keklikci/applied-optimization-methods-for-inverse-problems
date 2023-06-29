@@ -12,7 +12,6 @@ import os
 from optimize import Optimization
 from proximal_operators.nonnegativity import Nonnegativity
 
-
 class POGM(Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -53,9 +52,9 @@ def main():
     pogm = POGM()
     x = pogm.optimize()
     os.makedirs("images", exist_ok=True)
-    # TODO: clip the image
+    # normalize the image
+    x = (x - np.min(x)) / (np.max(x) - np.min(x))
     tifffile.imwrite(f"images/pogm.tif", x)
-
 
 if __name__ == "__main__":
     main()
