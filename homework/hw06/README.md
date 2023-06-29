@@ -12,7 +12,7 @@
 
 * Please find all images in [images](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/).
 
-* Please execute the scripts from the [hw06](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06) directory. Note that a reconstructed ground truth image (credits to @david.frank), called `htc2022_05c_recon.tif` must be placed inside `images` as the input image, specifically for `pogm.py`. Again, as in previous homework, this is of type `c` phantom, which is the most difficult phantom included in challenge dataset.
+* Please execute the scripts from the [hw06](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06) directory. Note that a reconstructed ground truth image, `htc2022_05c_recon.tif`, must be placed inside `images` as the input image, specifically for `pogm.py`. Again, as in previous homework, this is of type `c` phantom, which is the most difficult phantom included in challenge dataset.
 
 ## Homework 1: Proximal Optimized Gradient Method
 
