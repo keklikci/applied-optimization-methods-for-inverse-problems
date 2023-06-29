@@ -8,6 +8,7 @@
 import aomip
 import numpy as np
 import tifffile
+import matplotlib.pyplot as plt
 import os
 from optimize import Optimization
 from proximal_operators.nonnegativity import Nonnegativity
@@ -45,16 +46,24 @@ class POGM(Optimization):
             pogm = (thetaprev - 1) / (L * gammaprev * theta) * (zprev - xprev)
             z = w + nesterov + ogm + pogm
             x = Nonnegativity().proximal(z, gamma, gradient)
-        return x
-
+            if callback is not None and i % 2 == 0:
+                error = self.calculate_norm(x)
+                callback.append(error)
+        return x, callback
 
 def main():
     factor = 1000
     pogm = POGM()
-    x = pogm.optimize()
+    callback = []
+    x, callback = pogm.optimize(callback=callback)
     # rescale by the factor
     x *= factor
     os.makedirs("images", exist_ok=True)
+    # plot the callback
+    plt.plot(callback)
+    plt.ylabel(f"Reconstruction error")
+    plt.xlabel(f"# of iterations")
+    plt.savefig(f"images/convergence.png")
     tifffile.imwrite(f"images/pogm.tif", x)
 
 if __name__ == "__main__":
