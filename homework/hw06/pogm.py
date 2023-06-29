@@ -46,7 +46,7 @@ class POGM(Optimization):
             pogm = (thetaprev - 1) / (L * gammaprev * theta) * (zprev - xprev)
             z = w + nesterov + ogm + pogm
             x = Nonnegativity().proximal(z, gamma, gradient)
-            if callback is not None and i % 2 == 0:
+            if callback is not None and k % 2 == 0:
                 error = self.calculate_norm(x)
                 callback.append(error)
         return x, callback
