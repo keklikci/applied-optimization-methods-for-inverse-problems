@@ -49,11 +49,12 @@ class POGM(Optimization):
 
 
 def main():
+    factor = 10 ** 3
     pogm = POGM()
     x = pogm.optimize()
     os.makedirs("images", exist_ok=True)
-    # normalize the image
-    x = (x - np.min(x)) / (np.max(x) - np.min(x))
+    # scale image
+    x *= factor
     tifffile.imwrite(f"images/pogm.tif", x)
 
 if __name__ == "__main__":
