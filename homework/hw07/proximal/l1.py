@@ -13,5 +13,5 @@ class L1(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def proximal(self, x, beta):
-        return np.sign(x) * np.maximum(np.abs(x) - beta, 0)
+    def proximal(self, x, lmbd):
+        return np.sign(x) * np.maximum(np.abs(x) - lmbd, 0)
