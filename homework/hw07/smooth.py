@@ -15,10 +15,10 @@ def main():
     N = 512
     os.makedirs("images", exist_ok=True)
     plt.axis("off")
-    s = plt.imshow(aomip.smooth(N))
-    plt.colorbar(s)
+    s = aomip.smooth(N)
+    plt.imshow(s)
     plt.tight_layout()
-    plt.savefig("smooth.png")
+    plt.savefig("smooth.png", transparent=True)
 
 
 if __name__ == "__main__":
