@@ -9,6 +9,7 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 
+
 def estimate_initial_density(image: np.ndarray, window: int = 10) -> float:
     """
     Estimates initial density.
@@ -22,6 +23,7 @@ def estimate_initial_density(image: np.ndarray, window: int = 10) -> float:
     estimate = np.mean(pixels)
     return estimate
 
+
 def transmission_to_absorption(x, IO) -> np.ndarray:
     """
     Takes an estimate and converts transmission image to absorption image.
@@ -33,6 +35,7 @@ def transmission_to_absorption(x, IO) -> np.ndarray:
     """
     absorption_image = -np.log(x / I0)
     return absorption_image
+
 
 def absorption_to_transmission(x, IO) -> np.ndarray:
     """
@@ -46,12 +49,17 @@ def absorption_to_transmission(x, IO) -> np.ndarray:
     transmission_image = np.exp(-x) * I0
     return transmission_image
 
+
 if __name__ == "__main__":
     # source raw files
     input_dir = os.path.join(os.getcwd(), "homework", "hw01", "output", "scan", "raw")
     # create output directory
-    output_absorption_dir = os.path.join(input_dir.replace("raw", "transformed"), "absorption")
-    output_transmission_dir = os.path.join(input_dir.replace("raw", "transformed"), "transmission")
+    output_absorption_dir = os.path.join(
+        input_dir.replace("raw", "transformed"), "absorption"
+    )
+    output_transmission_dir = os.path.join(
+        input_dir.replace("raw", "transformed"), "transmission"
+    )
     os.makedirs(output_absorption_dir, exist_ok=True)
     os.makedirs(output_transmission_dir, exist_ok=True)
     for tag, f in enumerate(os.listdir(input_dir)):

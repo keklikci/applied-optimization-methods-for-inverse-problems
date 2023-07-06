@@ -7,6 +7,7 @@
 
 import numpy as np
 
+
 def slicing(projections: list, slice_idx: int) -> np.ndarray:
     """
     Implements and outputs a sliced sinogram, parametrized by the row slicing row index.

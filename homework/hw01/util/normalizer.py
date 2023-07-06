@@ -8,6 +8,7 @@
 
 import numpy as np
 
+
 def normalize(image: np.ndarray = np.array([])) -> np.ndarray:
     """
     Min-max scales the values of image data for plotting.

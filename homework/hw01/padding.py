@@ -11,8 +11,10 @@ import os
 from PIL import Image
 import matplotlib.pyplot as plt
 from dotenv import load_dotenv
+
 # source configuration file
 load_dotenv()
+
 
 def apply_padding(image: np.ndarray, amount: int) -> np.ndarray:
     """
@@ -21,11 +23,12 @@ def apply_padding(image: np.ndarray, amount: int) -> np.ndarray:
         image: np.ndarray of 2D image
         amount: int, padding offset
     :return:
-        image: np.ndarray of 2D padded image 
+        image: np.ndarray of 2D padded image
     """
     # padd on all sides of the projection
     image = np.pad(image, pad_width=amount)
     return image
+
 
 if __name__ == "__main__":
     # source raw files

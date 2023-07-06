@@ -8,6 +8,7 @@
 
 import numpy as np
 
+
 def truncate(image: np.ndarray, I0: int, input_mode: str = "absorption") -> np.ndarray:
     """
     Truncates image based on the supported modes, i.e., absorption and transmission.

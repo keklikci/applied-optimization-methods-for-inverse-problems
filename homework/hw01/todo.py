@@ -6,4 +6,4 @@
 # ********************************** #
 
 # TODO 1: fix (replace) filters using David's implementation
-# TODO 2: fix `backproject.py` (possible) dimension mismatches, i.e., add filter compatibility 
+# TODO 2: fix `backproject.py` (possible) dimension mismatches, i.e., add filter compatibility

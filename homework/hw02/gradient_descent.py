@@ -7,7 +7,14 @@
 
 import numpy as np
 
-def gradient_descent(x: np.ndarray, gradient: float, learning_rate: float = 0.001, n_iterations: int = 1000, epsilon: float = 1e-5) -> np.ndarray:
+
+def gradient_descent(
+    x: np.ndarray,
+    gradient: float,
+    learning_rate: float = 0.001,
+    n_iterations: int = 1000,
+    epsilon: float = 1e-5,
+) -> np.ndarray:
     """
     x: np.ndarray of 1D/2D signal
     gradient: float, derivative of the cost function
@@ -17,7 +24,7 @@ def gradient_descent(x: np.ndarray, gradient: float, learning_rate: float = 0.00
     """
     for i in range(n_iterations):
         margin = -learning_rate * gradient
-        if abs(margin) < epsilon: 
+        if abs(margin) < epsilon:
             break
         # update
         x -= learning_rate * gradient

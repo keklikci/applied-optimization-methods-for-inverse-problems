@@ -10,8 +10,10 @@ import os
 import matplotlib.pyplot as plt
 from PIL import Image
 from dotenv import load_dotenv
+
 # source configuration file
 load_dotenv()
+
 
 def rotate(image: np.ndarray, offset: int, tag: int, save_path: str) -> None:
     """
@@ -30,8 +32,8 @@ def rotate(image: np.ndarray, offset: int, tag: int, save_path: str) -> None:
     plt.xticks(xticks)
     correct_center_x = image.shape[-1] // 2
     correct_center_y = image.shape[0] // 2
-    plt.axvline(x = correct_center_x, ymax = 0.5, color = "r")
-    plt.axhline(y = correct_center_y, xmax = 0.5, color = "g")
+    plt.axvline(x=correct_center_x, ymax=0.5, color="r")
+    plt.axhline(y=correct_center_y, xmax=0.5, color="g")
     plt.imshow(image, cmap="gray")
     plt.title("Center of Rotation (Prior Correction)")
     raw_rotated_dir = os.path.join(save_path, "raw")
@@ -44,17 +46,20 @@ def rotate(image: np.ndarray, offset: int, tag: int, save_path: str) -> None:
     plt.yticks(yticks)
     plt.xticks(xticks)
     plt.imshow(image, cmap="gray")
-    plt.axvline(x = correct_center_x, ymax = 0.5, color = "g")
-    plt.axhline(y = correct_center_y, xmax = 0.5, color = "g")
+    plt.axvline(x=correct_center_x, ymax=0.5, color="g")
+    plt.axhline(y=correct_center_y, xmax=0.5, color="g")
     plt.title("Center of Rotation (Shifted Over Last Axis)")
     corrected_rotated_dir = os.path.join(save_path, "corrected")
     os.makedirs(corrected_rotated_dir, exist_ok=True)
     plt.savefig(os.path.join(corrected_rotated_dir, f"000{tag}.png"))
     plt.close()
 
+
 if __name__ == "__main__":
     # source flat-field corrected files
-    input_dir = os.path.join(os.getcwd(), "homework", "hw01", "output", "scan", "flat_field_corrected")
+    input_dir = os.path.join(
+        os.getcwd(), "homework", "hw01", "output", "scan", "flat_field_corrected"
+    )
     # create output directory
     output_dir = input_dir.replace("flat_field_corrected", "rotated")
     os.makedirs(output_dir, exist_ok=True)

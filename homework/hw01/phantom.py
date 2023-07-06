@@ -10,6 +10,7 @@ import os
 import matplotlib.pyplot as plt
 from skimage.data import shepp_logan_phantom
 
+
 def shepp_logan() -> np.ndarray:
     """
     Creates a shepp logan phantom using scikit-image.
@@ -21,6 +22,7 @@ def shepp_logan() -> np.ndarray:
     image = shepp_logan_phantom()
     return image
 
+
 def plot_phantom(phantom: np.ndarray) -> None:
     """
     Plots the parametrized phantom.
@@ -28,7 +30,7 @@ def plot_phantom(phantom: np.ndarray) -> None:
         phantom: np.ndarray of phantom image
     :return:
         None
-    """ 
+    """
     out_dir = os.path.join(os.getcwd(), "homework", "hw01", "output", "phantom", "raw")
     os.makedirs(out_dir, exist_ok=True)
     plt.axis("off")

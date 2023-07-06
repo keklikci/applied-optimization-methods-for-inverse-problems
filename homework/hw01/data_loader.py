@@ -23,6 +23,7 @@ data_dir = f"./datasets/Walnut{walnut_id}"
 orbit_ids = np.linspace(1, 3, 3, dtype=np.int64)
 projections_dir = os.path.join(data_dir, "Projections")
 
+
 def read_filenames() -> tuple:
     """
     Reads filenames on path for CT scans, dark frame, and flat-field images on a given orbit.
@@ -38,14 +39,30 @@ def read_filenames() -> tuple:
     flat_field_filenames = []
     # filter projection filenames
     orbits_dir = os.path.join(projections_dir, f"tubeV{orbit_id}")
-    projection_filenames = [projection for projection in os.listdir(orbits_dir) if not ("geom" in projection or "txt" in projection)]
-    dark_frame_filenames = [projection for projection in projection_filenames if projection.startswith("d")]
-    flat_field_filenames = [projection for projection in projection_filenames if projection.startswith("io")]
-    scan_filenames = list(set(projection_filenames) - set(dark_frame_filenames) - set(flat_field_filenames))
+    projection_filenames = [
+        projection
+        for projection in os.listdir(orbits_dir)
+        if not ("geom" in projection or "txt" in projection)
+    ]
+    dark_frame_filenames = [
+        projection for projection in projection_filenames if projection.startswith("d")
+    ]
+    flat_field_filenames = [
+        projection for projection in projection_filenames if projection.startswith("io")
+    ]
+    scan_filenames = list(
+        set(projection_filenames)
+        - set(dark_frame_filenames)
+        - set(flat_field_filenames)
+    )
     # join filtered filenames
     scan_filenames = [os.path.join(orbits_dir, scan) for scan in scan_filenames]
-    dark_frame_filenames = [os.path.join(orbits_dir, dark_frame) for dark_frame in dark_frame_filenames]
-    flat_field_filenames = [os.path.join(orbits_dir, flat_field) for flat_field in flat_field_filenames]
+    dark_frame_filenames = [
+        os.path.join(orbits_dir, dark_frame) for dark_frame in dark_frame_filenames
+    ]
+    flat_field_filenames = [
+        os.path.join(orbits_dir, flat_field) for flat_field in flat_field_filenames
+    ]
     print("Reading filenames, done.")
     # limit number of files
     scan_filenames = scan_filenames[:filecount]
@@ -73,6 +90,7 @@ def store_matrix(storage: list = [], filenames: list = [], save_dir: str = "") -
         image.close()
     return storage
 
+
 def save_file(data, save_dir: str = "", tag: int = 0) -> None:
     """
     Saves Pillow image to the parametrized directory.
@@ -84,6 +102,7 @@ def save_file(data, save_dir: str = "", tag: int = 0) -> None:
         None
     """
     data.save(f"{save_dir}/000{tag}.png")
+
 
 def create_directory():
     """
@@ -97,9 +116,10 @@ def create_directory():
     dark_frame_save_dir = os.path.join(save_dir, "dark_frame")
     flat_field_save_dir = os.path.join(save_dir, "flat_field")
     os.makedirs(scan_save_dir, exist_ok=True)
-    os.makedirs(dark_frame_save_dir, exist_ok=True) 
+    os.makedirs(dark_frame_save_dir, exist_ok=True)
     os.makedirs(flat_field_save_dir, exist_ok=True)
     return scan_save_dir, dark_frame_save_dir, flat_field_save_dir
+
 
 def load_files() -> tuple:
     """

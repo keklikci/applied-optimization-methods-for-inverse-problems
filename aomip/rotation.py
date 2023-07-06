@@ -10,8 +10,10 @@ import os
 import matplotlib.pyplot as plt
 from PIL import Image
 from dotenv import load_dotenv
+
 # source configuration file
 load_dotenv()
+
 
 def rotate(image: np.ndarray, offset: int) -> np.ndarray:
     """

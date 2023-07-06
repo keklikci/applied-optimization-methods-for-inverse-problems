@@ -3,6 +3,7 @@ import numpy as np
 import pyelsa as elsa
 import matplotlib.pyplot as plt
 
+
 def test_shepp_logan():
     """Do a forward and backward projection of a complex phantom"""
 
@@ -29,6 +30,7 @@ def test_shepp_logan():
     ax3.set_title("Back projection")
 
     plt.show()
+
 
 def test_square_phantom_apply():
     """Do a forward and backprojection of a small phantom using the interface provided by the XrayOperator"""
@@ -58,6 +60,7 @@ def test_square_phantom_apply():
     ax3.set_title("Back projection")
 
     plt.show()
+
 
 def test_square_phantom():
     """Do a forward and backprojection of a small phantom using the interface provided by scipy.LinearOpertor"""

@@ -9,6 +9,7 @@ import numpy as np
 import os
 import matplotlib.pyplot as plt
 
+
 def estimate_initial_density(image: np.ndarray, window: int = 10) -> float:
     """
     Estimates initial density.
@@ -22,6 +23,7 @@ def estimate_initial_density(image: np.ndarray, window: int = 10) -> float:
     estimate = np.mean(pixels)
     return estimate
 
+
 def transmission_to_absorption(x, IO) -> np.ndarray:
     """
     Takes an estimate and converts transmission image to absorption image.
@@ -33,6 +35,7 @@ def transmission_to_absorption(x, IO) -> np.ndarray:
     """
     absorption_image = -np.log(x / I0)
     return absorption_image
+
 
 def absorption_to_transmission(x, IO) -> np.ndarray:
     """

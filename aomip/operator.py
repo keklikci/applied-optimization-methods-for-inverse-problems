@@ -8,6 +8,7 @@
 import numpy as np
 from abc import ABC, abstractmethod
 
+
 class ProximalOperator(ABC):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -16,12 +17,14 @@ class ProximalOperator(ABC):
     def proximal(self) -> NotImplementedError:
         raise NotImplementedError
 
+
 class Nonnegativity(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def proximal(self, x, step, gradient):
         return np.maximum(x - step * gradient, 0)
+
 
 class L21(ProximalOperator):
     def __init__(self, *args, **kwargs):
@@ -34,6 +37,7 @@ class L21(ProximalOperator):
         prox[:, :] = scale * x[:, :]
         return prox
 
+
 class L11(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,8 +47,9 @@ class L11(ProximalOperator):
         v = np.zeros_like(x)
         nrows, _ = v.shape
         for k in range(nrows):
-                v[k] = self.l1.proximal(v[k], lmbd)
+            v[k] = self.l1.proximal(v[k], lmbd)
         return v
+
 
 class L2(ProximalOperator):
     def __init__(self, *args, **kwargs):
@@ -53,12 +58,14 @@ class L2(ProximalOperator):
     def proximal(self, x, lmbd, sigma=1):
         return x / (1 + sigma * lmbd)
 
+
 class L1(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def proximal(self, x, lmbd):
         return np.sign(x) * np.maximum(np.abs(x) - lmbd, 0)
+
 
 class Huber(ProximalOperator):
     def __init__(self, *args, **kwargs):
@@ -67,6 +74,7 @@ class Huber(ProximalOperator):
     def proximal(self, x, lmbd, sigma):
         x = (1.0 - sigma / max(np.linalg.norm(x), sigma + lmbd)) * x
         return x
+
 
 class Constant(ProximalOperator):
     def __init__(self, *args, **kwargs):

@@ -8,6 +8,7 @@
 
 import numpy as np
 
+
 def uint_mapper(image: np.ndarray = np.array([]), output_mode: str = "uint16"):
     """
     Maps unsigned integer values to the correct range, given the image representation.

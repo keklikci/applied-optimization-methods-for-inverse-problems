@@ -14,6 +14,7 @@ from util.normalizer import normalize
 from util.plotter import plot_figure
 from util.scaler import uint_mapper
 
+
 def main():
     start_time = time.time()
     print("Data loader executing...")
@@ -35,9 +36,6 @@ def main():
     print("Flat-field correction, done.")
     print("Total execution time: {:.2f} seconds.".format(time.time() - start_time))
 
+
 if __name__ == "__main__":
     main()
-
-
-
-

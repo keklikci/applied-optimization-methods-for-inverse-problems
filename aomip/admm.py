@@ -8,6 +8,7 @@
 import numpy as np
 import aomip
 
+
 class ADMM(aomip.Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -19,7 +20,12 @@ class ADMM(aomip.Optimization):
         u = np.zeros(self.sino_shape)[:, np.newaxis]
         for k in range(n):
             prevx, prevz, prevu = x, z, u
-            x = self.fproximal(prevx - mu / tau * self.operator.applyAdjoint(self.operator.apply(prevx) - prevz + prevu))
+            x = self.fproximal(
+                prevx
+                - mu
+                / tau
+                * self.operator.applyAdjoint(self.operator.apply(prevx) - prevz + prevu)
+            )
             z = self.gproximal(self.operator.apply(x) + prevu)
             u = prevu + self.operator.apply(x) - z
         return x

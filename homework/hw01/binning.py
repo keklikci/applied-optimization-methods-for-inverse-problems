@@ -8,6 +8,7 @@
 
 import numpy as np
 
+
 def average_samples(sliced_vector: list) -> float:
     """
     Returns averaged samples of a pair-wise row vector.
@@ -18,6 +19,7 @@ def average_samples(sliced_vector: list) -> float:
     """
     averages = [vector.mean() for vector in sliced_vector]
     return averages
+
 
 def bin(image: np.ndarray = np.array([]), factor: int = 2) -> np.ndarray:
     """
@@ -35,7 +37,9 @@ def bin(image: np.ndarray = np.array([]), factor: int = 2) -> np.ndarray:
     ndim = image[0].shape[0] // factor
     nrows, ncols = image.shape
     for index in range(nrows):
-        row_vector = image[index].reshape(-1, )
+        row_vector = image[index].reshape(
+            -1,
+        )
         split_value = row_vector.size // factor
         sliced_vector = np.array_split(row_vector, split_value)
         averages = average_samples(sliced_vector)

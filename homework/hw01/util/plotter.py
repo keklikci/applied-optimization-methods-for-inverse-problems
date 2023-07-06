@@ -10,7 +10,13 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 
-def plot_figure(image: np.ndarray = np.array([]), save: bool = True, save_dir: str = "", tag: int = 0) -> None:
+
+def plot_figure(
+    image: np.ndarray = np.array([]),
+    save: bool = True,
+    save_dir: str = "",
+    tag: int = 0,
+) -> None:
     """
     Plots and saves the parametrized data.
     :param:
@@ -24,6 +30,6 @@ def plot_figure(image: np.ndarray = np.array([]), save: bool = True, save_dir: s
     # convert back to the loaded format
     image = Image.fromarray(image).convert("I;16")
     if save:
-       output_file = save_dir + "/000{}.png".format(tag + 1)
-       image.save(output_file)
+        output_file = save_dir + "/000{}.png".format(tag + 1)
+        image.save(output_file)
     plt.close()

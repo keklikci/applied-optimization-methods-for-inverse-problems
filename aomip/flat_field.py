@@ -8,7 +8,12 @@
 
 import numpy as np
 
-def apply_correction(scan: np.ndarray = np.array([]), dark_frame: np.ndarray = np.array([]), flat_fields: list = []):
+
+def apply_correction(
+    scan: np.ndarray = np.array([]),
+    dark_frame: np.ndarray = np.array([]),
+    flat_fields: list = [],
+):
     """
     :param:
         scan: np.ndarray of flat-field detector output, i.e., CT scan
@@ -18,11 +23,7 @@ def apply_correction(scan: np.ndarray = np.array([]), dark_frame: np.ndarray = n
         b: np.ndarray of flat-field corrected output image
     """
     # average flat-fields element-wise
-    f = np.mean(flat_fields, axis = 0)
+    f = np.mean(flat_fields, axis=0)
     # corrected scan output
     b = (scan - dark_frame) / (f - dark_frame)
     return b
-    
-
-
-
