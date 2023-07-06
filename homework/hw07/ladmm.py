@@ -20,7 +20,7 @@ class LADMM(ADMM):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.f = L1()
-        self.g = L2()
+        self.g = L21()
 
     def optimize(self, n=100, mu=1.0, tau=1.0, callback=None) -> None:
         x, z = self.x0, self.sino
@@ -40,7 +40,7 @@ class LADMM(ADMM):
         return self.f.proximal(x, lmbd=lmbd)
 
     def gproximal(self, x, lmbd) -> np.ndarray:
-        return self.g.proximal(x, lmbd=lmbd, sigma=1.0)
+        return self.g.proximal(x, lmbd=lmbd)
 
     def compute(self, tau, norm) -> float:
         lmbd = 0.95 * tau / norm
