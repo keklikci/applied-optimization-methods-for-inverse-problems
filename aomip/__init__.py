@@ -6,3 +6,4 @@ from .power import *
 from .operator import *
 from .admm import *
 from .derivative import *
+from .smooth import *
