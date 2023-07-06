@@ -5,22 +5,17 @@
 # Date: 05.07.2023                   #
 # ********************************** #
 
-import aomip
 import numpy as np
 import tifffile
 import matplotlib.pyplot as plt
 import os
-from admm import ADMM
-from proximal.l11 import L11
-from proximal.l21 import L21
-from proximal.l1 import L1
-from proximal.l2 import L2
+import aomip
 
-class LADMM(ADMM):
+class LADMM(aomip.ADMM):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-        self.f = L1()
-        self.g = L21()
+        self.f = aomip.L1()
+        self.g = aomip.L2()
 
     def optimize(self, n=100, mu=1.0, tau=1.0, callback=None) -> None:
         x, z = self.x0, self.sino
@@ -58,7 +53,6 @@ def main():
         plt.axis("off")
         plt.tight_layout()
         plt.savefig(f"images/tau_{tau}.tif", transparent=True)
-
 
 if __name__ == "__main__":
     main()

@@ -5,14 +5,10 @@
 # Date: 05.07.2023                   #
 # ********************************** #
 
-import aomip
 import numpy as np
-import tifffile
-import matplotlib.pyplot as plt
-import os
-from optimize import Optimization
+import aomip
 
-class ADMM(Optimization):
+class ADMM(aomip.Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.f = None
