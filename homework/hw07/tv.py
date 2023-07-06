@@ -28,7 +28,6 @@ class TV(object):
         self.d2c = self.vols[0] * 100.0
         self.c2d = self.vols[0] * 5.0
         self.thetas = np.arange(360)
-        self.operator = aomip.XrayOperator(self.vols, self.bs, self.thetas, self.d2c, self.c2d)
         self.x0 = np.zeros(self.vols)
         self.target = tifffile.imread("/srv/ceph/share-all/aomip/htc2022_ground_truth/htc2022_05c_recon.tif")
         self.sino = aomip.radon(self.target, self.bs, self.thetas, self.d2c, self.c2d)
@@ -43,7 +42,8 @@ class TV(object):
         mu = self.compute(tau, norm)
         for k in range(n):
             prevx, prevz, prevu = x, z, u
-            s = self.operator.apply(prevx)
+            forward = self.operator.apply(prevx)
+            f1, f2 = forward[0], forward[1]
             x = prevx - mu / tau * self.operator.applyAdjoint(self.operator.apply(prevx) - prevz + prevu)
             z = self.operator.apply(x) + prevu
             u = prevu + self.operator.applyAdjoint(x) - z
@@ -70,4 +70,5 @@ def main():
     plt.savefig(f"images/tv.tif", transparent=True)
 
 if __name__ == "__main__":
-    # main()
+    # main()
+    pass
