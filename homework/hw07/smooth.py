@@ -14,11 +14,11 @@ import aomip
 def main():
     N = 512
     os.makedirs("images", exist_ok=True)
+    export = plt.imshow(aomip.smooth(512))
     plt.axis("off")
-    s = aomip.smooth(N)
-    plt.imshow(s)
+    plt.colorbar(export)
     plt.tight_layout()
-    plt.savefig("smooth.png", transparent=True)
+    plt.savefig("images/notebook/smooth.png")
 
 
 if __name__ == "__main__":
