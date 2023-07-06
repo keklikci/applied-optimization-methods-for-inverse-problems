@@ -14,10 +14,9 @@ import aomip
 def main():
     N = 512
     os.makedirs("images", exist_ok=True)
-    s = aomip.smooth(N)
     plt.axis("off")
-    export = plt.imshow(s)
-    plt.colorbar(export)
+    s = plt.imshow(aomip.smooth(N))
+    plt.colorbar(s)
     plt.tight_layout()
     plt.savefig("smooth.png")
 
