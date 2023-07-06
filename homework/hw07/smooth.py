@@ -16,6 +16,7 @@ def main():
     os.makedirs("images", exist_ok=True)
     s = aomip.smooth(N)
     plt.imshow(s)
+    plt.axis("off")
     plt.savefig("images/smooth.png")
 
 if __name__ == "__main__":
