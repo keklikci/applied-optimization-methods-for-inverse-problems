@@ -5,3 +5,4 @@ from .slicing import *
 from .power import *
 from .operator import *
 from .admm import *
+from .derivative import *

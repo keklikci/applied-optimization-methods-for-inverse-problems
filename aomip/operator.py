@@ -82,3 +82,20 @@ class Constant(ProximalOperator):
 
     def proximal(self, x):
         return x
+
+class StackedOperator:
+    def __init__(self, operators):
+        self.ops = operators
+
+    def apply(self, x):
+        l = np.array([], dtype=object)
+        l.resize(len(self.ops))
+        for i, op in enumerate(self.ops):
+            l[i] = op.apply(x)
+        return l
+
+    def applyAdjoint(self, y):
+        x = self.ops[0].applyAdjoint(y[0])
+        for yi, op in zip(y[1:], self.ops[1:]):
+            x += op.applyAdjoint(yi)
+        return x
