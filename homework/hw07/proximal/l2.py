@@ -12,4 +12,4 @@ class L2(ProximalOperator):
         super().__init__(*args, **kwargs)
 
     def proximal(self, x, sigma, lmbd):
-        return x / (1 + sigma * reg)
+        return x / (1 + sigma * lmbd)

@@ -14,7 +14,7 @@ from optimize import Optimization
 
 class ADMM(Optimization):
     def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)s
+        super().__init__(*args, **kwargs)
         self.f = None
         self.g = None
 
