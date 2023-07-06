@@ -18,34 +18,35 @@ thetas = np.arange(360)
 x = np.zeros(vols)
 A = aomip.XrayOperator(vols, bs, thetas, d2c, c2d)
 
-class IsotropicTV(object):
+class TV(object):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.ops = [A, aomip.FirstDerivative()]
         self.operator = aomip.StackedOperator(self.ops)
+        self.vols = [512, 512]
+        self.bs = [512]
+        self.d2c = self.vols[0] * 100.0
+        self.c2d = self.vols[0] * 5.0
+        self.thetas = np.arange(360)
+        self.operator = aomip.XrayOperator(self.vols, self.bs, self.thetas, self.d2c, self.c2d)
+        self.x0 = np.zeros(self.vols)
+        self.target = tifffile.imread("/srv/ceph/share-all/aomip/htc2022_ground_truth/htc2022_05c_recon.tif")
+        self.sino = aomip.radon(self.target, self.bs, self.thetas, self.d2c, self.c2d)
+        self.f = aomip.L11()
+        self.g = aomip.L21()
+        self.mode = None
 
     def optimize(self, n=100, mu=1.0, tau=1.0, callback=None) -> None:
         x, z = self.x0, self.sino
-        u = np.zeros(self.sino_shape)[:, np.newaxis]
+        u = np.zeros(self.bs)[:, np.newaxis]
         norm = aomip.PowerIteration().power()
         mu = self.compute(tau, norm)
         for k in range(n):
             prevx, prevz, prevu = x, z, u
-            x = self.fproximal(
-                prevx
-                - mu
-                / tau
-                * self.operator.applyAdjoint(
-                    self.operator.apply(prevx) - prevz + prevu
-                ),
-                lmbd=mu,
-            )
-            z = self.gproximal(self.operator.apply(x) + prevu, lmbd=tau)
-            x = prevx - mu / tau * self.operator.applyAdjoint(
-                self.operator.apply(prevx) - prevz + prevu
-            )
+            s = self.operator.apply(prevx)
+            x = prevx - mu / tau * self.operator.applyAdjoint(self.operator.apply(prevx) - prevz + prevu)
             z = self.operator.apply(x) + prevu
-            u = prevu + self.operator.apply(x) - z
+            u = prevu + self.operator.applyAdjoint(x) - z
         return x
 
     def fproximal(self, x, lmbd) -> np.ndarray:
@@ -59,4 +60,14 @@ class IsotropicTV(object):
         return lmbd
 
 
-    
+def main():
+    tv = TV()
+    x = tv.optimize()
+    os.makedirs("images", exist_ok=True)
+    plt.imshow(x, cmap="gray")
+    plt.axis("off")
+    plt.tight_layout()
+    plt.savefig(f"images/tv.tif", transparent=True)
+
+if __name__ == "__main__":
+    # main()
