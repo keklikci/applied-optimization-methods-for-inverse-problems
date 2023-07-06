@@ -6,7 +6,7 @@
 # ********************************** #
 
 import numpy as np
-from proximal import ProximalOperator
+from .proximal import ProximalOperator
 
 
 class Nonnegativity(ProximalOperator):

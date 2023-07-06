@@ -6,7 +6,7 @@
 # ********************************** #
 
 import numpy as np
-from l1 import *
+from .l1 import *
 
 
 class L11(ProximalOperator):

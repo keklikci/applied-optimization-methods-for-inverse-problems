@@ -5,7 +5,7 @@
 # Date: 16.06.2023                   #
 # ********************************** #
 
-from proximal import ProximalOperator
+from .proximal import ProximalOperator
 
 
 class Constant(ProximalOperator):
