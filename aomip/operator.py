@@ -22,8 +22,8 @@ class Nonnegativity(ProximalOperator):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def proximal(self, x, step, gradient):
-        return np.maximum(x - step * gradient, 0)
+    def proximal(self, x):
+        return np.maximum(x, 0)
 
 
 class L21(ProximalOperator):

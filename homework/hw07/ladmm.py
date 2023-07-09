@@ -18,7 +18,7 @@ class LADMM(aomip.ADMM):
         self.f = aomip.L1()
         self.g = aomip.L2()
 
-    def optimize(self, n=100, mu=1.0, tau=1.0, callback=None) -> None:
+    def optimize(self, n=100, mu=1.0, tau=1.0, callback=None) -> np.ndarray:
         x, z = self.x0, self.sino
         u = np.zeros(self.sino_shape)[:, np.newaxis]
         norm = aomip.PowerIteration().power()
