@@ -26,34 +26,40 @@ class POGM(aomip.Optimization):
             thetaprev, gammaprev = theta, gamma
             gradient = self.calculate_gradient(z)
             L = np.linalg.norm(gradient, ord=2) ** 2
-            self.lmbd = 1.0 / L
-            if 2 <= k < num_iterations - 1:
+            if 2 <= k < n - 1:
                 theta = 0.5 * (1 + np.sqrt(4 * thetaprev ** 2 + 1))
-            if k == num_iterations - 1:
+            if k == n - 1:
                 theta = 0.5 * (1 + np.sqrt(8 * theta ** 2 + 1))
-            gamma = self.lmbd * (2 * thetaprev + theta - 1) / theta
-            w = xprev - self.lmbd * gradient
+            gamma = 1 / L * (2 * thetaprev + theta - 1) / theta
+            w = xprev - 1 / L * gradient
             nesterov = (thetaprev - 1) / theta * (w * wprev)
             ogm = thetaprev / theta * (w - xprev)
             pogm = (thetaprev - 1) / (L * gammaprev * theta) * (zprev - xprev)
             z = w + nesterov + ogm + pogm
-            # update
-            z -= self.lmbd * gradient
-            x = self.f.proximal(x, self.lmbd)
+            x = self.f.proximal(z, lmbd=gamma)
         return x
 
 def main():
     pogm = POGM()
     x = pogm.optimize()
-    os.makedirs("images", exist_ok=True)
+    os.makedirs("images/notebook/pogm", exist_ok=True)
+    os.makedirs("images/pogm", exist_ok=True)
     lambdas = np.logspace(-3, 6, 10)
     for lmbd in lambdas:
         pogm.lmbd = lmbd
-        x = admm.optimize()
-        plt.imshow(x, cmap="gray")
+        x = pogm.optimize()
+        # scale output
+        x *= 1e3
+        # save notebook output
         plt.axis("off")
+        export = plt.imshow(x, cmap="gray")
+        plt.colorbar(export)
         plt.tight_layout()
-        plt.savefig(f"images/lambda_{tau}.tif", transparent=True)
+        plt.title(f"λ ={lmbd}")
+        plt.savefig(f"images/notebook/pogm/lambda_{lmbd}.png")
+        plt.clf()
+        # save tif output
+        tifffile.imwrite(f"images/pogm/lambda_{lmbd}.tif", x)
 
 
 if __name__ == "__main__":
