@@ -16,7 +16,7 @@ class Backtracking(aomip.Optimization):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-    def optimize(self, alpha=0.1, beta=0.5, n=100) -> np.ndarray:
+    def optimize(self, alpha=1e-3, beta=0.9, n=100) -> np.ndarray:
         x = self.x0
         step = 1.0
         gradient = self.calculate_gradient(x)
@@ -38,9 +38,9 @@ class Backtracking(aomip.Optimization):
 
 def main():
     backtrack = Backtracking()
-    os.makedirs("images/notebook", exist_ok=True)
+    os.makedirs("images/notebook/backtrack", exist_ok=True)
     os.makedirs("images/backtrack", exist_ok=True)
-    alphas = np.linspace(0, 1, num=5)
+    alphas = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1.0]
     for alpha in alphas:
         x = backtrack.optimize(alpha=alpha)
         # save notebook output
@@ -49,10 +49,10 @@ def main():
         plt.colorbar(export)
         plt.tight_layout()
         plt.title(f"α={alpha}")
-        plt.savefig(f"images/notebook/backtrack/alpha_{alpha}_beta_{0.5}.png")
+        plt.savefig(f"images/notebook/backtrack/alpha_{alpha}_beta_{0.9}.png")
         plt.clf()
         # save tif output
-        tifffile.imwrite(f"images/backtrack/alpha_{alpha}_beta_{0.5}.tif", x)
+        tifffile.imwrite(f"images/backtrack/alpha_{alpha}_beta_{0.9}.tif", x)
 
 
 if __name__ == "__main__":
