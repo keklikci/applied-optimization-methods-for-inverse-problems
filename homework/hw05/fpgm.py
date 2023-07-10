@@ -37,9 +37,12 @@ def main():
     fpgm = FPGM()
     os.makedirs("images/notebook/fpgm", exist_ok=True)
     os.makedirs("images/fpgm", exist_ok=True)
+    lambdas = np.logspace(-3, 6, 10)
     for lmbd in lambdas:
         fpgm.lmbd = lmbd
         x = fpgm.optimize()
+        # scale output
+        x *= 1e3
         # save notebook output
         plt.axis("off")
         export = plt.imshow(x, cmap="gray")
