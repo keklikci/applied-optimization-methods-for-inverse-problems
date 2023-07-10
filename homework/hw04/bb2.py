@@ -50,7 +50,7 @@ def main():
     os.makedirs("images/bb2", exist_ok=True)
     lambdas = [1e-6, 1e-5, 1e-4, 1e-3]
     for lmbd in lambdas:
-        x = bb1.optimize(lmbd=lmbd)
+        x = bb2.optimize(lmbd=lmbd)
         # save notebook output
         plt.axis("off")
         export = plt.imshow(x, cmap="gray")
