@@ -42,7 +42,7 @@ class POGM(aomip.Optimization):
 def main():
     pogm = POGM()
     x = pogm.optimize()
-    os.makedirs("images/notebook/pogm", exist_ok=True)
+    os.makedirs("images/notebook", exist_ok=True)
     os.makedirs("images/pogm", exist_ok=True)
     lambdas = np.logspace(-3, 6, 10)
     for lmbd in lambdas:
@@ -56,7 +56,7 @@ def main():
         plt.colorbar(export)
         plt.tight_layout()
         plt.title(f"λ ={lmbd}")
-        plt.savefig(f"images/notebook/pogm/lambda_{lmbd}.png")
+        plt.savefig(f"images/notebook/lambda_{lmbd}.png")
         plt.clf()
         # save tif output
         tifffile.imwrite(f"images/pogm/lambda_{lmbd}.tif", x)
