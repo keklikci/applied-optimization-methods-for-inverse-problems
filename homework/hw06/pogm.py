@@ -41,7 +41,6 @@ class POGM(aomip.Optimization):
 
 def main():
     pogm = POGM()
-    x = pogm.optimize()
     os.makedirs("images/notebook", exist_ok=True)
     os.makedirs("images/pogm", exist_ok=True)
     lambdas = np.logspace(-3, 6, 10)

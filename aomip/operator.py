@@ -99,3 +99,13 @@ class StackedOperator:
         for yi, op in zip(y[1:], self.ops[1:]):
             x += op.applyAdjoint(yi)
         return x
+
+class ElasticNet(ProximalOperator):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.f = L1().proximal
+
+    def proximal(self, x, lmbd, sigma):
+        l1_term = lmbd * sigma
+        l2_term = lmbd * (1 - sigma)
+        return 1 / (1 + l2_term) * self.f(x, l1_term)

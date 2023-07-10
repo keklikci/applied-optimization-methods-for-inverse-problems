@@ -29,7 +29,7 @@
     
 ## Homework 2: Expectation Maximization
 
-* Please see a replica of in-class solution for expectation maximiation in this [Jupyter notebook](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw06/mlem.ipynb).
+* Please see a replica of in-class solution for expectation maximization in this [Jupyter notebook](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw06/mlem.ipynb).
     
 ## Homework 3: Low Dose X-ray CT
     
