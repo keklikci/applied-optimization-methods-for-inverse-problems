@@ -2,23 +2,23 @@
 
 * Algorithms related to this homework are implemented with pure object oriented programming (OOP) and are blackformatted.
 
-* An improvement that needs to be done is to move the `Optimization` class in `optimize.py` to the top level module [aomip](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/aomip). This improvement is necessary for avoiding some repetitive code, which I will provide support for in the next homework, along with additional implementation leftover from previous tasks.
+* `POGM` inherits from `Optimization` from the top-level `aomip` development directory where concrete implementations are stored.
 
-* Not a direct outcome of this homework, but I have come to the realization that my image viewer was incapable of opening floating numbered arrays. This was the reason I published some artifactory images exported with `matplotlib` while casting to `np.uint8`, which is a hacky workaround that produces the artifacts. I will export some previous artifactory images again with `tifffile` because they seem to be visible on other image viewers.
+* `.tif` files are clear reconstructions of the target image. On the other hand, `.png` files seem to have some streaky lines among black pixels. Regardless, reconstruction is clearly observable and colormaps are attached to these plots. Additionally, this effect is also reproducible with unfiltered forward projection, i.e., the sinogram.
 
 * Every task is implemented, although I did not manage to get nice reconstructions out of Homework 3: Low Dose X-ray CT.
 
 * All implementation is available under [hw06](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06).
 
-* Please find all images in [images](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/).
+* Output images are stored in two different directories, i.e. [notebook](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/notebook) and [pogm](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/pogm). Reasoning behind this is explained in the following section.
 
-* Please execute the scripts from the [hw06](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06) directory. Note that a reconstructed ground truth image, `htc2022_05c_recon.tif`, must be placed inside [images](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/) as the input image, specifically for `pogm.py`. Again, as in previous homework, this is of type C phantom, which is the most difficult phantom included in challenge dataset.
+* Please execute the scripts from [hw06](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06) directory.
+
+* Please utilize the [notebook](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/notebook) for viewing output images and quality of reconstructions. For clear reconstructions, load and show `.tif` files stored in [pogm](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/pogm).
 
 ## Homework 1: Proximal Optimized Gradient Method
 
-* I copied over `proximal_operators` module and `Optimization` class from previous homework to the relevant directory. As I outlined before, they will be moved to the top level module `aomip` to avoid code repetition as a major refinement to the overall project structure and my work. 
-
-* Running `pogm.py` standalone will produce the reconstruction and save the output image and the callback plot to homework/hw06/images.
+* Running `pogm.py` standalone will produce the reconstruction and save outputs to two different directories, one for displaying reconstructions in the [Juypter notebook](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw06/notebook.ipynb) and the other for the [challenge](https://submission.ciip.in.tum.de/) submission.
 
 * Reconstruction quality-wise, the algorithm can compete with FPGM, although the convergence rate is by far slower, as opposed to being 2 times faster. Most likely, this is due to the difference in problem setting. 
 
@@ -29,16 +29,18 @@
     
 ## Homework 2: Expectation Maximization
 
-* Please see the in-class solution, i.e., `homework/hw6/mlem.ipynb`.
+* Please see a replica of in-class solution for expectation maximiation in this [Jupyter notebook](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw06/mlem.ipynb).
     
 ## Homework 3: Low Dose X-ray CT
     
-* Please run the script called `reconstruct.py` to save both reconsructions to the [images](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/).
+* Runnning `reconstruct.py` standalone will produce the reconstruction for both high-dose and low-dose targets.
 
-* I modified and modularized the provided scripts to extract the data from the server under `/srv/ceph/share-all/aomip/mayo_clinical/out/` directory.
+* I modified and modularized the provided scripts to extract the data from the server under the shared directory.
 
 * Unfortunately, my reconstructions turned out to be horizontally spread and vertically squeezed enough to not make sense. Therefore, I deliberately decided not to provide the exports for this task.
 
-* Implementation is complete for reconstruction of both doses and can be executed by running `reconstruct.py` from the homework folder.
+* `reconstruct.py` performs the reconstruction and saves images to the [mayo](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw06/images/mayo) directory.
 
-* As an additional note, `config.py` fetches the optimization parameters for the operator and `loader.py` loads the data and the metadata.
+* `config.py` fetches the optimization parameters for the operator.
+
+* `loader.py` loads the data and the metadata.

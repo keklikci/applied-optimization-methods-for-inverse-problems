@@ -12,7 +12,6 @@ config = {}
 
 
 def configure(data, metadata) -> dict:
-    # config["angles"] = np.degrees(np.array(metadata["angles"])[: metadata["rotview"]])
     config["angles"] = np.arange(0, 360, 5)
     config["voxels"] = 0.7
     config["voxscale"] = 1 / config["voxels"]

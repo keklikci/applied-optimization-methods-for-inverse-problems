@@ -39,10 +39,9 @@ def main():
         qgrad = operator.applyAdjoint(operator.apply(qdata) - qsino)
         fdata -= lr * fgrad
         qdata -= lr * qgrad
-    # fig, (ax1, ax2) = plt.subplots(1, 2, figshape = (12, 5))
-    os.makedirs("images", exist_ok=True)
-    tifffile.imwrite("images/qrecon.tif", qdata)
-    tifffile.imwrite("images/frecon.tif", fdata)
+    os.makedirs("images/mayo", exist_ok=True)
+    tifffile.imwrite("images/mayo/qrecon.tif", qdata)
+    tifffile.imwrite("images/mayo/frecon.tif", fdata)
 
 
 if __name__ == "__main__":
