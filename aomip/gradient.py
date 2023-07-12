@@ -26,14 +26,21 @@ class GradientDescent(aomip.Optimization):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.scheduler = Gradient()
+        self.objective = aomip.leastSquares
 
-    def optimize(self, n=10, **kwargs) -> np.ndarray:
-        x = self.x0
+    def optimize(self, n=10, **kwargs) -> tuple:
+        x, loss = self.x0, 0.0
+        history = []
         self.scheduler.lr = kwargs.get("lr", self.scheduler.lr)
-        for _ in range(n):
+        for i in range(n):
+            if i % 10 == 0:
+                print(f"Loss @ {i}-th iteration = {loss:.2f}")
             gradient = self.calculate_gradient(x)
             x = self.scheduler.update(x, gradient, lr=self.scheduler.lr)
-        return x
+            loss = self.objective(self.operator.apply(x), self.sino)
+            history.append(loss)
+        print(f"Completed, loss = {loss:.2f}")
+        return x, history
 
 class Subgradient(aomip.Optimization):
     def __init__(self, *args, **kwargs):
