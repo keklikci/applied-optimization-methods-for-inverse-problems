@@ -7,6 +7,7 @@
 
 import numpy as np
 import aomip
+import tifffile
 from abc import ABC
 
 class Gradient(ABC):
@@ -39,8 +40,8 @@ class Subgradient(aomip.Optimization):
         super().__init__(*args, **kwargs)
         self.scheduler = Gradient()
 
-    def optimize(self, n=100, beta=1.0, **kwargs) -> np.ndarray:
-        x = self.x0
+    def optimize(self, n=10, beta=1.0, **kwargs) -> np.ndarray:
+        x = self.operator.applyAdjoint(self.operator.apply(self.target))
         self.scheduler.lr = kwargs.get("lr", self.scheduler.lr)
         subgradient = aomip.Subgradient()
         derivative = aomip.FirstDerivative()
@@ -52,8 +53,9 @@ class Subgradient(aomip.Optimization):
             x = self.scheduler.update(x, subgradient, lr=self.scheduler.lr)
             # compute derivative in all directions
             grad = derivative.apply(x)
+            grad = grad.reshape(-1, grad.shape[-1])
             # compute running loss
-            least_squares_loss = aomip.leastSquares(x, aomip.Optimization.target())
+            least_squares_loss = aomip.leastSquares(self.operator.apply(x), self.sino)
             regularization = beta * np.linalg.norm(grad, ord=1)
             loss = least_squares_loss + regularization
             curr_loss += loss

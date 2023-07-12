@@ -8,7 +8,7 @@
 import numpy as np
 import tifffile
 import aomip
-from abc import ABC, abstractmethod
+from abc import ABC
 
 
 class Optimization(ABC):
@@ -31,14 +31,6 @@ class Optimization(ABC):
         )
         # apply ram-lak filter
         self.sino = self.apply_filter()
-
-    @property
-    def target(self) -> np.ndarray:
-        return self.target
-
-    @target.setter
-    def target(self, target) -> None:
-        self._target = target
 
     @property
     def operator(self) -> aomip.XrayOperator:
@@ -74,6 +66,5 @@ class Optimization(ABC):
         sino = np.real(np.fft.ifft(np.fft.ifftshift(projection, axes=1), axis=0))
         return sino
 
-    @abstractmethod
     def optimize(self) -> float:
         raise NotImplementedError
