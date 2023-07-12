@@ -18,7 +18,7 @@ def main():
     gd = aomip.GradientDescent()
     lrs = [1e-7, 1e-8, 1e-6, 1e-5]
     for lr in lrs:
-        x = gd.optimize(lr=lr)
+        x, history = gd.optimize(lr=lr)
         # save notebook output
         plt.axis("off")
         export = plt.imshow(x, cmap="gray")
