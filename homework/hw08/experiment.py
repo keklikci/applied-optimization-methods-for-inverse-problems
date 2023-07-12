@@ -10,6 +10,7 @@ import tifffile
 import matplotlib.pyplot as plt
 import os
 import aomip
+import time
 
 # square summable step size export paths
 ss_notebook_path = "images/notebook/subgradient/square_summable"
@@ -20,6 +21,10 @@ ss_tifffile_path = "images/subgradient/square_summable"
 diminishing_notebook_path = "images/notebook/subgradient/diminishing"
 diminishing_convergence_path = "images/notebook/subgradient/convergence/diminishing"
 diminishing_tifffile_path = "images/subgradient/diminishing"
+
+# admm comparison export path
+comparison_notebook_path = "images/notebook/subgradient/comparison"
+comparison_tifffile_path = "images/subgradient/comparison"
 
 def square_summable():
     os.makedirs(ss_notebook_path, exist_ok=True)
@@ -65,11 +70,39 @@ def nonsummable_diminishing():
     # save tif output
     tifffile.imwrite(f"{diminishing_tifffile_path}/nonsummable_diminishing.tif", x)
 
+def admm_subgradient():
+    os.makedirs(comparison_tifffile_path, exist_ok=True)
+    start_time = time.time()
+    admm = aomip.ADMM()
+    print(f"ADMM complete, execution time = {time.time() - start_time:.2f}")
+    start_time = time.time()
+    subgradient = aomip.Subgradient()
+    print(f"Subgradient complete, execution time = {time.time() - start_time:.2f}")
+    sx, shistory = subgradient.optimize()
+    ax, ahistory = admm.optimize()
+    fig, axes = plt.subplots(2, 2)
+    # subgradient notebook output
+    export = axes[0, 0].imshow(ax, cmap="gray")
+    axes[0, 0].colorbar(export)
+    axes[0, 0].set_title("Variable Splitting (ADMM)")
+    axes[1, 0].plot(ahistory)
+    axes[1, 0].set_title("Convergence Analysis")
+    export = axes[0, 1].imshow(sx, cmap="gray")
+    axes[1, 0].colorbar(export)
+    axes[0, 1].set_title("Subgradient")
+    axes[1, 1].plot(shistory)
+    axes[1, 1].set_title("Convergence Analysis")
+    # save tif output
+    tifffile.imwrite(f"{comparison_tifffile_path}/admm.tif", ax)
+    tifffile.imwrite(f"{comparison_tifffile_path}/subgradient.tif", ax)
+
 def main():
     print("Running square summable step sizes...")
     square_summable()
     print("Running nonsummable but diminishing step sizes...")
     nonsummable_diminishing()
+    print("Running analysis on ADMM and subgradient optimization...")
+    admm_subgradient()
 
 if __name__ == "__main__":
     main()
