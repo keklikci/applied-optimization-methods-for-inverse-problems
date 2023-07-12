@@ -89,12 +89,10 @@ def admm_subgradient():
     plt.colorbar(export, ax=axes[0, 0])
     axes[0, 0].set_title("Variable Splitting (ADMM)")
     axes[1, 0].plot(ahistory)
-    axes[1, 0].set_title("Convergence Analysis")
     export = axes[0, 1].imshow(sx, cmap="gray")
     plt.colorbar(export, ax=axes[0, 1])
     axes[0, 1].set_title("Subgradient")
     axes[1, 1].plot(shistory)
-    axes[1, 1].set_title("Convergence Analysis")
     plt.savefig(f"{comparison_notebook_path}/comparison.png")
     # save tif output
     tifffile.imwrite(f"{comparison_tifffile_path}/admm.tif", ax)

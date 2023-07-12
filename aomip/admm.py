@@ -16,7 +16,7 @@ class ADMM(aomip.Optimization):
         self.g = None
         self.objective = aomip.leastSquares
 
-    def optimize(self, n=100, mu=1.0, tau=1.0, beta=0.1) -> tuple:
+    def optimize(self, n=100, mu=1.0, tau=1000.0, beta=0.1) -> tuple:
         A = self.operator
         grad = aomip.FirstDerivative()
         x, z = self.x0, A.apply(self.x0)
