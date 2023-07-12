@@ -13,3 +13,4 @@ from .fpgm import *
 from .bb1 import *
 from .bb2 import *
 from .gradient import *
+from .objective import *
