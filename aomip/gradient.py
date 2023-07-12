@@ -53,7 +53,7 @@ class Subgradient(aomip.Optimization):
             # compute derivative in all directions
             grad = derivative.apply(x)
             # compute running loss
-            least_squares_loss = aomip.leastSquares(x, aomip.Optimization.target)
+            least_squares_loss = aomip.leastSquares(x, aomip.Optimization.target())
             regularization = beta * np.linalg.norm(grad, ord=1)
             loss = least_squares_loss + regularization
             curr_loss += loss

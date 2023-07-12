@@ -33,6 +33,14 @@ class Optimization(ABC):
         self.sino = self.apply_filter()
 
     @property
+    def target(self) -> np.ndarray:
+        return self.target
+
+    @target.setter
+    def target(self, target) -> None:
+        self._target = target
+
+    @property
     def operator(self) -> aomip.XrayOperator:
         return self._operator
 
