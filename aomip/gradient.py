@@ -40,7 +40,7 @@ class Subgradient(aomip.Optimization):
         super().__init__(*args, **kwargs)
         self.scheduler = Gradient()
 
-    def optimize(self, n=10, beta=1.0, **kwargs) -> np.ndarray:
+    def optimize(self, n=100, beta=1.0, **kwargs) -> np.ndarray:
         # backprojection as the initial guess
         backprojection = self.operator.applyAdjoint(self.operator.apply(self.target))
         x = backprojection.reshape(self.vol_shape, order="F")
