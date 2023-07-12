@@ -7,3 +7,8 @@ from .operator import *
 from .admm import *
 from .derivative import *
 from .smooth import *
+from .pogm import *
+from .elastic import *
+from .fpgm import *
+from .bb1 import *
+from .bb2 import *
