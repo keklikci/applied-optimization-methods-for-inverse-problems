@@ -75,7 +75,7 @@ def admm_subgradient():
     os.makedirs(comparison_notebook_path, exist_ok=True)
     start_time = time.time()
     admm = aomip.ADMM()
-    admm.f = aomip.L1()
+    admm.f = aomip.L11()
     admm.g = aomip.L2()
     ax, ahistory = admm.optimize()
     print(f"ADMM complete, execution time = {time.time() - start_time:.2f}")
