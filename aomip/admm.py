@@ -16,27 +16,22 @@ class ADMM(aomip.Optimization):
         self.g = None
         self.objective = aomip.leastSquares
 
-    def optimize(self, n=100, mu=1.0, tau=1000.0, beta=0.01) -> tuple:
+    def optimize(self, n=100, mu=1.0, tau=100.0, beta=0.01) -> tuple:
         A = self.operator
         x, z = self.x0, A.apply(self.x0)
         u = np.zeros(self.sino_shape)[:, np.newaxis]
-        history, loss = [], 0.0
         for k in range(n):
-            if k % 10 == 0:
-                print(f"Loss @ {k}-th iteration = {loss:.2f}")
             prevx, prevz, prevu = x, z, u
             x = self.fproximal(
                 prevx
                 - mu
                 / tau
-                * A.applyAdjoint(A.apply(prevx) - prevz + prevu)
+                * A.applyAdjoint(A.apply(prevx) - prevz + prevu), lmbd=mu
             )
-            z = self.gproximal(A.apply(x) + prevu)
+            z = self.gproximal(A.apply(x) + prevu, lmbd=tau)
             u = prevu + A.apply(x) - z
-            loss = self.objective(A.apply(x), self.sino) + beta * np.linalg.norm(z-x) ** 2
             history.append(loss)
-        print(f"Completed, loss = {loss:.2f}")
-        return x, history
+        return x
 
     def fproximal(self, x, lmbd=1.0) -> np.ndarray:
         return self.f.proximal(x, lmbd=lmbd)
