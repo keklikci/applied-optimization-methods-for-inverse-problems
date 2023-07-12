@@ -86,10 +86,10 @@ def admm_subgradient():
     fig, axes = plt.subplots(1, 2)
     # subgradient notebook output
     export = axes[0].imshow(ax, cmap="gray")
-    plt.colorbar(export, ax=axes[0, 0])
+    plt.colorbar(export, ax=axes[0])
     axes[0].set_title("Variable Splitting (ADMM)")
     export = axes[1].imshow(sx, cmap="gray")
-    plt.colorbar(export, ax=axes[0, 1])
+    plt.colorbar(export, ax=axes[1])
     axes[1].set_title("Subgradient")
     plt.savefig(f"{comparison_notebook_path}/comparison.png")
     # save tif output

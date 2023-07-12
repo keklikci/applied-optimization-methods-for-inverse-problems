@@ -30,7 +30,6 @@ class ADMM(aomip.Optimization):
             )
             z = self.gproximal(A.apply(x) + prevu, lmbd=tau)
             u = prevu + A.apply(x) - z
-            history.append(loss)
         return x
 
     def fproximal(self, x, lmbd=1.0) -> np.ndarray:
