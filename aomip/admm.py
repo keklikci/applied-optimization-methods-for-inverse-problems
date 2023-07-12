@@ -38,8 +38,8 @@ class ADMM(aomip.Optimization):
         print(f"Completed, loss = {loss:.2f}")
         return x
 
-    def fproximal(self, x, lmbd) -> np.ndarray:
+    def fproximal(self, x, lmbd=1.0) -> np.ndarray:
         return self.f.proximal(x, lmbd=lmbd)
 
-    def gproximal(self, x, lmbd) -> np.ndarray:
+    def gproximal(self, x, lmbd=1.0) -> np.ndarray:
         return self.g.proximal(x, lmbd=lmbd)
