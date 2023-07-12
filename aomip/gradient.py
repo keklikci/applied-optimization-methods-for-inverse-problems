@@ -56,7 +56,9 @@ class Subgradient(aomip.Optimization):
             subgradient = np.sign(norm)
             x = self.scheduler.update(prevx, (dx + self.calculate_gradient(prevx)), lr=self.scheduler.lr)
             loss = aomip.leastSquares(A.apply(x), self.sino) + norm
+            running_loss += loss
             history.append(loss)
+        print(f"Completed @ running_loss = {running_loss:.2f}")
         return x, history
 
     def precondition(self, loss_fn) -> bool:
