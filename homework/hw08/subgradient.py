@@ -17,7 +17,7 @@ def main():
     lrs = [1e-7, 1e-8, 1e-6, 1e-5]
     subgradient = aomip.Subgradient()
     for lr in lrs:
-        x = subgradient.optimize(lr=lr)
+        x, history = subgradient.optimize(lr=lr)
         # save notebook output
         plt.axis("off")
         export = plt.imshow(x, cmap="gray")
@@ -25,6 +25,12 @@ def main():
         plt.tight_layout()
         plt.title(f"α ={lr}")
         plt.savefig(f"images/notebook/subgradient/lr_{lr}.png")
+        plt.clf()
+        plt.plot(history)
+        plt.title(f"Convergence Analysis, Constant Step Size = {lr}")
+        plt.xlabel("# iterations")
+        plt.ylabel("Loss")
+        plt.savefig(f"images/notebook/subgradient/convergence_{lr}.png")
         plt.clf()
         # save tif output
         tifffile.imwrite(f"images/subgradient/lr_{lr}.tif", x)

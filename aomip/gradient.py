@@ -26,7 +26,7 @@ class GradientDescent(aomip.Optimization):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.scheduler = Gradient()
-    
+
     def optimize(self, n=10, **kwargs) -> np.ndarray:
         x = self.x0
         self.scheduler.lr = kwargs.get("lr", self.scheduler.lr)
@@ -40,19 +40,25 @@ class Subgradient(aomip.Optimization):
         super().__init__(*args, **kwargs)
         self.scheduler = Gradient()
 
-    def optimize(self, n=10, beta=0.001, **kwargs) -> np.ndarray:
+    def optimize(self, n=100, beta=0.1, **kwargs) -> np.ndarray:
         # backprojection as the initial guess
-        backprojection = self.operator.applyAdjoint(self.operator.apply(self.target))
+        A = self.operator
+        backprojection = A.applyAdjoint(A.apply(self.target))
         x = backprojection.reshape(self.vol_shape, order="F")
         self.scheduler.lr = kwargs.get("lr", self.scheduler.lr)
+        grad = aomip.FirstDerivative()
         # assert self.precondition(self.scheduler.lr), "α-value did not meet all preconditions!"
+        history, running_loss = [], 0.0
         for _ in range(n):
             prevx = x
-            subgradient = np.sign(prevx)
-            x = self.scheduler.update(prevx, subgradient, lr=self.scheduler.lr)
-            # print(x.sum(), prevx.sum())
-        return x
+            dx = grad.applyAdjoint(grad.apply(prevx))
+            norm = np.linalg.norm(dx, ord=1)
+            subgradient = np.sign(norm)
+            x = self.scheduler.update(prevx, (dx + self.calculate_gradient(prevx)), lr=self.scheduler.lr)
+            loss = aomip.leastSquares(A.apply(x), self.sino) + norm
+            history.append(loss)
+        return x, history
 
     def precondition(self, loss_fn) -> bool:
         pass
-    
+
