@@ -22,7 +22,7 @@ diminishing_notebook_path = "images/notebook/subgradient/diminishing"
 diminishing_convergence_path = "images/notebook/subgradient/convergence/diminishing"
 diminishing_tifffile_path = "images/subgradient/diminishing"
 
-# admm comparison export path
+# fpgm comparison export path
 comparison_notebook_path = "images/notebook/subgradient/comparison"
 comparison_tifffile_path = "images/subgradient/comparison"
 
@@ -70,13 +70,13 @@ def nonsummable_diminishing():
     # save tif output
     tifffile.imwrite(f"{diminishing_tifffile_path}/nonsummable_diminishing.tif", x)
 
-def admm_subgradient():
+def fpgm_subgradient():
     os.makedirs(comparison_tifffile_path, exist_ok=True)
     os.makedirs(comparison_notebook_path, exist_ok=True)
     start_time = time.time()
-    admm = aomip.LADMM()
-    ax = admm.optimize()
-    print(f"ADMM complete, execution time = {time.time() - start_time:.2f}")
+    fpgm = aomip.FPGM()
+    ax = fpgm.optimize()
+    print(f"FPGM complete, execution time = {time.time() - start_time:.2f}")
     start_time = time.time()
     subgradient = aomip.Subgradient()
     sx, _ = subgradient.optimize(lr=1e-3)
@@ -85,13 +85,15 @@ def admm_subgradient():
     # subgradient notebook output
     export = axes[0].imshow(ax, cmap="gray")
     plt.colorbar(export, ax=axes[0])
-    axes[0].set_title("Variable Splitting (ADMM)")
+    plt.axis("off")
+    axes[0].set_title("Fast Proximal Gradient Method (FPGM)")
     export = axes[1].imshow(sx, cmap="gray")
+    plt.axis("off")
     plt.colorbar(export, ax=axes[1])
     axes[1].set_title("Subgradient")
     plt.savefig(f"{comparison_notebook_path}/comparison.png")
     # save tif output
-    tifffile.imwrite(f"{comparison_tifffile_path}/admm.tif", ax)
+    tifffile.imwrite(f"{comparison_tifffile_path}/fpgm.tif", ax)
     tifffile.imwrite(f"{comparison_tifffile_path}/subgradient.tif", ax)
 
 def main():
@@ -99,8 +101,8 @@ def main():
     square_summable()
     print("Running nonsummable but diminishing step sizes...")
     nonsummable_diminishing()
-    print("Running analysis on ADMM and subgradient optimization...")
-    admm_subgradient()
+    print("Running analysis on FPGM and subgradient optimization...")
+    fpgm_subgradient()
 
 if __name__ == "__main__":
     main()
