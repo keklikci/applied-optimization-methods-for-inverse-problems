@@ -41,7 +41,9 @@ class Subgradient(aomip.Optimization):
         self.scheduler = Gradient()
 
     def optimize(self, n=10, beta=1.0, **kwargs) -> np.ndarray:
-        x = self.operator.applyAdjoint(self.operator.apply(self.target))
+        # backprojection as the initial guess
+        backprojection = self.operator.applyAdjoint(self.operator.apply(self.target))
+        x = backprojection.reshape(self.vol_shape, order="F")
         self.scheduler.lr = kwargs.get("lr", self.scheduler.lr)
         subgradient = aomip.Subgradient()
         derivative = aomip.FirstDerivative()
