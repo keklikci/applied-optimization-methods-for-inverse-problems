@@ -31,6 +31,6 @@ class GradientDescent(aomip.Optimization):
         self.scheduler.lr = kwargs.get("lr", self.scheduler.lr)
         for _ in range(n):
             gradient = self.calculate_gradient(x)
-            x = self.scheduler.update(x, gradient, self.scheduler.lr)
+            x = self.scheduler.update(x, gradient, lr=self.scheduler.lr)
         return x
     

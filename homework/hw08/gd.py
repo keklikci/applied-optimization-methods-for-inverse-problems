@@ -15,7 +15,7 @@ def main():
     os.makedirs("images/notebook/gd", exist_ok=True)
     os.makedirs("images/gd", exist_ok=True)
     gd = aomip.GradientDescent()
-    lrs = [1e-4, 1e-3, 1e-2]
+    lrs = [1e-7, 1e-8, 1e-6, 1e-5]
     for lr in lrs:
         x = gd.optimize(lr=lr)
         # save notebook output
@@ -28,3 +28,6 @@ def main():
         plt.clf()
         # save tif output
         tifffile.imwrite(f"images/gd/lr_{lr}.tif", x)
+
+if __name__ == "__main__":
+    main()
