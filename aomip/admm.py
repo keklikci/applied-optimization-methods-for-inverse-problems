@@ -16,8 +16,9 @@ class ADMM(aomip.Optimization):
         self.g = None
         self.objective = aomip.leastSquares
 
-    def optimize(self, n=100, mu=1.0, tau=1.0, beta=0.1) -> None:
+    def optimize(self, n=100, mu=1.0, tau=1.0, beta=0.1) -> tuple:
         A = self.operator
+        grad = aomip.FirstDerivative()
         x, z = self.x0, A.apply(self.x0)
         u = np.zeros(self.sino_shape)[:, np.newaxis]
         history, loss = [], 0.0
@@ -31,12 +32,16 @@ class ADMM(aomip.Optimization):
                 / tau
                 * A.applyAdjoint(A.apply(prevx) - prevz + prevu)
             )
-            loss = self.objective(A.apply(x), self.sino) + beta * np.linalg.norm(x, ord=1)
+            # solve LASSO + TV regularization
+            # enables comparison to subgradient method
+            # must be modified to make use of other objective functions
+            dx = grad.applyAdjoint(grad.apply(prevx))
+            loss = self.objective(A.apply(x), self.sino) + beta * np.linalg.norm(dx, ord=1)
             z = self.gproximal(A.apply(x) + prevu)
             u = prevu + A.apply(x) - z
             history.append(loss)
         print(f"Completed, loss = {loss:.2f}")
-        return x
+        return x, history
 
     def fproximal(self, x, lmbd=1.0) -> np.ndarray:
         return self.f.proximal(x, lmbd=lmbd)
