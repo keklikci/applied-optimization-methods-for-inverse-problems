@@ -67,9 +67,9 @@ class Subgradient(aomip.Optimization):
             subgradient = np.sign(norm)
             # compute learning rate
             if self.step == "square_summable":
-                self.scheduler.lr = 1 / (i + 1)
+                self.scheduler.lr = 1 / (i + 1e3)
             elif self.step == "diminishing":
-                self.scheduler.lr = 1 / np.sqrt(i + 1)
+                self.scheduler.lr = 1 / np.sqrt(i + 1e6)
             elif self.step == "constant":
                 self.scheduler.lr = self.scheduler.lr
             else:
