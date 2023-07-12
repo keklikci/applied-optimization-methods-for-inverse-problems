@@ -17,7 +17,7 @@ def main():
     lrs = [1e-7, 1e-8, 1e-6, 1e-5]
     subgradient = aomip.Subgradient()
     for lr in lrs:
-        x = subgradient.optimize()
+        x = subgradient.optimize(lr=lr)
         # save notebook output
         plt.axis("off")
         export = plt.imshow(x, cmap="gray")

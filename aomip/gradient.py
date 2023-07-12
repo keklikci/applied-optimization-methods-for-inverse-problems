@@ -36,6 +36,7 @@ class GradientDescent(aomip.Optimization):
 
 class Subgradient(aomip.Optimization):
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.scheduler = Gradient()
 
     def optimize(self, n=100, beta=1.0, **kwargs) -> np.ndarray:
