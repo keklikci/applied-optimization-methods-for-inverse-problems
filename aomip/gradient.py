@@ -49,7 +49,9 @@ class Subgradient(aomip.Optimization):
         grad = aomip.FirstDerivative()
         # assert self.precondition(self.scheduler.lr), "α-value did not meet all preconditions!"
         history, running_loss = [], 0.0
-        for _ in range(n):
+        for i in range(n):
+            if i % 10 == 0:
+                print(f"Logging, running loss = {running_loss:.2f}")
             prevx = x
             dx = grad.applyAdjoint(grad.apply(prevx))
             norm = np.linalg.norm(dx, ord=1)
@@ -58,7 +60,7 @@ class Subgradient(aomip.Optimization):
             loss = aomip.leastSquares(A.apply(x), self.sino) + norm
             running_loss += loss
             history.append(loss)
-        print(f"Completed @ running_loss = {running_loss:.2f}")
+        print(f"Completed, total loss = {running_loss:.2f}")
         return x, history
 
     def precondition(self, loss_fn) -> bool:
