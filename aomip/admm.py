@@ -32,13 +32,12 @@ class ADMM(aomip.Optimization):
                 / tau
                 * A.applyAdjoint(A.apply(prevx) - prevz + prevu)
             )
-            # solve LASSO + TV regularization
-            # enables comparison to subgradient method
-            # must be modified to make use of other objective functions
-            dx = grad.applyAdjoint(grad.apply(x))
-            loss = self.objective(A.apply(x), self.sino) + beta * np.linalg.norm(dx, ord=1)
             z = self.gproximal(A.apply(x) + prevu)
             u = prevu + A.apply(x) - z
+            dx = grad.applyAdjoint(grad.apply(z))
+            # solve LASSO + TV regularization
+            # enables comparison to subgradient method
+            loss = self.objective(A.apply(x), self.sino) + beta * np.linalg.norm(dx, ord=1)
             history.append(loss)
         print(f"Completed, loss = {loss:.2f}")
         return x, history

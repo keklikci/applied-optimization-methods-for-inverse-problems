@@ -72,6 +72,7 @@ def nonsummable_diminishing():
 
 def admm_subgradient():
     os.makedirs(comparison_tifffile_path, exist_ok=True)
+    os.makedirs(comparison_notebook_path, exist_ok=True)
     start_time = time.time()
     admm = aomip.ADMM()
     admm.f = aomip.L1()
@@ -94,7 +95,7 @@ def admm_subgradient():
     axes[0, 1].set_title("Subgradient")
     axes[1, 1].plot(shistory)
     axes[1, 1].set_title("Convergence Analysis")
-    plt.savefig(f"{comparison_notebook_path}/comparsion.png")
+    plt.savefig(f"{comparison_notebook_path}/comparison.png")
     # save tif output
     tifffile.imwrite(f"{comparison_tifffile_path}/admm.tif", ax)
     tifffile.imwrite(f"{comparison_tifffile_path}/subgradient.tif", ax)
