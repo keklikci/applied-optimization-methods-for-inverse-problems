@@ -46,6 +46,7 @@ class Subgradient(aomip.Optimization):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.scheduler = Gradient()
+        self.step = "constant"
 
     def optimize(self, n=100, beta=0.1, **kwargs) -> tuple:
         # backprojection as the initial guess
@@ -53,8 +54,8 @@ class Subgradient(aomip.Optimization):
         backprojection = A.applyAdjoint(A.apply(self.target))
         x = backprojection.reshape(self.vol_shape, order="F")
         self.scheduler.lr = kwargs.get("lr", self.scheduler.lr)
+        self.step = kwargs.get("step", self.step)
         grad = aomip.FirstDerivative()
-        # assert self.precondition(self.scheduler.lr), "α-value did not meet all preconditions!"
         history, loss = [], 0.0
         for i in range(n):
             if i % 10 == 0:
@@ -63,12 +64,18 @@ class Subgradient(aomip.Optimization):
             dx = grad.applyAdjoint(grad.apply(prevx))
             norm = np.linalg.norm(dx, ord=1)
             subgradient = np.sign(norm)
+            # compute learning rate
+            if self.step == "square_summable":
+                self.scheduler.lr = 1 / (i + 1)
+            elif self.step == "diminishing":
+                self.scheduler.lr = 1 / np.sqrt(i + 1)
+            elif self.step == "constant":
+                self.scheduler.lr = self.scheduler.lr
+            else:
+                raise NotImplementedError
             x = self.scheduler.update(prevx, (dx + self.calculate_gradient(prevx)), lr=self.scheduler.lr)
             loss = aomip.leastSquares(A.apply(x), self.sino) + norm
             history.append(loss)
         print(f"Completed, loss = {loss:.2f}")
         return x, history
-
-    def precondition(self, loss_fn) -> bool:
-        pass
 
