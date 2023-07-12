@@ -28,7 +28,7 @@ class GradientDescent(aomip.Optimization):
         self.scheduler = Gradient()
         self.objective = aomip.leastSquares
 
-    def optimize(self, n=10, **kwargs) -> tuple:
+    def optimize(self, n=100, **kwargs) -> tuple:
         x, loss = self.x0, 0.0
         history = []
         self.scheduler.lr = kwargs.get("lr", self.scheduler.lr)
@@ -46,6 +46,7 @@ class Subgradient(aomip.Optimization):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.scheduler = Gradient()
+        self.objective = aomip.leastSquares
         self.step = "constant"
 
     def optimize(self, n=100, beta=0.1, **kwargs) -> tuple:
@@ -74,7 +75,7 @@ class Subgradient(aomip.Optimization):
             else:
                 raise NotImplementedError
             x = self.scheduler.update(prevx, (dx + self.calculate_gradient(prevx)), lr=self.scheduler.lr)
-            loss = aomip.leastSquares(A.apply(x), self.sino) + norm
+            loss = self.objective(A.apply(x), self.sino) + norm
             history.append(loss)
         print(f"Completed, loss = {loss:.2f}")
         return x, history

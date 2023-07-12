@@ -16,9 +16,9 @@ def main():
     os.makedirs("images/notebook/gd/convergence", exist_ok=True)
     os.makedirs("images/gd", exist_ok=True)
     gd = aomip.GradientDescent()
-    lrs = [1e-7, 1e-8, 1e-6, 1e-5]
+    lrs = [1e-5, 1e-4, 1e-3]
     for lr in lrs:
-        x = gd.optimize(lr=lr)
+        x, history = gd.optimize(lr=lr)
         # save notebook output
         plt.axis("off")
         export = plt.imshow(x, cmap="gray")
