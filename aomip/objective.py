@@ -8,4 +8,4 @@
 import numpy as np
 
 def leastSquares(forward, b) -> float:
-    return np.linalg.norm(forward - b, ord=2) ** 2
+    return 0.5 * np.linalg.norm(forward - b, ord=2) ** 2

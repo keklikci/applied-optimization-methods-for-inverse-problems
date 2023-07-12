@@ -31,7 +31,7 @@ class ADMM(aomip.Optimization):
                 / tau
                 * A.applyAdjoint(A.apply(prevx) - prevz + prevu)
             )
-            loss = self.objective(A.apply(prevx), self.sino) + beta * np.linalg.norm(prevx, ord=1)
+            loss = self.objective(A.apply(x), self.sino) + beta * np.linalg.norm(x, ord=1)
             z = self.gproximal(A.apply(x) + prevu)
             u = prevu + A.apply(x) - z
             history.append(loss)
