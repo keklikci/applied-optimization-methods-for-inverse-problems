@@ -15,7 +15,7 @@ class FPGM(aomip.Optimization):
         self.f = aomip.L1()
         self.objective = aomip.leastSquares
 
-    def optimize(self, n=100, beta=0.1) -> tuple:
+    def optimize(self, n=10, beta=0.1) -> tuple:
         A = self.operator
         x, z = self.x0, self.x0
         t = 1.0

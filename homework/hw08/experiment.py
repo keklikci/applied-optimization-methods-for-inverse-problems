@@ -76,12 +76,14 @@ def fpgm_subgradient():
     start_time = time.time()
     fpgm = aomip.FPGM()
     fx, fhistory = fpgm.optimize()
-    # multiply by the scale factor
-    fx *= 1e3
+    # apply masking
+    fx = aomip.mask(fx)
     print(f"FPGM complete, execution time = {time.time() - start_time:.2f}")
     start_time = time.time()
     subgradient = aomip.Subgradient()
     sx, shistory = subgradient.optimize(lr=1e-3)
+    # apply masking
+    sx = aomip.mask(sx)
     print(f"Subgradient complete, execution time = {time.time() - start_time:.2f}")
     fig, axes = plt.subplots(2, 2, figsize = (16, 10))
     # subgradient notebook output
