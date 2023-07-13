@@ -11,6 +11,7 @@ import tifffile
 import os
 import matplotlib.pyplot as plt
 
+
 def main():
     elastic = aomip.Elastic()
     os.makedirs("images/notebook/elastic", exist_ok=True)
@@ -27,7 +28,7 @@ def main():
         plt.title(f"λ ={lmbd}")
         plt.savefig(f"images/notebook/elastic/lambda_{lmbd}.png")
         plt.clf()
-        # save tif output
+        # save tif output
         tifffile.imwrite(f"images/elastic/lambda_{lmbd}.tif", x)
 
 

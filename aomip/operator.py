@@ -83,6 +83,7 @@ class Constant(ProximalOperator):
     def proximal(self, x):
         return x
 
+
 class StackedOperator:
     def __init__(self, operators):
         self.ops = operators
@@ -99,6 +100,7 @@ class StackedOperator:
         for yi, op in zip(y[1:], self.ops[1:]):
             x += op.applyAdjoint(yi)
         return x
+
 
 class ElasticNet(ProximalOperator):
     def __init__(self, *args, **kwargs):

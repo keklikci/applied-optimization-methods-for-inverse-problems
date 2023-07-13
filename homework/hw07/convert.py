@@ -8,6 +8,7 @@
 import os
 import matplotlib.pyplot as plt
 
+
 def main():
     os.makedirs("images/notebook", exist_ok=True)
     images = os.listdir("images")
@@ -21,8 +22,11 @@ def main():
         plt.tight_layout()
         idx = filename.find("_")
         plt.title(f"τ ={filename[(idx + 1):len(filename) - 4]}")
-        plt.savefig("images" + "/" + "notebook" + "/" + images[i].replace(".tif", ".png"))
+        plt.savefig(
+            "images" + "/" + "notebook" + "/" + images[i].replace(".tif", ".png")
+        )
         plt.clf()
+
 
 if __name__ == "__main__":
     main()

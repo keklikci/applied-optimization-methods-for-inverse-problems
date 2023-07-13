@@ -51,7 +51,7 @@ def main():
         plt.title(f"α={alpha}")
         plt.savefig(f"images/notebook/backtrack/alpha_{alpha}_beta_{0.9}.png")
         plt.clf()
-        # save tif output
+        # save tif output
         tifffile.imwrite(f"images/backtrack/alpha_{alpha}_beta_{0.9}.tif", x)
 
 

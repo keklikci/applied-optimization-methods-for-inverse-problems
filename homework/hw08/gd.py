@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import os
 import aomip
 
+
 def main():
     os.makedirs("images/notebook/gd", exist_ok=True)
     os.makedirs("images/notebook/gd/convergence", exist_ok=True)
@@ -32,8 +33,9 @@ def main():
         plt.ylabel("Loss")
         plt.savefig(f"images/notebook/gd/convergence/convergence_{lr}.png")
         plt.clf()
-        # save tif output
+        # save tif output
         tifffile.imwrite(f"images/gd/lr_{lr}.tif", x)
+
 
 if __name__ == "__main__":
     main()

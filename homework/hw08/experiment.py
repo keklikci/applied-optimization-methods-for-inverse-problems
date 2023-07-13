@@ -29,6 +29,7 @@ comparison_tifffile_path = "images/subgradient/comparison"
 # challenge path
 challenge_path = "images/challenge"
 
+
 def square_summable():
     os.makedirs(ss_notebook_path, exist_ok=True)
     os.makedirs(ss_convergence_path, exist_ok=True)
@@ -48,8 +49,9 @@ def square_summable():
     plt.ylabel("Loss")
     plt.savefig(f"{ss_convergence_path}/convergence.png")
     plt.clf()
-    # save tif output
+    # save tif output
     tifffile.imwrite(f"{ss_tifffile_path}/square_summable.tif", x)
+
 
 def nonsummable_diminishing():
     os.makedirs(diminishing_notebook_path, exist_ok=True)
@@ -70,8 +72,9 @@ def nonsummable_diminishing():
     plt.ylabel("Loss")
     plt.savefig(f"{diminishing_convergence_path}/convergence.png")
     plt.clf()
-    # save tif output
+    # save tif output
     tifffile.imwrite(f"{diminishing_tifffile_path}/nonsummable_diminishing.tif", x)
+
 
 def fpgm_subgradient():
     os.makedirs(comparison_tifffile_path, exist_ok=True)
@@ -88,7 +91,7 @@ def fpgm_subgradient():
     # apply masking
     sx = aomip.mask(sx)
     print(f"Subgradient complete, execution time = {time.time() - start_time:.2f}")
-    fig, axes = plt.subplots(2, 2, figsize = (16, 10))
+    fig, axes = plt.subplots(2, 2, figsize=(16, 10))
     # subgradient notebook output
     export = axes[0, 0].imshow(fx, cmap="gray")
     plt.colorbar(export, ax=axes[0, 0])
@@ -104,6 +107,7 @@ def fpgm_subgradient():
     tifffile.imwrite(f"{comparison_tifffile_path}/fpgm.tif", fx)
     tifffile.imwrite(f"{comparison_tifffile_path}/subgradient.tif", sx)
 
+
 def challenge():
     os.makedirs(challenge_path, exist_ok=True)
     fpgm = aomip.FPGM()
@@ -118,6 +122,7 @@ def challenge():
     # save tifffile output
     tifffile.imwrite(f"{challenge_path}/challenge.tif", fx)
 
+
 def main():
     print("Running square summable step sizes...")
     square_summable()
@@ -127,6 +132,7 @@ def main():
     fpgm_subgradient()
     print("Submitting to the challenge...")
     challenge()
+
 
 if __name__ == "__main__":
     main()

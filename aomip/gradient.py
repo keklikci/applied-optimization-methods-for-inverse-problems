@@ -10,6 +10,7 @@ import aomip
 import tifffile
 from abc import ABC
 
+
 class Gradient(ABC):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,8 +20,9 @@ class Gradient(ABC):
         self.lr = lr
 
     def update(self, x, gradient, **kwargs) -> np.ndarray:
-        self.lr =  kwargs.get("lr", self.lr)
+        self.lr = kwargs.get("lr", self.lr)
         return x - self.lr * gradient
+
 
 class GradientDescent(aomip.Optimization):
     def __init__(self, *args, **kwargs):
@@ -41,6 +43,7 @@ class GradientDescent(aomip.Optimization):
             history.append(loss)
         print(f"Completed, loss = {loss:.2f}")
         return x, history
+
 
 class Subgradient(aomip.Optimization):
     def __init__(self, *args, **kwargs):
@@ -74,9 +77,10 @@ class Subgradient(aomip.Optimization):
                 self.scheduler.lr = self.scheduler.lr
             else:
                 raise NotImplementedError
-            x = self.scheduler.update(prevx, (dx + self.calculate_gradient(prevx)), lr=self.scheduler.lr)
+            x = self.scheduler.update(
+                prevx, (dx + self.calculate_gradient(prevx)), lr=self.scheduler.lr
+            )
             loss = self.objective(A.apply(x), self.sino) + norm
             history.append(loss)
         print(f"Completed, loss = {loss:.2f}")
         return x, history
-

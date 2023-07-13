@@ -23,10 +23,8 @@ class ADMM(aomip.Optimization):
         for k in range(n):
             prevx, prevz, prevu = x, z, u
             x = self.fproximal(
-                prevx
-                - mu
-                / tau
-                * A.applyAdjoint(A.apply(prevx) - prevz + prevu), lmbd=mu
+                prevx - mu / tau * A.applyAdjoint(A.apply(prevx) - prevz + prevu),
+                lmbd=mu,
             )
             z = self.gproximal(A.apply(x) + prevu, lmbd=tau)
             u = prevu + A.apply(x) - z

@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import os
 import aomip
 
+
 def main():
     bb2 = aomip.BB2()
     os.makedirs("images/notebook/bb2", exist_ok=True)
@@ -26,7 +27,7 @@ def main():
         plt.title(f"λ ={lmbd}")
         plt.savefig(f"images/notebook/bb2/lambda_{lmbd}.png")
         plt.clf()
-        # save tif output
+        # save tif output
         tifffile.imwrite(f"images/bb2/lambda_{lmbd}.tif", x)
 
 

@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import os
 import aomip
 
+
 def main():
     pogm = aomip.POGM()
     os.makedirs("images/notebook", exist_ok=True)
@@ -29,7 +30,7 @@ def main():
         plt.title(f"λ ={lmbd}")
         plt.savefig(f"images/notebook/lambda_{lmbd}.png")
         plt.clf()
-        # save tif output
+        # save tif output
         tifffile.imwrite(f"images/pogm/lambda_{lmbd}.tif", x)
 
 

@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import os
 import aomip
 
+
 def main():
     N = 512
     os.makedirs("images", exist_ok=True)

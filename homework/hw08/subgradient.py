@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import os
 import aomip
 
+
 def main():
     os.makedirs("images/notebook/subgradient/constant", exist_ok=True)
     os.makedirs("images/notebook/subgradient/convergence/constant", exist_ok=True)
@@ -30,10 +31,13 @@ def main():
         plt.title(f"Convergence Analysis, Constant Step Size = {lr}")
         plt.xlabel("# iterations")
         plt.ylabel("Loss")
-        plt.savefig(f"images/notebook/subgradient/convergence/constant/convergence_{lr}.png")
+        plt.savefig(
+            f"images/notebook/subgradient/convergence/constant/convergence_{lr}.png"
+        )
         plt.clf()
-        # save tif output
+        # save tif output
         tifffile.imwrite(f"images/subgradient/constant/lr_{lr}.tif", x)
+
 
 if __name__ == "__main__":
     main()

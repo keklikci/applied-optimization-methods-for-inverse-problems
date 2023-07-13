@@ -11,6 +11,7 @@ import tifffile
 import os
 import matplotlib.pyplot as plt
 
+
 def main():
     fpgm = aomip.FPGM()
     os.makedirs("images/notebook/fpgm", exist_ok=True)
@@ -29,7 +30,7 @@ def main():
         plt.title(f"λ ={lmbd}")
         plt.savefig(f"images/notebook/fpgm/lambda_{lmbd}.png")
         plt.clf()
-        # save tif output
+        # save tif output
         tifffile.imwrite(f"images/fpgm/lambda_{lmbd}.tif", x)
 
 

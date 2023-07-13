@@ -8,10 +8,12 @@
 import numpy as np
 import aomip
 
+
 class BB2(aomip.Optimization):
     """
     Gradient descent using BB2 steps
     """
+
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 

@@ -24,9 +24,9 @@ class POGM(aomip.Optimization):
             gradient = self.calculate_gradient(z)
             L = np.linalg.norm(gradient, ord=2) ** 2
             if 2 <= k < n - 1:
-                theta = 0.5 * (1 + np.sqrt(4 * thetaprev ** 2 + 1))
+                theta = 0.5 * (1 + np.sqrt(4 * thetaprev**2 + 1))
             if k == n - 1:
-                theta = 0.5 * (1 + np.sqrt(8 * theta ** 2 + 1))
+                theta = 0.5 * (1 + np.sqrt(8 * theta**2 + 1))
             gamma = 1 / L * (2 * thetaprev + theta - 1) / theta
             w = xprev - 1 / L * gradient
             nesterov = (thetaprev - 1) / theta * (w * wprev)

@@ -18,6 +18,7 @@ thetas = np.arange(360)
 x = np.zeros(vols)
 A = aomip.XrayOperator(vols, bs, thetas, d2c, c2d)
 
+
 class TV(object):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -29,7 +30,9 @@ class TV(object):
         self.c2d = self.vols[0] * 5.0
         self.thetas = np.arange(360)
         self.x0 = np.zeros(self.vols)
-        self.target = tifffile.imread("/srv/ceph/share-all/aomip/htc2022_ground_truth/htc2022_05c_recon.tif")
+        self.target = tifffile.imread(
+            "/srv/ceph/share-all/aomip/htc2022_ground_truth/htc2022_05c_recon.tif"
+        )
         self.sino = aomip.radon(self.target, self.bs, self.thetas, self.d2c, self.c2d)
         self.f = aomip.L11()
         self.g = aomip.L21()
@@ -44,7 +47,9 @@ class TV(object):
             prevx, prevz, prevu = x, z, u
             forward = self.operator.apply(prevx)
             f1, f2 = forward[0], forward[1]
-            x = prevx - mu / tau * self.operator.applyAdjoint(self.operator.apply(prevx) - prevz + prevu)
+            x = prevx - mu / tau * self.operator.applyAdjoint(
+                self.operator.apply(prevx) - prevz + prevu
+            )
             z = self.operator.apply(x) + prevu
             u = prevu + self.operator.applyAdjoint(x) - z
         return x
@@ -69,6 +74,7 @@ def main():
     plt.tight_layout()
     plt.savefig(f"images/tv.tif", transparent=True)
 
+
 if __name__ == "__main__":
-    # main()
+    # main()
     pass
