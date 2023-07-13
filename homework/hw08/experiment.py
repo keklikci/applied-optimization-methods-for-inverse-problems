@@ -105,17 +105,17 @@ def fpgm_subgradient():
     tifffile.imwrite(f"{comparison_tifffile_path}/subgradient.tif", sx)
 
 def challenge():
-    os.makedirs(comparison_tifffile_path, exist_ok=True)
+    os.makedirs(challenge_path, exist_ok=True)
     fpgm = aomip.FPGM()
     fx, _ = fpgm.optimize(n=500)
     plt.axis("off")
-    export = plt.imshow(x, cmap="gray")
+    export = plt.imshow(fx, cmap="gray")
     plt.colorbar(export)
     plt.title(f"Challenge Submission")
     # save challenge output
     plt.savefig(f"{challenge_path}/challenge.png")
     # save tifffile output
-    tifffile.imwrite(f"{challenge_path}/challenge.tif")
+    tifffile.imwrite(f"{challenge_path}/challenge.tif", fx)
 
 def main():
     print("Running square summable step sizes...")
