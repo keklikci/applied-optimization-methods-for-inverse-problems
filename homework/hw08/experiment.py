@@ -26,6 +26,9 @@ diminishing_tifffile_path = "images/subgradient/diminishing"
 comparison_notebook_path = "images/notebook/subgradient/comparison"
 comparison_tifffile_path = "images/subgradient/comparison"
 
+# challenge path
+challenge_path = "images/challenge"
+
 def square_summable():
     os.makedirs(ss_notebook_path, exist_ok=True)
     os.makedirs(ss_convergence_path, exist_ok=True)
@@ -101,6 +104,19 @@ def fpgm_subgradient():
     tifffile.imwrite(f"{comparison_tifffile_path}/fpgm.tif", fx)
     tifffile.imwrite(f"{comparison_tifffile_path}/subgradient.tif", sx)
 
+def challenge():
+    os.makedirs(comparison_tifffile_path, exist_ok=True)
+    fpgm = aomip.FPGM()
+    fx, _ = fpgm.optimize(n=500)
+    plt.axis("off")
+    export = plt.imshow(x, cmap="gray")
+    plt.colorbar(export)
+    plt.title(f"Challenge Submission")
+    # save challenge output
+    plt.savefig(f"{challenge_path}/challenge.png")
+    # save tifffile output
+    tifffile.imwrite(f"{challenge_path}/challenge.tif")
+
 def main():
     print("Running square summable step sizes...")
     square_summable()
@@ -108,6 +124,8 @@ def main():
     nonsummable_diminishing()
     print("Running analysis on FPGM and subgradient optimization...")
     fpgm_subgradient()
+    print("Submitting to the challenge...")
+    challenge()
 
 if __name__ == "__main__":
     main()
