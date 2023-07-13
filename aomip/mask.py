@@ -7,7 +7,7 @@
 
 import numpy as np
 
-def mask(image, radius=176) -> np.ndarray:
+def mask(image, radius=170) -> np.ndarray:
     height, width = image.shape
     blacked_out_image = np.zeros_like(image)
     center_x = width // 2
