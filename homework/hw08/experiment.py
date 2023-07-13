@@ -108,6 +108,7 @@ def challenge():
     os.makedirs(challenge_path, exist_ok=True)
     fpgm = aomip.FPGM()
     fx, _ = fpgm.optimize(n=500)
+    plt.clf()
     plt.axis("off")
     export = plt.imshow(fx, cmap="gray")
     plt.colorbar(export)
