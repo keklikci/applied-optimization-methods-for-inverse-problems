@@ -2,7 +2,9 @@
 
 * Algorithms related to this homework are implemented with pure object oriented programming (OOP) and are blackformatted.
 
-* With this release, I put out my best effort out there to re-implement some of my methods so they are optimized by specifically assessing the objective function value given the current iterate.
+* With this release, I put out my best effort out there to re-implement some of my methods so they are optimized by specifically assessing the objective function value given the current iterate. 
+
+* I also configured the main [Optimization](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/optimize.py) class that all my methods inherit from to take phantom `7c` as the default target, as it was one of my observations that everyone that took part in the presentations mainly focused on that.
 
 * By default, I set the objective function for solving LASSO problem. To achieve this, I implemented the least squares method in my development folder [aomip](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/aomip) and calculated the norm on-the-fly. Least squares method, in modular fashion, can be found in [objective.py](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/objective.py).
 
@@ -49,4 +51,67 @@
 
 ## Homework 1: Subgradient Method
 
-* 
+* Concerete implementation of the Subgradient resides in [gradient.py](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py). In context of the assignment, we were required to implement this method for three different step selections and analyze the convergence of it. For computing the subgradient, I used `np.sign(l1(dx))` where `dx` is the derivate in all directions and `l1` is the 1-norm.
+
+* For constant step size (α), please run [subgradient.py](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw08/subgradient.py) to save reconstruction images to relevant subfolders dynamically created in [images](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw08/images). 
+
+* For experimenting with other step size (α) configurations such as square summable or diminishing, please run [experiment.py](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw08/experiment.py) to save reconstruction images to relevant subfolders dynamically created in [images](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw08/images). 
+
+* Below are the [Subgradient](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py) reconstructions and their convergence plots tested on different  but constant step sizes (α-values).
+
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/constant/lr_0.0001.png)
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/convergence/constant/convergence_0.0001.png)
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/constant/lr_0.001.png)
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/convergence/constant/convergence_0.001.png)
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/constant/lr_1e-05.png)
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/convergence/constant/convergence_1e-05.png)
+
+* When observed under fixed amount of iterations, we can see that it takes roughly 7-8 iterations for subgradient method to converge with α = 0.001, which produces the best and smoothest reconstruction among others. For α = 0.0001, convergence happens around 35-40 iterations. For α = 0.0001, the loss is still decreasing and some form of reconstruction is visible but subgradient is not a descent method, therefore there is no guarantee that reconstruction is better of when n-iterations is increased. In fact, that was not the case.
+
+* For square summable but not summable step sizes (α), I set the step size to the following.
+
+    * `α_k = a/(b + k), where a > 0 and b ≥ 0.`
+    * In my implementation, I set `a = 1` and `b = (i + 1e3), where i is the i-th iteration.` In the formulation above, `i` corresponds to `k`.
+    * I referenced this [lecture](https://web.stanford.edu/class/ee392o/subgrad_method.pdf) to satisfy this condition.
+
+* Below is the reconstruction and convergence plot associated with this α setting.     
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/square_summable/square_summable.png)
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/convergence/square_summamble/convergence.png)
+
+* As observed, convergence behavior is very similar to setting α = 0.001 (constant), meaning that this works out better than other constant step sizes and loss becomes 0 around 5 iterations.
+    
+* For nonsummable but diminishing step sizes (α), I set the step size to the following.
+
+    * `α_k = a/√k, where a > 0.`
+    * In my implementation, I set `a = 1` and `b = np.sqrt((i + 1e6)), where i is the i-th iteration.` In the formulation above, `i` corresponds to `k`.
+    * I referenced this [lecture](https://web.stanford.edu/class/ee392o/subgrad_method.pdf) to satisfy this condition.
+    
+* Below is the reconstruction and convergence plot associated with this α setting.     
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/diminishing/nonsummable_diminishing.png)
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/convergence/diminishing/convergence.png)
+
+* Similar remarks to square summable and constant α = 0.001 persist because I set the step size (α) configuration carefully, these selections work out.
+
+* At this point, please run [experiment.py](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw08/experiment.py) if you haven't already to save the comparison plot between [Fast Proximal Gradient Method (FPGM)](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/fpgm.py) and [Subgradient](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py) method. The reason why this analysis was carried out with [Fast Proximal Gradient Method (FPGM)](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/fpgm.py) instead of [ADMM](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/admm.py) was clarified in the sections above.
+
+* Below is a plot that outlines the difference between reconstructions and their convergence. Clearly, [FPGM](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/fpgm.py) reconstruction quality just in 10 iterations compared to [Subgradient](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py) in 100 iterations is much better. Although the loss is decreasing, because of using momentum, it's not wise with this method to exceed 500 iterations to my experience. Reconstruction quality-wise, judging from the [ADMM](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/admm.py) images provided in the Overview section, [ADMM](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/admm.py) is also better than the [Subgradient](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py) method but worse than [FPGM](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/fpgm.py). 
+
+* Script also prints out the elapsed time for both methods. Owed to fast reconstruction, [FPGM](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/fpgm.py) takes around 2 seconds compared to [Subgradient](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py) taking roughly around 8 seconds for convergence.
+
+    * | Method      | # of Iterations | Elapsted Total Time (seconds) | Convergence Rate 
+      | ---------   | ----------------| ------------------            | -----------
+      | FPGM        |       10        | ~ 2 seconds                   | O(1/k^2)
+      | Subgradient |       100       | ~ 10 seconds                  | O(1/√k)
+
+* Analysis is satisfactory because FPGM convergence rate can be as fast as `O(1/k^2)` [FPGM](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/fpgm.py) whereas [Subgradient](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py) convergence is as slow as `O(1/√k)`.
+
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/comparison/comparison.png)
+
+### Homework 2: Challenge
+
+* By now, you will have already run [experiment.py](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw08/experiment.py), which will also save my challenge submission for the full-arc (360) to [challenge](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw08/images/challenge).
+
+* Below is the challenge image.
+
+* TODO: add image
+
