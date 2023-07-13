@@ -8,7 +8,7 @@
 
 * By default, I set the objective function for solving LASSO problem. To achieve this, I implemented the least squares method in my development folder [aomip](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/aomip) and calculated the norm on-the-fly. Least squares method, in modular fashion, can be found in [objective.py](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/objective.py).
 
-* Furthermore, it is worth noting down that I modified my usual setup to return a cost history for convergence analysis so I returned a `tuple` instead of `np.ndarray` x where x is the reconstruction. Please note that I implemented this change for methods that were working stable and reliable enough for me to plot the objective function values of the following.
+* Furthermore, it is worth noting down that I modified my usual setup to return a cost history for convergence analysis so I returned a `tuple` instead of `np.ndarray` x where x is the reconstruction. Please note that I implemented this change for recent methods that were working stable and reliable enough for me to plot the objective function values of the following.
     * [Fast Proximal Gradient Method (FPGM)](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/fpgm.py)
     * [Gradient Descent](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py)
     * [Subgradient](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/gradient.py)
@@ -107,11 +107,25 @@
 
 ![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/notebook/subgradient/comparison/comparison.png)
 
-### Homework 2: Challenge
+## Homework 2: Challenge
+
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/leaderboard/leaderboard.png)
 
 * By now, you will have already run [experiment.py](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw08/experiment.py), which will also save my challenge submission for the full-arc (360) to [challenge](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw08/images/challenge).
 
-* Below is the challenge image.
+* Below is the challenge image, reconstructed by [Fast Proximal Gradient Method (FPGM)](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/fpgm.py). This puts me in the **first place** in the [Ultimate leaderboard](https://submission.ciip.in.tum.de/difficulty-07/arc-360.html) as of the date of this release.
 
-* TODO: add image
+* You will find two files saved to [challenge](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/tree/main/homework/hw08/images/challenge), with one of them being the `.png` export below and the other the `.tif` export for submision to the challenge.
+
+* Additionally, I implemented [masking](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/aomip/mask.py) and used it for lower angles to boost my scores there which bumped up my reconstructions around 15-20%.
+
+    * | Method        | Arc | Difficulty | Phantom | Score
+      | ---------     | ----| ---------- | ------- | -----
+      | Configuration | 360 | 7          | c       | 0.998811
+
+![](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/raw/main/homework/hw08/images/challenge/challenge.png)
+
+## Homework 3: Presentation
+
+* My final presentation that I gave out in-class can be found [here](https://gitlab.lrz.de/IP/teaching/applied-optimization-methods-for-inverse-problems/aomip-kaan-guney-keklikci/-/blob/main/homework/hw08/Practical%20Course%20-%20Applied%20Optimization%20Methods%20for%20Inverse%20Problems.pdf).
 
