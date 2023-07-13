@@ -76,6 +76,8 @@ def fpgm_subgradient():
     start_time = time.time()
     fpgm = aomip.FPGM()
     fx, fhistory = fpgm.optimize()
+    # multiply by the scale factor
+    fx *= 1e3
     print(f"FPGM complete, execution time = {time.time() - start_time:.2f}")
     start_time = time.time()
     subgradient = aomip.Subgradient()
