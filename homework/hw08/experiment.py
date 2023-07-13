@@ -81,14 +81,12 @@ def fpgm_subgradient():
     subgradient = aomip.Subgradient()
     sx, shistory = subgradient.optimize(lr=1e-3)
     print(f"Subgradient complete, execution time = {time.time() - start_time:.2f}")
-    fig, axes = plt.subplots(2, 2)
+    fig, axes = plt.subplots(2, 2, figsize = (16, 10))
     # subgradient notebook output
     export = axes[0, 0].imshow(fx, cmap="gray")
     plt.colorbar(export, ax=axes[0, 0])
-    plt.axis("off")
     axes[0, 0].set_title("Fast Proximal Gradient Method (FPGM)")
     export = axes[0, 1].imshow(sx, cmap="gray")
-    plt.axis("off")
     plt.colorbar(export, ax=axes[0, 1])
     axes[0, 1].set_title("Subgradient")
     # convergence
@@ -96,8 +94,8 @@ def fpgm_subgradient():
     axes[1, 1].plot(shistory)
     plt.savefig(f"{comparison_notebook_path}/comparison.png")
     # save tif output
-    tifffile.imwrite(f"{comparison_tifffile_path}/fpgm.tif", ax)
-    tifffile.imwrite(f"{comparison_tifffile_path}/subgradient.tif", ax)
+    tifffile.imwrite(f"{comparison_tifffile_path}/fpgm.tif", fx)
+    tifffile.imwrite(f"{comparison_tifffile_path}/subgradient.tif", sx)
 
 def main():
     print("Running square summable step sizes...")
