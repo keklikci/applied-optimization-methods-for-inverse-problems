@@ -91,7 +91,7 @@ def fpgm_subgradient():
     # apply masking
     sx = aomip.mask(sx)
     print(f"Subgradient complete, execution time = {time.time() - start_time:.2f}")
-    fig, axes = plt.subplots(2, 2, figsize=(16, 10))
+    fig, axes = plt.subplots(2, 2, figsize=(15, 12))
     # subgradient notebook output
     export = axes[0, 0].imshow(fx, cmap="gray")
     plt.colorbar(export, ax=axes[0, 0])
@@ -101,7 +101,11 @@ def fpgm_subgradient():
     axes[0, 1].set_title("Subgradient")
     # convergence
     axes[1, 0].plot(fhistory)
+    axes[1, 0].set_xlabel("# iterations")
+    axes[1, 0].set_ylabel("Loss")
     axes[1, 1].plot(shistory)
+    axes[1, 1].set_ylabel("Loss")
+    axes[1, 1].set_xlabel("# iterations")
     plt.savefig(f"{comparison_notebook_path}/comparison.png")
     # save tif output
     tifffile.imwrite(f"{comparison_tifffile_path}/fpgm.tif", fx)
@@ -112,11 +116,11 @@ def challenge():
     os.makedirs(challenge_path, exist_ok=True)
     fpgm = aomip.FPGM()
     fx, _ = fpgm.optimize(n=500)
-    plt.clf()
+    fig, ax = plt.subplots(1)
     plt.axis("off")
-    export = plt.imshow(fx, cmap="gray")
+    export = ax.imshow(fx, cmap="gray")
     plt.colorbar(export)
-    plt.title(f"Challenge Submission")
+    ax.set_title(f"Challenge Submission")
     # save challenge output
     plt.savefig(f"{challenge_path}/challenge.png")
     # save tifffile output
