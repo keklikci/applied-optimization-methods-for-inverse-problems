@@ -161,4 +161,12 @@ cython_debug/
 
 # datasets for programming assignments
 /datasets
-
+.venv/
+.pytest_cache/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.ipynb_checkpoints/
