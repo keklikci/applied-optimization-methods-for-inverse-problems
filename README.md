@@ -8,7 +8,24 @@ The course website can be found [here](https://ciip.in.tum.de/teaching/aom-ip_ss
 
 ## Getting started
 
-#### Poetry
+#### uv
+
+Install [uv](https://docs.astral.sh/uv/), then create the locked development
+environment from the repository root:
+
+```bash
+uv sync
+uv run pytest
+uv run ruff format --check .
+uv run ruff check .
+```
+
+The repository targets Python 3.11 and keeps the environment in `.venv`.
+
+#### Legacy Poetry
+
+The project previously used Poetry. New installations should use uv and the
+checked-in `uv.lock` file.
 
 The easiest and recommended way to install is using `poetry` (see
 [here](https://python-poetry.org/)). Once you've installed `poetry`, 
