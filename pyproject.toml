@@ -1,21 +1,51 @@
-[tool.poetry]
+[project]
 name = "aomip"
 version = "0.1.0"
-description = "Project for the Practical Course: Applied Optimization Methods for Inverse Problems, offered in the summer term 2023 at TUM"
-authors = ["David Frank <frankd@in.tum.de>"]
-license = "Apache 2.0"
+description = "Applied optimization methods for inverse problems"
 readme = "README.md"
+requires-python = ">=3.9,<3.13"
+license = { text = "Apache-2.0" }
+authors = [{ name = "David Frank", email = "frankd@in.tum.de" }]
+dependencies = [
+    "matplotlib>=3.7",
+    "numpy>=1.24",
+    "pillow>=9.5",
+    "scikit-image>=0.20",
+    "scipy>=1.10",
+    "tifffile>=2023.4.12",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.8,<3.12"
-numpy = "^1.24.2"
-tifffile = "^2023.4.12"
-matplotlib = "^3.7.1"
-pyqt5 = "^5.15.9"
-scikit-image = "^0.20.0"
-jupyterlab = "^3.6.3"
-
-
+[dependency-groups]
+dev = [
+    "jupyterlab>=3.6",
+    "pytest>=7.3",
+    "pytest-cov>=4.1",
+    "ruff>=0.6",
+]
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["aomip"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-config --strict-markers"
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+exclude = ["homework/*/output", "homework/*/images"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.uv]
+default-groups = ["dev"]
