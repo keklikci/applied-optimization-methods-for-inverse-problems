@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 06.07.2023                   #
 # ********************************** #
 
-import numpy as np
 from abc import ABC, abstractmethod
+
+import numpy as np
 
 
 class ProximalOperator(ABC):

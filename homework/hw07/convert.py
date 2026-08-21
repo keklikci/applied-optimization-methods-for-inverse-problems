@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 05.07.2023                   #
 # ********************************** #
 
 import os
+
 import matplotlib.pyplot as plt
 
 
@@ -21,7 +20,7 @@ def main():
         plt.colorbar(export)
         plt.tight_layout()
         idx = filename.find("_")
-        plt.title(f"τ ={filename[(idx + 1):len(filename) - 4]}")
+        plt.title(f"τ ={filename[(idx + 1) : len(filename) - 4]}")
         plt.savefig(
             "images" + "/" + "notebook" + "/" + images[i].replace(".tif", ".png")
         )

@@ -1,9 +1,12 @@
-"""
-"""
+""" """
 
-import pyelsa as elsa
-from scipy.sparse.linalg import LinearOperator
 import numpy as np
+
+try:
+    import pyelsa as elsa
+except ImportError:
+    elsa = None
+from scipy.sparse.linalg import LinearOperator
 
 
 class XrayOperator(LinearOperator):
@@ -69,6 +72,8 @@ class XrayOperator(LinearOperator):
         projection_method="josephs",
         dtype="float32",
     ):
+        if elsa is None:
+            raise ImportError("XrayOperator requires the optional pyelsa package")
         self.vol_shape = np.array(vol_shape)
         self.sino_shape = np.array(sino_shape)
 

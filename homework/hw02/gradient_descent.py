@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 08.05.2023                   #

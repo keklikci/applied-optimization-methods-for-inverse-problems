@@ -1,17 +1,17 @@
 # !/usr/bin/env python
-# -*- coding: utf-8 -*-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 02.05.2023                   #
 # ********************************** #
 
-from phantom import shepp_logan
-from sinogram import transform, get_projection_angles
-from scipy.fft import fft, ifft
-from filters import ramp
-import numpy as np
 import os
+
 import matplotlib.pyplot as plt
+import numpy as np
+from filters import ramp
+from phantom import shepp_logan
+from scipy.fft import fft, ifft
+from sinogram import get_projection_angles, transform
 
 
 def get_coordinate_system(x: int) -> tuple:

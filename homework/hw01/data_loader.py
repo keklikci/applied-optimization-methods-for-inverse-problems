@@ -1,5 +1,4 @@
 # !/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
@@ -7,9 +6,10 @@
 # ********************************** #
 
 import os
+
 import numpy as np
-from PIL import Image
 from dotenv import load_dotenv
+from PIL import Image
 
 # source configuration file
 load_dotenv()

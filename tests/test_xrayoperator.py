@@ -1,7 +1,9 @@
-import aomip
-import numpy as np
-import pyelsa as elsa
 import matplotlib.pyplot as plt
+import numpy as np
+import pytest
+
+pytest.importorskip("pyelsa")
+import aomip
 
 
 def test_shepp_logan():

@@ -1,14 +1,13 @@
 # !/usr/bin/env python
-# -*- coding: utf-8 -*-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 01.05.2023                   #
 # ********************************** #
 
-import numpy as np
 import os
+
 import matplotlib.pyplot as plt
-from PIL import Image
+import numpy as np
 from dotenv import load_dotenv
 
 # source configuration file

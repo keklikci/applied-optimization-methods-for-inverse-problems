@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 29.06.2023                   #
 # ********************************** #
 
-import aomip
 import tifffile
-import matplotlib.pyplot as plt
-from loader import *
 from config import *
+from loader import *
 from pogm import *
+
+import aomip
 
 fpath = "/srv/ceph/share-all/aomip/mayo_clinical/out/L310_flat_fan_projections_fd.tif"
 qpath = "/srv/ceph/share-all/aomip/mayo_clinical/out/L310_flat_fan_projections_qd.tif"

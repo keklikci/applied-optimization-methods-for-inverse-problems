@@ -1,8 +1,5 @@
 """Script export of 01_exercise02.ipynb."""
 
-import matplotlib.pyplot as plt
-import numpy as np
-import aomip
 
 # ## Backprojection
 #

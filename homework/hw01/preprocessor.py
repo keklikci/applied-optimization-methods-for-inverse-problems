@@ -1,13 +1,13 @@
 # !/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 30.04.2023                   #
 # ********************************** #
 
-import time
 import os
+import time
+
 from data_loader import *
 from flat_field import apply_correction
 from util.normalizer import normalize
@@ -34,7 +34,7 @@ def main():
         plot_figure(out, save=True, save_dir=corrected_scan_dir, tag=tag)
         # sequential application of normalization and mapping yields higher definitions
     print("Flat-field correction, done.")
-    print("Total execution time: {:.2f} seconds.".format(time.time() - start_time))
+    print(f"Total execution time: {time.time() - start_time:.2f} seconds.")
 
 
 if __name__ == "__main__":

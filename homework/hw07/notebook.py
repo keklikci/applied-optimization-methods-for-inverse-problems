@@ -11,7 +11,7 @@
 # * LASSO
 #
 #     * `λ` = 0.95τ / norm.
-#     * Norm is computed via power iterations. 
+#     * Norm is computed via power iterations.
 #     * Visualizations are generated for a set of `τ` over `np.logspace(-3, 6, 10)`.
 
 # | ![τ = 0.1](images/notebook/tau_0.1.png) | ![τ = 1.0](images/notebook/tau_1.0.png) |

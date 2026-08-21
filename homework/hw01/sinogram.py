@@ -1,15 +1,14 @@
 # !/usr/bin/env python
-# -*- coding: utf-8 -*-
 # ************************************************************************************************** #
 # Author: kaanguney.keklikci@tum.de                                                                  #
 # Date: 01.05.2023                                                                                   #
 # Reference: https://scikit-image.org/docs/stable/auto_examples/transform/plot_radon_transform.html  #
 # ************************************************************************************************** #
 
-import numpy as np
 import matplotlib.pyplot as plt
-from skimage.transform import radon
+import numpy as np
 from phantom import *
+from skimage.transform import radon
 
 
 def get_projection_angles(phantom: np.ndarray) -> np.ndarray:

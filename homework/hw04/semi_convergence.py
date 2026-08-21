@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 14.06.2023                   #
 # ********************************** #
 
-import aomip
-import numpy as np
-import matplotlib.pyplot as plt
-import tifffile
 import os
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+import aomip
 
 # usual setup
 vol_shape = [512, 512]
@@ -73,7 +72,7 @@ def main():
         plt.clf()
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {1e-4}")
-        plt.xlabel(f"# of iterations")
+        plt.xlabel("# of iterations")
         plt.savefig(f"images/semi_convergence_error{i + 1}.png")
         plt.clf()
 

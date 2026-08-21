@@ -1,0 +1,29 @@
+name: Quality
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: latest
+      - name: Set up Python
+        run: uv python install 3.11
+      - name: Install dependencies
+        run: uv sync --locked
+      - name: Check formatting
+        run: uv run ruff format --check .
+      - name: Lint
+        run: >-
+          uv run ruff check
+          tests/test_xrayoperator.py
+          homework/hw05/notebook.py
+          homework/hw06/notebook.py
+          homework/hw07/notebook.py
+      - name: Test
+        run: uv run pytest tests/test_binning.py tests/test_noise.py

@@ -1,14 +1,14 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 06.07.2023                   #
 # ********************************** #
 
+import os
+
+import matplotlib.pyplot as plt
 import numpy as np
 import tifffile
-import matplotlib.pyplot as plt
-import os
+
 import aomip
 
 # setup
@@ -19,7 +19,7 @@ x = np.zeros(vols)
 A = aomip.XrayOperator(vols, bs, thetas, d2c, c2d)
 
 
-class TV(object):
+class TV:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.ops = [A, aomip.FirstDerivative()]
@@ -72,7 +72,7 @@ def main():
     plt.imshow(x, cmap="gray")
     plt.axis("off")
     plt.tight_layout()
-    plt.savefig(f"images/tv.tif", transparent=True)
+    plt.savefig("images/tv.tif", transparent=True)
 
 
 if __name__ == "__main__":

@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 12.07.2023                   #
 # ********************************** #
 
-import aomip
 import numpy as np
+
+import aomip
 
 
 class FPGM(aomip.Optimization):

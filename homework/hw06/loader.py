@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
-
 # ************************************** #
 # Author: frank@in.tum.de                #
 # Modified by: kaanguney.keklikci@tum.de #
 # Date: 29.06.2023                       #
 # ************************************** #
 
-import tifffile
 import json
-import numpy as np
+
+import tifffile
 
 
 def load(file):
