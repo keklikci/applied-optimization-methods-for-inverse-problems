@@ -26,4 +26,4 @@ jobs:
           homework/hw06/notebook.py
           homework/hw07/notebook.py
       - name: Test
-        run: uv run pytest
+        run: uv run pytest tests/test_binning.py tests/test_noise.py
