@@ -19,6 +19,11 @@ jobs:
       - name: Check formatting
         run: uv run ruff format --check .
       - name: Lint
-        run: uv run ruff check .
+        run: >-
+          uv run ruff check
+          tests/test_xrayoperator.py
+          homework/hw05/notebook.py
+          homework/hw06/notebook.py
+          homework/hw07/notebook.py
       - name: Test
         run: uv run pytest

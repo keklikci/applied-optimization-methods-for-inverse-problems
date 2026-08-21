@@ -1,9 +1,8 @@
-from pathlib import Path
 import argparse
+from pathlib import Path
 
-import utils
 import matplotlib.pyplot as plt
-import numpy as np
+import utils
 
 
 def main():
@@ -82,7 +81,7 @@ def main():
     # Show ground truth
     ax3.imshow(groundtruth, cmap="gray")
     ax3.set_title(
-        f"Groundtruth",
+        "Groundtruth",
     )
 
     plt.tight_layout()

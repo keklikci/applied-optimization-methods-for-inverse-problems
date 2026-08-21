@@ -1,9 +1,9 @@
 """Script export of 01_exercise01.ipynb."""
 
-import aomip
-import numpy as np
 import matplotlib.pyplot as plt
-import pyelsa as elsa
+import numpy as np
+
+import aomip
 
 # ## Create phantom with small rectangle in the middle
 

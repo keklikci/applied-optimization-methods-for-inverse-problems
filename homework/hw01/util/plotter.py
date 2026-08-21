@@ -1,5 +1,4 @@
 # !/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
@@ -7,8 +6,8 @@
 # ********************************** #
 
 import matplotlib.pyplot as plt
-from PIL import Image
 import numpy as np
+from PIL import Image
 
 
 def plot_figure(
@@ -30,6 +29,6 @@ def plot_figure(
     # convert back to the loaded format
     image = Image.fromarray(image).convert("I;16")
     if save:
-        output_file = save_dir + "/000{}.png".format(tag + 1)
+        output_file = save_dir + f"/000{tag + 1}.png"
         image.save(output_file)
     plt.close()

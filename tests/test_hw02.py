@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 07.05.2023                   #
 # ********************************** #
 
+import os
+
 import matplotlib.pyplot as plt
 import numpy as np
 import tifffile
-import os
 
 try:
     import aomip
@@ -61,7 +60,7 @@ def test_gradient_descent_opt(
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 4.5))
     ax1.set_title("Original")
     ax1.imshow(phantom, cmap="gray")
-    ax2.set_title(f"Reconstructed")
+    ax2.set_title("Reconstructed")
     ax2.imshow(x, cmap="gray")
     os.makedirs(output_path, exist_ok=True)
     plt.savefig(os.path.join(output_path, "least_squares.png"), transparent=True)

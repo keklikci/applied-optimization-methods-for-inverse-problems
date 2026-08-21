@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 21.05.2023                   #
@@ -31,7 +29,7 @@ class Noise:
         return True
 
     def __isvalid(self, method):
-        if not method in self.validity:
+        if method not in self.validity:
             raise ValueError(f"Method must be an element of {self.validity}")
         return True
 

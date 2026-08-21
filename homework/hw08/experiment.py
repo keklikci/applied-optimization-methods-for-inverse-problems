@@ -1,16 +1,15 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 12.07.2023                   #
 # ********************************** #
 
-import numpy as np
-import tifffile
-import matplotlib.pyplot as plt
 import os
-import aomip
 import time
+
+import matplotlib.pyplot as plt
+import tifffile
+
+import aomip
 
 # square summable step size export paths
 ss_notebook_path = "images/notebook/subgradient/square_summable"
@@ -40,11 +39,11 @@ def square_summable():
     plt.axis("off")
     export = plt.imshow(x, cmap="gray")
     plt.colorbar(export)
-    plt.title(f"Square Summable α Values")
+    plt.title("Square Summable α Values")
     plt.savefig(f"{ss_notebook_path}/square_summable.png")
     plt.clf()
     plt.plot(history)
-    plt.title(f"Convergence Analysis, Square Summable Step Sizes")
+    plt.title("Convergence Analysis, Square Summable Step Sizes")
     plt.xlabel("# iterations")
     plt.ylabel("Loss")
     plt.savefig(f"{ss_convergence_path}/convergence.png")
@@ -63,11 +62,11 @@ def nonsummable_diminishing():
     plt.axis("off")
     export = plt.imshow(x, cmap="gray")
     plt.colorbar(export)
-    plt.title(f"Nonsummable Diminishing α Values")
+    plt.title("Nonsummable Diminishing α Values")
     plt.savefig(f"{diminishing_notebook_path}/nonsummable_diminishing.png")
     plt.clf()
     plt.plot(history)
-    plt.title(f"Convergence Analysis, Nonsummable Diminishing Step Sizes")
+    plt.title("Convergence Analysis, Nonsummable Diminishing Step Sizes")
     plt.xlabel("# iterations")
     plt.ylabel("Loss")
     plt.savefig(f"{diminishing_convergence_path}/convergence.png")
@@ -120,7 +119,7 @@ def challenge():
     plt.axis("off")
     export = ax.imshow(fx, cmap="gray")
     plt.colorbar(export)
-    ax.set_title(f"Challenge Submission")
+    ax.set_title("Challenge Submission")
     # save challenge output
     plt.savefig(f"{challenge_path}/challenge.png")
     # save tifffile output

@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 21.05.2023                   #
 # ********************************** #
 
-import unittest
-import tifffile
-import os
 import sys
+import unittest
+
+import tifffile
 
 sys.path.append("homework/hw03")
 from noise import *
@@ -51,7 +49,7 @@ class TestNoise(unittest.TestCase):
 
     def test_gaussian_transform(self):
         noisy_image = func(self.noise.transform(image))
-        tifffile.imsave(
+        tifffile.imwrite(
             OUTPUT_PATH + "/" + f"{str(self.noise).lower()}_noise.tif", noisy_image
         )
         self.assertEqual(str(self.noise).lower(), "gaussian")
@@ -59,7 +57,7 @@ class TestNoise(unittest.TestCase):
     def test_poisson_transform(self):
         self.noise.update(method="Poisson")
         noisy_image = self.noise.transform(image)
-        tifffile.imsave(
+        tifffile.imwrite(
             OUTPUT_PATH + "/" + f"{str(self.noise).lower()}_noise.tif", noisy_image
         )
         self.assertEqual(str(self.noise).lower(), "poisson")
@@ -67,7 +65,7 @@ class TestNoise(unittest.TestCase):
     def test_salt_pepper_transform(self):
         self.noise.update(method="Salt-Pepper")
         noisy_image = func(self.noise.transform(image))
-        tifffile.imsave(
+        tifffile.imwrite(
             OUTPUT_PATH
             + "/"
             + f"{str(self.noise).lower().replace('-', '_')}_noise.tif",
