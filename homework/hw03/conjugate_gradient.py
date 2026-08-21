@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 22.05.2023                   #
 # ********************************** #
 
 import numpy as np
+import os
 
 try:
     import aomip
-except:
+except ImportError:
     import sys
 
     sys.path.append(os.getcwd())

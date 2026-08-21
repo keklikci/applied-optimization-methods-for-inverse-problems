@@ -1,13 +1,13 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 05.07.2023                   #
 # ********************************** #
 
-import aomip
-import numpy as np
 from abc import ABC
+
+import numpy as np
+
+import aomip
 
 
 class PowerIteration(ABC):

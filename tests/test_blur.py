@@ -1,18 +1,14 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 22.05.2023                   #
 # ********************************** #
 
-import unittest
-import matplotlib.pyplot as plt
-import tifffile
-import os
 import sys
+import unittest
+
+import tifffile
 
 sys.path.append("homework/hw03")
-from PIL import Image
 from blur import *
 
 INPUT_PATH = "homework/hw03/images/input/htc2022_04b_recon.tif"

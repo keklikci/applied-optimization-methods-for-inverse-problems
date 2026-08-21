@@ -1,13 +1,13 @@
 # !/usr/bin/env python
-# -*- coding: utf-8 -*-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 01.05.2023                   #
 # ********************************** #
 
-import numpy as np
 import os
+
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def estimate_initial_density(image: np.ndarray, window: int = 10) -> float:

@@ -1,8 +1,8 @@
-from aomip import XrayOperator
-
 import numpy as np
 import scipy.io as spio
 from skimage.filters import threshold_otsu
+
+from aomip import XrayOperator
 
 
 def loadmat(filename):

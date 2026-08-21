@@ -1,5 +1,4 @@
 # !/usr/bin/env python
-# -*- coding: utf-8 -*-
 # ******************************************************************************************************* #
 # Author: kaanguney.keklikci@tum.de                                                                       #
 # Date: 01.05.2023                                                                                        #
@@ -7,8 +6,8 @@
 # ******************************************************************************************************* #
 
 import numpy as np
-from scipy.fft import fft, ifft, fftshift, fftfreq
 from phantom import shepp_logan
+from scipy.fft import fft, fftfreq, fftshift
 
 
 def add_axis(image_filter: np.ndarray) -> np.ndarray:

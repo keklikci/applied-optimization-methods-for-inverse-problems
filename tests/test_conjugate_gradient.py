@@ -1,19 +1,15 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 22.05.2023                   #
 # ********************************** #
 
-import unittest
-import matplotlib.pyplot as plt
-import tifffile
 import os
 import sys
+import unittest
 
 sys.path.append("homework/hw03")
-from PIL import Image
 from conjugate_gradient import *
+from PIL import Image
 
 OUTPUT_PATH = "homework/hw03/images/output"
 

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # ************************************** #
 # Author: frank@in.tum.de                #
 # Modified by: kaanguney.keklikci@tum.de #

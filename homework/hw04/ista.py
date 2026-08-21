@@ -1,15 +1,13 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 14.06.2023                   #
 # ********************************** #
 
-import aomip
+import os
+
+import matplotlib.pyplot as plt
 import numpy as np
 import tifffile
-import os
-import matplotlib.pyplot as plt
 from optimize import Optimization
 
 
@@ -60,7 +58,7 @@ def main():
         tifffile.imsave(f"images/ista_{i + 1}.tif", x.astype(np.uint8))
         plt.plot(np.arange(len(callback)), callback)
         plt.ylabel(f"Reconstruction error, alpha = {params[0]}, beta = {params[1]}")
-        plt.xlabel(f"# of iterations")
+        plt.xlabel("# of iterations")
         plt.savefig(f"images/ista_callback_{i + 1}")
 
 

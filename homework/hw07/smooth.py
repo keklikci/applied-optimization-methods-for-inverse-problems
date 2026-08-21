@@ -1,14 +1,12 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 06.07.2023                   #
 # ********************************** #
 
-import numpy as np
-import tifffile
-import matplotlib.pyplot as plt
 import os
+
+import matplotlib.pyplot as plt
+
 import aomip
 
 

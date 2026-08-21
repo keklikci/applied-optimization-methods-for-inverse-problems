@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # ********************************** #
 # Author: kaanguney.keklikci@tum.de  #
 # Date: 22.05.2023                   #
@@ -38,8 +36,9 @@ class Blur:
     ) -> None:
         self.image_shape = shape
         self.blur = np.fromfunction(
-            lambda x, y: (1 / (2 * np.pi * scale**2))
-            * np.exp(-(x**2 + y**2) / (2 * scale**2)),
+            lambda x, y: (
+                (1 / (2 * np.pi * scale**2)) * np.exp(-(x**2 + y**2) / (2 * scale**2))
+            ),
             (kernel_stride, kernel_stride),
         )
         if self.__check_args(_mode.lower()):
@@ -51,7 +50,7 @@ class Blur:
     def __check_args(self, arg: str) -> bool:
         if not isinstance(arg, str):
             raise ValueError("Mode must be of type str!")
-        if not arg in ALLOWED_MODES:
+        if arg not in ALLOWED_MODES:
             raise ValueError(f"Mode must be an element of {ALLOWED_MODES}")
         return True
 
